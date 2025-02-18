@@ -6,7 +6,7 @@
                 <h6>{{ $li_1 }}</h6>
             </div>
         </div>
-        <ul class="table-top-head">
+        <!--<ul class="table-top-head">
             <li>
                 <div class="page-btn">
                     <a href="{{ $li_2 }}" class="btn btn-secondary"><i data-feather="arrow-left"
@@ -19,7 +19,7 @@
             </li>
         </ul>
 
-    </div>
+    </div>-->
 @endif
 
 @if (
@@ -73,7 +73,7 @@
                 <h6>{{ $li_1 }}</h6>
             </div>
         </div>
-        <ul class="table-top-head">
+       <!-- <ul class="table-top-head">
             <li>
                 <a data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf"><img
                         src="{{ URL::asset('/build/img/icons/pdf.svg') }}" alt="img"></a>
@@ -94,7 +94,7 @@
                 <a data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse" id="collapse-header"><i
                         data-feather="chevron-up" class="feather-chevron-up"></i></a>
             </li>
-        </ul>
+        </ul> -->
         @if (Route::is(['warranty']))
             <div class="page-btn">
                 <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-units"><i
@@ -310,10 +310,10 @@
                 <a href="{{ $li_2 }}" class="btn btn-added"><i data-feather="plus-circle"
                         class="me-2"></i>{{ $li_3 }}</a>
             </div>
-            <div class="page-btn import">
+            <!--<div class="page-btn import">
                 <a href="#" class="btn btn-added color" data-bs-toggle="modal" data-bs-target="#view-notes"><i
-                        data-feather="download" class="me-2"></i>{{ $li_4 }}</a>
-            </div>
+                        data-feather="download" class="me-2"></i>{{ $li_4 ?? 'Volver' }}</a>
+            </div>-->
         @endif
     </div>
 @endif

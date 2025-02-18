@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,13 +29,13 @@ Route::get('/index', function () {
     return view('index');
 })->name('index');
 
-Route::get('/product-list', function () {
-    return view('product-list');
-})->name('product-list');
+Route::get('/product-list', [ProductController::class, 'producto'])->name('product-list');
+Route::get('/add-product', function () {return view('add-product');})->name('add-product');
+Route::post('/add-product', [ProductController::class, 'guardarProducto'])->name('guardar-producto');
+Route::get('/edit-product/{Id_Producto}', [ProductController::class, 'editarProductoGet'])->name('edit-product');
+Route::post('/edit-product/{Id_Producto}', [ProductController::class, 'actualizarProducto'])->name('update-product');
+Route::get('/cambiar-estado/{Id_Producto}', [ProductController::class, 'cambiarEstado'])->name('cambiar-estado');
 
-Route::get('/add-product', function () {
-    return view('add-product');
-})->name('add-product');
 
 Route::get('/expired-products', function () {
     return view('expired-products');
@@ -79,10 +80,6 @@ Route::get('/qrcode', function () {
 Route::get('/product-details', function () {
     return view('product-details');
 })->name('product-details');
-
-Route::get('/edit-product', function () {
-    return view('edit-product');
-})->name('edit-product');
 
 Route::get('/sales-dashboard', function () {
     return view('sales-dashboard');
