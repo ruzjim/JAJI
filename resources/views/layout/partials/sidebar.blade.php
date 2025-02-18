@@ -56,7 +56,7 @@
                     <h6 class="submenu-hdr">Inventory</h6>
                     <ul>
                         <li class="{{ Request::is('product-list','product-details') ? 'active' : '' }}"><a
-                                href="{{ url('product-list') }}"><i data-feather="box"></i><span>Products</span></a>
+                                href="{{ url('product-list') }}"><i data-feather="box"></i><span>Productos</span></a>
                         </li>
                         <li class="{{ Request::is('add-product','edit-product') ? 'active' : '' }}"><a
                                 href="{{ url('add-product') }}"><i data-feather="plus-square"></i><span>Create
