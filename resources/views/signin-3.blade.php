@@ -11,24 +11,31 @@
                             <img src="{{ URL::asset('/build/img/logo-white.png') }}" alt="">
                         </a>
                     </div>
-                    <form action="index">
+                    <form action="{{ route('login') }}" method="POST">
+                        @csrf
                         <div class="login-userset">
                             <div class="login-userheading">
-                                <h3>Sign In</h3>
-                                <h4>Access the Dreamspos panel using your email and passcode.</h4>
+                                <h3>Iniciar</h3>
+                                <h4>Accede al sistema usando tu correo y contraseña.</h4>
                             </div>
                             <div class="form-login">
-                                <label class="form-label">Email Address</label>
+                                <label class="form-label">Correo electrónico</label>
                                 <div class="form-addons">
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="email" class="form-control"  value="{{ old('email') }}" required>
+                                    @if ($errors->has('email'))
+                                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
                                     <img src="{{ URL::asset('/build/img/icons/mail.svg') }}" alt="img">
                                 </div>
                             </div>
                             <div class="form-login">
-                                <label>Password</label>
+                                <label>Contraseña</label>
                                 <div class="pass-group">
-                                    <input type="password" class="pass-input">
+                                    <input type="password" name="password" class="pass-input" required>
                                     <span class="fas toggle-password fa-eye-slash"></span>
+                                    @if ($errors->has('password'))
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-login authentication-check">
@@ -36,52 +43,53 @@
                                     <div class="col-6">
                                         <div class="custom-control custom-checkbox">
                                             <label class="checkboxs ps-4 mb-0 pb-0 line-height-1">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>Remember me
+                                                <input type="checkbox" name="remember">
+                                                <span class="checkmarks"></span>Recordarme
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <a class="forgot-link" href="{{ url('forgot-password-3') }}">Forgot Password?</a>
+                                        <a class="forgot-link" href="{{ url('forgot-password-3') }}">¿Olvidaste la contraseña?</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-login">
-                                <button class="btn btn-login" type="submit">Sign In</button>
+                                <button class="btn btn-login" type="submit">Iniciar</button>
                             </div>
                             <div class="signinform">
-                                <h4>New on our platform?<a href="{{ url('register-3') }}" class="hover-a"> Create an
-                                        account</a></h4>
+                                <h4>¿Eres nuevo?<a href="{{ url('register-3') }}" class="hover-a"> Crea una cuenta</a></h4>
                             </div>
-                            <div class="form-setlogin or-text">
-                                <h4>OR</h4>
-                            </div>
-                            <div class="form-sociallink">
-                                <ul class="d-flex">
-                                    <li>
-                                        <a href="javascript:void(0);" class="facebook-logo">
-                                            <img src="{{ URL::asset('/build/img/icons/facebook-logo.svg') }}"
-                                                alt="Facebook">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <img src="{{ URL::asset('/build/img/icons/google.png') }}" alt="Google">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="apple-logo">
-                                            <img src="{{ URL::asset('/build/img/icons/apple-logo.svg') }}" alt="Apple">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            {{-- <div class="form-setlogin or-text">
+                                        <h4>O</h4>
+                                    </div>
+                                    <div class="form-sociallink">
+                                        <ul class="d-flex">
+                                            <li>
+                                                <a href="javascript:void(0);" class="facebook-logo">
+                                                    <img src="{{ URL::asset('/build/img/icons/facebook-logo.svg') }}"
+                                                        alt="Facebook">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);">
+                                                    <img src="{{ URL::asset('/build/img/icons/google.png') }}" alt="Google">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" class="apple-logo">
+                                                    <img src="{{ URL::asset('/build/img/icons/apple-logo.svg') }}" alt="Apple">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div> --}}
                         </div>
                     </form>
+                    
+                   
 
                 </div>
                 <div class="my-4 d-flex justify-content-center align-items-center copyright-text">
-                    <p>Copyright &copy; 2023 DreamsPOS. All rights reserved</p>
+                    <p>Copyright &copy; 2025 JAJI</p>
                 </div>
             </div>
         </div>

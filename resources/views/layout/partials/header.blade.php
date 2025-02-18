@@ -63,7 +63,7 @@
                             <ul class="customers">
                                 <li>
                                     <a href="javascript:void(0);">Aron Varu<img
-                                            src="{{ URL::asset('/build/img/profiles/avator1.jpg') }}" alt=""
+                                            src="{{ URL::asset('/build/img/profiles/avatar-01.webp') }}" alt=""
                                             class="img-fluid"></a>
                                 </li>
                                 <li>
@@ -267,11 +267,11 @@
             <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-info">
                     <span class="user-letter">
-                        <img src="{{ URL::asset('/build/img/profiles/avator1.jpg') }}" alt=""
+                        <img src="{{ URL::asset('/build/img/profiles/avatar-01.webp') }}" alt=""
                             class="img-fluid">
                     </span>
                     <span class="user-detail">
-                        <span class="user-name">John Smilga</span>
+                        <span class="user-name">{{ Auth::user()->name }}</span>
                         <span class="user-role">Super Admin</span>
                     </span>
                 </span>
@@ -279,11 +279,11 @@
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
                     <div class="profileset">
-                        <span class="user-img"><img src="{{ URL::asset('/build/img/profiles/avator1.jpg') }}"
+                        <span class="user-img"><img src="{{ URL::asset('/build/img/profiles/avatar-01.webp') }}"
                                 alt="">
                             <span class="status online"></span></span>
                         <div class="profilesets">
-                            <h6>John Smilga</h6>
+                            <h6>{{ Auth::user()->name }}</h6>
                             <h5>Super Admin</h5>
                         </div>
                     </div>
@@ -293,9 +293,13 @@
                     <a class="dropdown-item" href="{{ url('general-settings') }}"><i class="me-2"
                             data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
-                    <a class="dropdown-item logout pb-0" href="{{ url('signin') }}"><img
-                            src="{{ URL::asset('/build/img/icons/log-out.svg') }}" class="me-2"
-                            alt="img">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a class="dropdown-item logout pb-0" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <img src="{{ URL::asset('/build/img/icons/log-out.svg') }}" class="me-2" alt="img">Logout
+                    </a>
+                    
                 </div>
             </div>
         </li>
@@ -309,7 +313,7 @@
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="{{ url('profile') }}">My Profile</a>
             <a class="dropdown-item" href="{{ url('general-settings') }}">Settings</a>
-            <a class="dropdown-item" href="{{ url('signin') }}">Logout</a>
+            <a class="dropdown-item" href="{{ url('signin-3') }}">Logout</a>
         </div>
     </div>
     <!-- /Mobile Menu -->
