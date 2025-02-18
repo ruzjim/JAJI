@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\authController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 
@@ -13,6 +14,29 @@ use App\Http\Controllers\CustomAuthController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::post('/register', [authController::class, 'register'])->name('register');
+Route::post('/login', [authController::class, 'login'])->name('login');
+Route::post('/logout', [authController::class, 'logout'])->name('logout');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('index', [CustomAuthController::class, 'dashboard']); 
 Route::get('signin', [CustomAuthController::class, 'index'])->name('signin');
 Route::post('custom-login', [CustomAuthController::class, 'customSignin'])->name('signin.custom'); 
