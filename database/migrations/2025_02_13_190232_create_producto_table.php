@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('Marca', 100);
             $table->integer('Stock')->nullable();
             $table->string('Descripcion', 300);
-            $table->decimal('Precio_Original', 7);
-            $table->decimal('Precio_Modificado', 7);
+            $table->decimal('Precio_Compra', 7);
+            $table->decimal('Precio_Venta', 7);
             $table->timestamps();
             $table->string('ubicacion')->nullable()->default('No disponible');
+            $table->tinyInteger('Estado')->default(1);
         });
     }
 

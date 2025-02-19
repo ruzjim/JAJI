@@ -158,7 +158,7 @@ $(document).ready(function(){
 			"language": {
 				search: ' ',
 				sLengthMenu: '_MENU_',
-				searchPlaceholder: "Search",
+				searchPlaceholder: "Buscar",
 				info: "_START_ - _END_ of _TOTAL_ items",
 				paginate: {
 					next: ' <i class=" fa fa-angle-right"></i>',

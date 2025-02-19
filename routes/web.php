@@ -4,6 +4,10 @@ use App\Http\Controllers\authController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\puntoController;
+use App\Http\Controllers\ProductoPuntosController;
+use App\Http\Controllers\PuntosUsersController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,12 +57,33 @@ Route::get('/index', function () {
     return view('index');
 })->name('index');
 
+//Rutas producto
 Route::get('/product-list', [ProductController::class, 'producto'])->name('product-list');
 Route::get('/add-product', function () {return view('add-product');})->name('add-product');
 Route::post('/add-product', [ProductController::class, 'guardarProducto'])->name('guardar-producto');
 Route::get('/edit-product/{Id_Producto}', [ProductController::class, 'editarProductoGet'])->name('edit-product');
 Route::post('/edit-product/{Id_Producto}', [ProductController::class, 'actualizarProducto'])->name('update-product');
 Route::get('/cambiar-estado/{Id_Producto}', [ProductController::class, 'cambiarEstado'])->name('cambiar-estado');
+
+//Rutas Puntos
+Route::get('/puntos', [PuntoController::class, 'puntos'])->name('puntos');
+Route::get('/edit-punto/{Id_Puntos}', [PuntoController::class, 'editarPuntoGet'])->name('editar-punto');
+Route::put('/edit-punto/{Id_Puntos}', [PuntoController::class, 'actualizarPunto'])->name('update-punto');
+Route::get('/crear-punto', function () { return view('crear-punto'); })->name('crear-punto');
+Route::post('/crear-punto', [PuntoController::class, 'guardarPunto'])->name('guardar-punto');
+Route::get('/cambiar-estado-punto/{Id_Puntos}', [PuntoController::class, 'cambiarEstadoPuntos'])->name('cambiar-estado-punto');
+
+//Rutas Producto Puntos
+Route::get('/producto_puntos', [ProductoPuntosController::class, 'producto_puntosList'])->name('producto_puntos');
+Route::get('/crear-producto_puntos', [ProductoPuntosController::class, 'crearproductopunto'])->name('crear-producto_puntos');
+Route::post('/producto_puntos', [ProductoPuntosController::class, 'store'])->name('producto_puntos.store');
+Route::get('/editar-producto_puntos/{id}', [ProductoPuntosController::class, 'editar'])->name('editar-producto_puntos');
+Route::put('/editar-producto_puntos/{id}', [ProductoPuntosController::class, 'update'])->name('editar-producto_puntos.update');
+Route::get('/cambiar-estado-producto-punto/{id}', [ProductoPuntosController::class, 'cambiarEstadoProductosPuntos'])->name('cambiar-estado-producto-punto');
+
+//Rutas para buscar la cantidad de puntos por numero de cedula de usuario
+Route::get('/puntos_users', [PuntosUsersController::class, 'puntosUsersList'])->name('puntos_users');
+Route::get('/puntos_totales_users', [PuntosUsersController::class, 'buscarPorCedula'])->name('puntos_users_buscar');
 
 
 Route::get('/expired-products', function () {

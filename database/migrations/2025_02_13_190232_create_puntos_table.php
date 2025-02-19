@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('Nombre_Punto', 100);
             $table->timestamps();
             $table->integer('Puntos_Obtenitos')->nullable();
+            $table->tinyInteger('Estado')->default(1);
+            $table->string('Descripcion', 300);
         });
     }
 

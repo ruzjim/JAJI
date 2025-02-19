@@ -153,7 +153,7 @@
                                             class="feather-search"></i></a>
                                     <div id="DataTables_Table_0_filter" class="dataTables_filter">
                                         <label> <input type="search" class="form-control form-control-sm"
-                                                placeholder="Search"></label>
+                                                placeholder="Buscar"></label>
                                     </div>
                                 </div>
                             </div>
