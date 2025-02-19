@@ -32,4 +32,9 @@ class producto extends model
     ];
 
     public $timestamps = true;
+
+    public function productoPuntos()
+    {
+        return $this->hasMany(ProductoPunto::class, 'Id_ProductoFK', 'Id_Producto');
+    }
 }

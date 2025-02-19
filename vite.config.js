@@ -26,7 +26,10 @@ export default defineConfig({
         laravel({
             input: ['resources/css/style.css',
                     'resources/js/script.js',
-                    'resources/js/productos.js'],
+                    'resources/js/productos.js',
+                    'resources/js/puntos.js',
+                    'resources/js/productoPuntos',],
+                    
             refresh: true,
         }),
 

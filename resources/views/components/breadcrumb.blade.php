@@ -305,7 +305,7 @@
                         data-feather="plus-circle" class="me-2"></i> Add New Role</a>
             </div>
         @endif
-        @if (Route::is(['product-list']))
+        @if (Route::is(['product-list'], ['puntos'], ['producto_puntos']))
             <div class="page-btn">
                 <a href="{{ $li_2 }}" class="btn btn-added"><i data-feather="plus-circle"
                         class="me-2"></i>{{ $li_3 }}</a>

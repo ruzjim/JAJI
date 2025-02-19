@@ -58,6 +58,16 @@
                         <li class="{{ Request::is('product-list','product-details') ? 'active' : '' }}"><a
                                 href="{{ url('product-list') }}"><i data-feather="box"></i><span>Productos</span></a>
                         </li>
+                        <li class="{{ Request::is('puntos','puntos') ? 'active' : '' }}"><a
+                                href="{{ url('puntos') }}"><i data-feather="box"></i><span>Puntos</span></a>
+                        </li>
+                        <li class="{{ Request::is('puntos_users') ? 'active' : '' }}"><a 
+                                href="{{ url('puntos_users') }}"><i data-feather="box"></i><span>Buscar Puntos De Usuario</span></a>
+                        </li>
+                        <li class="{{ Request::is('producto_puntos') ? 'active' : '' }}"><a
+                                href="{{ url('producto_puntos') }}"><i data-feather="box"></i><span>Puntos Por Producto</span></a>
+                        </li>
+
                         <li class="{{ Request::is('add-product','edit-product') ? 'active' : '' }}"><a
                                 href="{{ url('add-product') }}"><i data-feather="plus-square"></i><span>Create
                                     Product</span></a></li>
