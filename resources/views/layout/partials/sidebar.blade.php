@@ -59,18 +59,18 @@
                                 href="{{ url('product-list') }}"><i data-feather="box"></i><span>Productos</span></a>
                         </li>
                         <li class="{{ Request::is('puntos','puntos') ? 'active' : '' }}"><a
-                                href="{{ url('puntos') }}"><i data-feather="box"></i><span>Puntos</span></a>
+                                href="{{ url('puntos') }}"><i class="fa-solid fa-money-bill-wave"></i>&nbsp;&nbsp;<span>Puntos</span></a>
                         </li>
                         <li class="{{ Request::is('puntos_users') ? 'active' : '' }}"><a 
-                                href="{{ url('puntos_users') }}"><i data-feather="box"></i><span>Buscar Puntos De Usuario</span></a>
+                                href="{{ url('puntos_users') }}"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;<span>Buscar Puntos De Usuario</span></a>
                         </li>
                         <li class="{{ Request::is('producto_puntos') ? 'active' : '' }}"><a
-                                href="{{ url('producto_puntos') }}"><i data-feather="box"></i><span>Puntos Por Producto</span></a>
+                                href="{{ url('producto_puntos') }}"><i class="fa-solid fa-coins"></i>&nbsp;&nbsp;<span>Puntos Por Producto</span></a>
                         </li>
 
                         <li class="{{ Request::is('add-product','edit-product') ? 'active' : '' }}"><a
-                                href="{{ url('add-product') }}"><i data-feather="plus-square"></i><span>Create
-                                    Product</span></a></li>
+                                href="{{ url('add-product') }}"><i data-feather="plus-square"></i><span>Crear
+                                    Producto</span></a></li>
                         <li class="{{ Request::is('expired-products') ? 'active' : '' }}"><a
                                 href="{{ url('expired-products') }}"><i data-feather="codesandbox"></i><span>Expired
                                     Products</span></a></li>

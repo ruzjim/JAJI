@@ -60,7 +60,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="{{ url('puntos-users') }}" class="btn btn-secondary">Realizar otra búsqueda</a>
+            <a href="{{ url('puntos_users') }}" class="btn btn-secondary">Realizar otra búsqueda</a>
         </div>
     </div>
 </div>
