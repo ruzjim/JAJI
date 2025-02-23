@@ -19,7 +19,7 @@
 
 
                     <div class="form-login">
-                        <a class="btn btn-login mt-0" href="{{ url('signin-3') }}">Back to Login</a>
+                        <a class="btn btn-login mt-0" href="{{ url('signin') }}">Back to Login</a>
                     </div>
                     <div class="my-4 d-flex justify-content-center align-items-center copyright-text">
                         <p>Copyright © 2023-Dreamspos</p>

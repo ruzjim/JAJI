@@ -1,4 +1,4 @@
-<?php $page = 'register-3'; ?>
+<?php $page = 'register'; ?>
 @extends('layout.mainlayout')
 @section('content')
 {{-- @vite(['resources/js/test.js']) --}}
@@ -11,7 +11,7 @@
                         <img src="{{ URL::asset('/build/img/logo-white.png') }}" alt="">
                     </a>
                 </div>
-                {{-- <form action="signin-3"> --}}
+                {{-- <form action="signin"> --}}
                 <form action="{{ route('register') }}" method="POST">
                     @csrf
                     <div class="login-userset">
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="form-login">
-                            <label>cédula</label>
+                            <label>Cédula</label>
                             <div class="form-addons">
                                 <input type="text" class="form-control" name="cedula" value="{{ old('cedula') }}">
                                 @if ($errors->has('cedula'))
@@ -102,7 +102,7 @@
                             <button type="submit" class="btn btn-login">Registrarme</button>
                         </div>
                         <div class="signinform">
-                            <h4>Ya tienes cuenta ? <a href="{{ url('signin-3') }}" class="hover-a">Iniciar Sesión</a></h4>
+                            <h4>Ya tienes cuenta ? <a href="{{ url('signin') }}" class="hover-a">Iniciar Sesión</a></h4>
                         </div>
                         {{-- @dump($errors) --}}
                        

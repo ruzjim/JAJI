@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 class authController extends Controller
 {
+    public function signin()
+    {
+        return view('signin');
+    }
+
+    public function registerr()
+    {
+        return view('register');
+    }
+
     public function register(Request $request)
     {
         // Validar datos
@@ -27,8 +37,8 @@ class authController extends Controller
             'password' => 'contraseña',
             'terms' => 'términos y condiciones',
         ]);
-        
-        
+
+
         User::create([
             'name' => $request->name,
             'cedula' => $request->cedula,
@@ -36,8 +46,8 @@ class authController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        
-        return redirect()->route('signin-3')->with('success', 'Registro exitoso. Inicia sesión.');
+
+        return redirect()->route('signin')->with('success', 'Registro exitoso. Inicia sesión.');
     }
 
     public function login(Request $request)
@@ -75,6 +85,6 @@ class authController extends Controller
         $request->session()->regenerateToken();
 
         // Redirigir al usuario al formulario de inicio de sesión
-        return redirect()->route('signin-3')->with('success', 'Has cerrado sesión exitosamente.');
+        return redirect()->route('signin')->with('success', 'Has cerrado sesión exitosamente.');
     }
 }

@@ -271,7 +271,7 @@
                             class="img-fluid">
                     </span>
                     <span class="user-detail">
-                        <span class="user-name">{{ Auth::user()->name }}</span>
+                        <span class="user-name">{{ Auth::user()->name ?? 'Usuario' }}</span>
                         <span class="user-role">Super Admin</span>
                     </span>
                 </span>
@@ -283,7 +283,7 @@
                                 alt="">
                             <span class="status online"></span></span>
                         <div class="profilesets">
-                            <h6>{{ Auth::user()->name }}</h6>
+                            <h6>{{ Auth::user()->name ?? 'Usuario' }}</h6>
                             <h5>Super Admin</h5>
                         </div>
                     </div>
@@ -313,7 +313,7 @@
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="{{ url('profile') }}">My Profile</a>
             <a class="dropdown-item" href="{{ url('general-settings') }}">Settings</a>
-            <a class="dropdown-item" href="{{ url('signin-3') }}">Logout</a>
+            <a class="dropdown-item" href="{{ url('signin') }}">Logout</a>
         </div>
     </div>
     <!-- /Mobile Menu -->

@@ -41,7 +41,7 @@
                             <button type="submit" class="btn btn-login">Change Password</button>
                         </div>
                         <div class="signinform text-center">
-                            <h4>Return to <a href="{{ url('signin-3') }}" class="hover-a"> login </a></h4>
+                            <h4>Return to <a href="{{ url('signin') }}" class="hover-a"> login </a></h4>
                         </div>
                     </div>
                 </form>

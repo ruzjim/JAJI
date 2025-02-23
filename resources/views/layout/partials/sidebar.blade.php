@@ -318,24 +318,18 @@
                                             class="menu-arrow inside-submenu"></span></a>
                                     <ul>
                                         <li><a href="{{ url('signin') }}">Cover</a></li>
-                                        <li><a href="{{ url('signin-2') }}">Illustration</a></li>
-                                        <li><a href="{{ url('signin-3') }}">Basic</a></li>
                                     </ul>
                                 </li>
                                 <li class="submenu submenu-two"><a href="javascript:void(0);">Register<span
                                             class="menu-arrow inside-submenu"></span></a>
                                     <ul>
                                         <li><a href="{{ url('register') }}">Cover</a></li>
-                                        <li><a href="{{ url('register-2') }}">Illustration</a></li>
-                                        <li><a href="{{ url('register-3') }}">Basic</a></li>
                                     </ul>
                                 </li>
                                 <li class="submenu submenu-two"><a href="javascript:void(0);">Forgot Password<span
                                             class="menu-arrow inside-submenu"></span></a>
                                     <ul>
                                         <li><a href="{{ url('forgot-password') }}">Cover</a></li>
-                                        <li><a href="{{ url('forgot-password-2') }}">Illustration</a></li>
-                                        <li><a href="{{ url('forgot-password-3') }}">Basic</a></li>
                                     </ul>
                                 </li>
                                 <li class="submenu submenu-two"><a href="javascript:void(0);">Reset Password<span
