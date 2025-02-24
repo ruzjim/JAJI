@@ -140,10 +140,10 @@
                                                 <a href="javascript:void(0);" class="img-bg">
                                                     @if ($producto->imagen)
                                                         <img src="{{ $producto->imagen }}"
-                                                            alt="Products" class="p-5">
+                                                            alt="Products" class="p-5" style="width: 70%;">
                                                     @else
                                                     <img src="https://icons.veryicon.com/png/o/miscellaneous/fu-jia-intranet/product-29.png"
-                                                        alt="Products" class="p-5">
+                                                        alt="Products" class="p-5" style="width: 70%;">
                                                     @endif
                                                     <span><i data-feather="check" class="feather-16"></i></span>
                                                 </a>
