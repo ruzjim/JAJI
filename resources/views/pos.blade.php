@@ -1,7 +1,7 @@
 <?php $page = 'pos'; ?>
 @extends('layout.mainlayout')
 @section('content')
-    @vite(['resources/js/test.js'])
+    @vite(['resources/js/addproducts.js'])
 
     <div class="page-wrapper pos-pg-wrapper ms-0">
         <div class="content pos-design p-0">
@@ -176,19 +176,19 @@
                             <h6>Escanear Artículos</h6>
                             <div class="input-block d-flex align-items-center">
                                 <div class="flex-grow-1">
-                                    <input type="text" class="form-control" placeholder="Escanea el articulo" autofocus>
+                                    <input type="text" class="form-control" placeholder="Escanea el articulo" id="escaner" autofocus>
                                 </div>
                             </div>
                         </div>
                         <div class="product-added block-section">
                             <div class="head-text d-flex align-items-center justify-content-between">
-                                <h6 class="d-flex align-items-center mb-0">Productos Agregados<span class="count">2</span></h6>
+                                <h6 class="d-flex align-items-center mb-0">Productos Agregados<span class="count" id="contadorArticulos">0</span></h6>
                                 <a href="javascript:void(0);" class="d-flex align-items-center text-danger"><span
-                                        class="me-1"><i data-feather="x" class="feather-16"></i></span>Clear all</a>
+                                        class="me-1"><i data-feather="x" class="feather-16"></i></span>Limpiar</a>
                             </div>
                             <div class="product-wrap" id="ListaProductos">
 
-                                <div class="product-list d-flex align-items-center justify-content-between">
+                                {{-- <div class="product-list d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center product-info" data-bs-toggle="modal"
                                         data-bs-target="#products">
                                         <a href="javascript:void(0);" class="img-bg">
@@ -222,116 +222,9 @@
                                             <i data-feather="trash-2" class="feather-14"></i>
                                         </a>
                                     </div>
-                                </div>
+                                </div> --}}
 
-                                <div class="product-list d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center product-info" data-bs-toggle="modal"
-                                        data-bs-target="#products">
-                                        <a href="javascript:void(0);" class="img-bg">
-                                            <img src="{{ URL::asset('/build/img/products/pos-product-17.png') }}"
-                                                alt="Products">
-                                        </a>
-                                        <div class="info">
-                                            <span>PT0235</span>
-                                            <h6><a href="javascript:void(0);">Iphone 14</a></h6>
-                                            <p>$3000</p>
-                                        </div>
-                                    </div>
-                                    <div class="qty-item text-center">
-                                        <a href="javascript:void(0);"
-                                            class="dec d-flex justify-content-center align-items-center"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="minus"><i
-                                                data-feather="minus-circle" class="feather-14"></i></a>
-                                        <input type="text" class="form-control text-center" name="qty"
-                                            value="3">
-                                        <a href="javascript:void(0);"
-                                            class="inc d-flex justify-content-center align-items-center"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="plus"><i
-                                                data-feather="plus-circle" class="feather-14"></i></a>
-                                    </div>
-                                    <div class="d-flex align-items-center action">
-                                        <a class="btn-icon edit-icon me-2" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#edit-product">
-                                            <i data-feather="edit" class="feather-14"></i>
-                                        </a>
-                                        <a class="btn-icon delete-icon confirm-text" href="javascript:void(0);">
-                                            <i data-feather="trash-2" class="feather-14"></i>
-                                        </a>
-                                    </div>
-                                </div>
 
-                                <div class="product-list d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center product-info" data-bs-toggle="modal"
-                                        data-bs-target="#products">
-                                        <a href="javascript:void(0);" class="img-bg">
-                                            <img src="{{ URL::asset('/build/img/products/pos-product-16.png') }}"
-                                                alt="Products">
-                                        </a>
-                                        <div class="info">
-                                            <span>PT0005d</span>
-                                            <h6><a href="javascript:void(0);">Red Nike Laser</a></h6>
-                                            <p>$2000</p>
-                                        </div>
-                                    </div>
-                                    <div class="qty-item text-center">
-                                        <a href="javascript:void(0);"
-                                            class="dec d-flex justify-content-center align-items-center"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="minus"><i
-                                                data-feather="minus-circle" class="feather-14"></i></a>
-                                        <input type="text" class="form-control text-center" name="qty"
-                                            value="1">
-                                        <a href="javascript:void(0);"
-                                            class="inc d-flex justify-content-center align-items-center"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="plus"><i
-                                                data-feather="plus-circle" class="feather-14"></i></a>
-                                    </div>
-                                    <div class="d-flex align-items-center action">
-                                        <a class="btn-icon edit-icon me-2" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#edit-product">
-                                            <i data-feather="edit" class="feather-14"></i>
-                                        </a>
-                                        <a class="btn-icon delete-icon confirm-text" href="javascript:void(0);">
-                                            <i data-feather="trash-2" class="feather-14"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="product-list d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center product-info" data-bs-toggle="modal"
-                                        data-bs-target="#products">
-                                        <a href="javascript:void(0);" class="img-bg">
-                                            <img src="{{ URL::asset('/build/img/products/pos-product-17.png') }}"
-                                                alt="Products">
-                                        </a>
-                                        <div class="info">
-                                            <span>PT0005</span>
-                                            <h6><a href="javascript:void(0);">Red Nike Laser</a></h6>
-                                            <p>$2000</p>
-                                        </div>
-                                    </div>
-                                    <div class="qty-item text-center">
-                                        <a href="javascript:void(0);"
-                                            class="dec d-flex justify-content-center align-items-center"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="minus"><i
-                                                data-feather="minus-circle" class="feather-14"></i></a>
-                                        <input type="text" class="form-control text-center" name="qty"
-                                            value="1">
-                                        <a href="javascript:void(0);"
-                                            class="inc d-flex justify-content-center align-items-center"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="plus"><i
-                                                data-feather="plus-circle" class="feather-14"></i></a>
-                                    </div>
-                                    <div class="d-flex align-items-center action">
-                                        <a class="btn-icon edit-icon me-2" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#edit-product">
-                                            <i data-feather="edit" class="feather-14"></i>
-                                        </a>
-                                        <a class="btn-icon delete-icon confirm-text" href="javascript:void(0);">
-                                            <i data-feather="trash-2" class="feather-14"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                
                             </div>
                         </div>
                         <div class="block-section">
