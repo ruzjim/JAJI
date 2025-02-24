@@ -58,15 +58,17 @@ Route::get('/index', function () {
     return view('index');
 })->name('index');
 
-//Rutas producto
+// Rutas producto
 Route::get('/product-list', [ProductController::class, 'producto'])->name('product-list');
-Route::get('/add-product', function () {
-    return view('add-product');
-})->name('add-product');
+Route::get('/add-product', function () { return view('add-product'); })->name('add-product');
 Route::post('/add-product', [ProductController::class, 'guardarProducto'])->name('guardar-producto');
 Route::get('/edit-product/{Id_Producto}', [ProductController::class, 'editarProductoGet'])->name('edit-product');
 Route::post('/edit-product/{Id_Producto}', [ProductController::class, 'actualizarProducto'])->name('update-product');
 Route::get('/cambiar-estado/{Id_Producto}', [ProductController::class, 'cambiarEstado'])->name('cambiar-estado');
+Route::put('/product-discount/{Id_Producto}', [ProductController::class, 'updateDiscount'])->name('product-discount');
+
+// Rutas búsqueda
+Route::get('/search-products', [ProductController::class, 'search'])->name('search.products');
 
 //Rutas Puntos
 Route::get('/puntos', [PuntoController::class, 'puntos'])->name('puntos');
