@@ -33,6 +33,9 @@ document.addEventListener("DOMContentLoaded", function () {
             cantidadInput.value = parseInt(cantidadInput.value) + 1; // Sumar cantidad
         } else {
             // Crear nuevo elemento de producto en la lista
+            let precioDescuento = producto.Precio_Venta - (producto.Precio_Venta * (producto.descuento / 100));
+            console.log(producto.Precio_Venta, producto.descuento, precioDescuento);
+            
             let productoHTML = `
                 <div class="product-list d-flex align-items-center justify-content-between producto" data-id="${producto.Id_Producto}">
                     <div class="d-flex align-items-center product-info">
@@ -42,7 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="info">
                             <span>${producto.barcode}</span>
                             <h6><a href="javascript:void(0);">${producto.Nombre_Producto}</a></h6>
-                            <p>₡ ${producto.Precio_Venta}</p>
+                            ${producto.descuento > 0 ? `<span class="bg-success text-dark bg-opacity-50">₡ ${producto.Precio_Venta} - ${producto.descuento}%</span>` : ''}
+                            <p>₡ ${precioDescuento}</p>
                         </div>
                     </div>
                     <div class="qty-item text-center">

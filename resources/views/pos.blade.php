@@ -155,6 +155,9 @@
                                                     <span class="d-none">{{ $producto->Id_Producto }}</span>
                                                     <p>₡ {{ $producto->Precio_Venta }}</p>
                                                 </div>
+                                                @if ($producto->descuento > 0)
+                                                    <span class="badge bg-success p-2 text-dark bg-opacity-50 position-absolute top-1 start-1 rounded-circle p-2">-{{ $producto->descuento }}%</span>
+                                                @endif
                                             </div>
                                         </div>
                                         @endforeach
