@@ -6688,7 +6688,7 @@ caption {
 }
 
 .dataTables_length label:before {
-  content: "Showing 10 of 40 Results";
+  content: "Showing 10 of 30 Results1";
   margin-right: 5px;
 }
 

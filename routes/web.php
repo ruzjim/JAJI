@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\POSController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\puntoController;
 use App\Http\Controllers\ProductoPuntosController;
@@ -22,11 +24,18 @@ use App\Http\Controllers\PuntosUsersController;
 
 Route::post('/register', [authController::class, 'register'])->name('register');
 Route::post('/login', [authController::class, 'login'])->name('login');
-Route::post('/logout', [authController::class, 'logout'])->name('logout');
+Route::get('/logout', [authController::class, 'logout'])->name('logout');
 Route::get('/signin', [authController::class, 'signin'])->name('signin');
 Route::get('/register', [authController::class, 'registerr'])->name('register');
 
+Route::get('/customers', [ClientesController::class, 'index'])->name('customers');
+Route::post('/agregarCliente', [ClientesController::class, 'agregarCliente'])->name('agregarCliente');
+Route::get('/pos', [POSController::class, 'index'])->name('pos');
 
+
+// Route::get('/pos', function () {
+    
+// })->name('pos');
 
 
 
@@ -304,17 +313,13 @@ Route::get('/quotation-list', function () {
     return view('quotation-list');
 })->name('quotation-list');
 
-Route::get('/pos', function () {
-    return view('pos');
-})->name('pos');
+
 
 Route::get('/coupons', function () {
     return view('coupons');
 })->name('coupons');
 
-Route::get('/customers', function () {
-    return view('customers');
-})->name('customers');
+
 
 Route::get('/suppliers', function () {
     return view('suppliers');

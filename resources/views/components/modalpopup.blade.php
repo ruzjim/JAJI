@@ -6998,48 +6998,39 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="pos">
+                    <form action="agregarCliente" method="POST">
+                        @csrf
                         <div class="row">
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>Customer Name</label>
-                                    <input type="text" class="form-control">
+                            <div class="col-lg-6 pe-0">
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" name="name">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control">
+                            <div class="col-lg-6 pe-0">
+                                <div class="mb-3">
+                                    <label class="form-label">Cédula</label>
+                                    <input type="text" class="form-control" name="cedula">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>Phone</label>
-                                    <input type="text" class="form-control">
+                            <div class="col-lg-6 pe-0">
+                                <div class="mb-3">
+                                    <label class="form-label">Telefono</label>
+                                    <input type="number" class="form-control" name="telefono">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>Country</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>City</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>Address</label>
-                                    <input type="text">
+                            <div class="col-lg-12 pe-0">
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email">
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer d-sm-flex justify-content-end">
-                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-submit me-2">Submit</button>
+
+                        <div class="modal-footer-btn">
+                            <button type="button" class="btn btn-cancel me-2"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-submit">Guardar</button>
                         </div>
                     </form>
                 </div>
@@ -8379,80 +8370,38 @@
                     <div class="content">
                         <div class="modal-header border-0 custom-modal-header">
                             <div class="page-title">
-                                <h4>Add Customer</h4>
+                                <h4>Agregar Clientes</h4>
                             </div>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body custom-modal-body">
-                            <form action="customers">
-                                <div class="modal-title-head people-cust-avatar">
-                                    <h6>Avatar</h6>
-                                </div>
-                                <div class="new-employee-field">
-                                    <div class="profile-pic-upload">
-                                        <div class="profile-pic">
-                                            <span><i data-feather="plus-circle" class="plus-down-add"></i> Add
-                                                Image</span>
-                                        </div>
-                                        <div class="mb-3">
-                                            <div class="image-upload mb-0">
-                                                <input type="file">
-                                                <div class="image-uploads">
-                                                    <h4>Change Image</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <form action="agregarCliente" method="POST">
+                                @csrf
                                 <div class="row">
-                                    <div class="col-lg-4 pe-0">
+                                    <div class="col-lg-6 pe-0">
                                         <div class="mb-3">
-                                            <label class="form-label">Customer Name</label>
-                                            <input type="text" class="form-control">
+                                            <label class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" name="name">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 pe-0">
+                                    <div class="col-lg-6 pe-0">
                                         <div class="mb-3">
-                                            <label class="form-label">Email</label>
-                                            <input type="email" class="form-control">
+                                            <label class="form-label">Cédula</label>
+                                            <input type="text" class="form-control" name="cedula">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 pe-0">
-                                        <div class="input-blocks">
-                                            <label class="mb-2">Phone</label>
-                                            <input class="form-control form-control-lg group_formcontrol"
-                                                id="phone" name="phone" type="text">
+                                    <div class="col-lg-6 pe-0">
+                                        <div class="mb-3">
+                                            <label class="form-label">Telefono</label>
+                                            <input type="number" class="form-control" name="telefono">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 pe-0">
                                         <div class="mb-3">
-                                            <label class="form-label">Address</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 pe-0">
-                                        <div class="mb-3">
-                                            <label class="form-label">City</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 pe-0">
-                                        <div class="mb-3">
-                                            <label class="form-label">Country</label>
-                                            <select class="select">
-                                                <option>Choose</option>
-                                                <option>United Kingdom</option>
-                                                <option>United State</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3 input-blocks">
-                                            <label class="form-label">Descriptions</label>
-                                            <textarea class="form-control mb-1"></textarea>
-                                            <p>Maximum 60 Characters</p>
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" name="email">
                                         </div>
                                     </div>
                                 </div>
@@ -8460,7 +8409,7 @@
                                 <div class="modal-footer-btn">
                                     <button type="button" class="btn btn-cancel me-2"
                                         data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-submit">Submit</button>
+                                    <button type="submit" class="btn btn-submit">Guardar</button>
                                 </div>
                             </form>
                         </div>

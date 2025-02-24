@@ -18,7 +18,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="submenu">
+                        <li class="submenu d-none">
                             <a href="javascript:void(0);"
                                 class="{{ Request::is('chat', 'file-manager', 'file-archived','file-document','file-favourites','file-manager-seleted','file-recent','file-shared','notes', 'todo', 'email', 'calendar', 'call-history', 'audio-call', 'video-call','file-manager-deleted') ? 'active subdrop' : '' }} "><i
                                     data-feather="smartphone"></i><span>Application</span><span
@@ -179,7 +179,7 @@
                     <h6 class="submenu-hdr">Peoples</h6>
                     <ul>
                         <li class="{{ Request::is('customers') ? 'active' : '' }}"><a
-                                href="{{ url('customers') }}"><i data-feather="user"></i><span>Customers</span></a>
+                                href="{{ url('customers') }}"><i data-feather="user"></i><span>Clientes</span></a>
                         </li>
                         <li class="{{ Request::is('suppliers') ? 'active' : '' }}"><a
                                 href="{{ url('suppliers') }}"><i data-feather="users"></i><span>Suppliers</span></a>
@@ -520,7 +520,7 @@
                             </ul>
                         </li>
                         <li class="{{ Request::is('signin') ? 'active' : '' }}">
-                            <a href="{{ url('signin') }}"><i data-feather="log-out"></i><span>Logout</span> </a>
+                            <a href="{{ route('logout') }}"><i data-feather="log-out"></i><span>Logout</span> </a>
                         </li>
                     </ul>
                 </li>

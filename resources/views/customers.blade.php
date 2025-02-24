@@ -1,17 +1,29 @@
 <?php $page = 'customers'; ?>
 @extends('layout.mainlayout')
 @section('content')
+<style>
+.dataTables_info {
+    padding: 0px !important;
+    margin: 0px !important;
+    float: left;
+    display: block;
+}
+.dataTables_length{
+    display: none;
+}
+</style>
+    @vite(['resources/js/test.js'])
     <div class="page-wrapper">
         <div class="content">
             @component('components.breadcrumb')
                 @slot('title')
-                    Customer List
+                    Lista de Clientes
                 @endslot
                 @slot('li_1')
-                    Manage your warehouse
+                    Administra tu lista de clientes
                 @endslot
                 @slot('li_2')
-                    Add New Customer
+                    Agregar un nuevo cliente
                 @endslot
             @endcomponent
 
@@ -25,7 +37,7 @@
                                         class="feather-search"></i></a>
                             </div>
                         </div>
-                        <div class="search-path">
+                        <div class="search-path d-none">
                             <div class="d-flex align-items-center">
                                 <a class="btn btn-filter" id="filter_search">
                                     <i data-feather="filter" class="filter-icon"></i>
@@ -34,72 +46,60 @@
 
                             </div>
                         </div>
-                        <div class="form-sort">
+                        <div class="form-sort d-none">
                             <i data-feather="sliders" class="info-img"></i>
                             <select class="select">
-                                <option>Sort by Date</option>
-                                <option>Newest</option>
-                                <option>Oldest</option>
+                                <option>Por fecha</option>
+                                <option>Nuevo</option>
+                                <option>Viejo</option>
                             </select>
                         </div>
                     </div>
-                    <!-- /Filter -->
-                    <div class="card" id="filter_inputs">
-                        <div class="card-body pb-0">
-                            <div class="row">
-                                <div class="col-lg-3 col-sm-6 col-12">
-                                    <div class="input-blocks">
-                                        <i data-feather="user" class="info-img"></i>
-                                        <select class="select">
-                                            <option>Choose Customer Name</option>
-                                            <option>Benjamin</option>
-                                            <option>Ellen</option>
-                                            <option>Freda</option>
-                                            <option>Kaitlin</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 col-12">
-                                    <div class="input-blocks">
-                                        <i data-feather="globe" class="info-img"></i>
-                                        <select class="select">
-                                            <option>Choose Country</option>
-                                            <option>India</option>
-                                            <option>USA</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 col-12 ms-auto">
-                                    <div class="input-blocks">
-                                        <a class="btn btn-filters ms-auto"> <i data-feather="search"
-                                                class="feather-search"></i> Search </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Filter -->
+      
                     <div class="table-responsive">
-                        <table class="table  datanew">
+                        <table class="table datanew">
                             <thead>
                                 <tr>
-                                    <th class="no-sort">
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
-                                    <th>Customer Name</th>
-                                    <th>Code</th>
-                                    <th>Customer</th>
+                                    <th>Cliente</th>
+                                    <th>Cédula</th>
+                                    <th>Telefono</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Country</th>
                                     <th class="no-sort">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                @foreach ($customers as $customer)
+                                    <tr>
+                                        
+                                        <td>
+                                            <div class="userimgname cust-imgname">
+                                                <a href="javascript:void(0);" class="product-img">
+                                                    <img src="{{ $customer->profile_photo_path }}"
+                                                        alt="product">
+                                                </a>
+                                                <a href="javascript:void(0);">{{ $customer->name }}</a>
+                                            </div>
+                                        </td>
+                                        <td>{{ $customer->cedula }}</td>
+                                        <td>{{ $customer->telefono }}</td> 
+                                        <td> {{ $customer->email }}</td>
+                                        <td class="action-table-data">
+                                            <div class="edit-delete-action">
+                                                <a class="me-2 p-2" href="#">
+                                                    <i data-feather="eye" class="feather-eye"></i>
+                                                </a>
+                                                <a class="me-2 p-2" href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#edit-units">
+                                                    <i data-feather="edit" class="feather-edit"></i>
+                                                </a>
+                                                <a class="confirm-text p-2" href="javascript:void(0);">
+                                                    <i data-feather="trash-2" class="feather-trash-2"></i>
+                                                </a>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                {{-- <tr>
                                     <td>
                                         <label class="checkboxs">
                                             <input type="checkbox">
@@ -117,12 +117,10 @@
                                     <td>
                                         201
                                     </td>
-                                    <td>Thomas</td>
                                     <td>
                                         thomas@exmple.com
                                     </td>
                                     <td>+12163547758 </td>
-                                    <td>Germany</td>
                                     <td class="action-table-data">
                                         <div class="edit-delete-action">
                                             <a class="me-2 p-2" href="#">
@@ -138,8 +136,8 @@
                                         </div>
 
                                     </td>
-                                </tr>
-                                <tr>
+                                </tr> --}}
+                                {{-- <tr>
                                     <td>
                                         <label class="checkboxs">
                                             <input type="checkbox">
@@ -514,7 +512,7 @@
                                         </div>
 
                                     </td>
-                                </tr>
+                                </tr> --}}
 
                             </tbody>
                         </table>

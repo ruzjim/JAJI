@@ -293,13 +293,14 @@
                     <a class="dropdown-item" href="{{ url('general-settings') }}"><i class="me-2"
                             data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    <a class="dropdown-item logout pb-0" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    
+                
+                    <a class="dropdown-item logout pb-0" href="{{ route('logout') }}" >
                         <img src="{{ URL::asset('/build/img/icons/log-out.svg') }}" class="me-2" alt="img">Logout
                     </a>
                     
+
+
                 </div>
             </div>
         </li>
