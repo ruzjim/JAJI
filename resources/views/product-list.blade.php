@@ -13,6 +13,12 @@
                 @slot('li_3') Agregar Nuevo Producto @endslot
             @endcomponent
 
+            <!-- Search Box -->
+<div class="search-container mb-3">
+    <input type="text" id="search" class="form-control" placeholder="Buscar producto..." />
+</div>
+
+
             <!-- Product List Table -->
             <div class="card table-list-card shadow-lg rounded-3 border-0">
                 <div class="card-body">
@@ -35,35 +41,56 @@
                             </thead>
                             <tbody>
                                 @foreach ($producto as $producto)
-                                    <tr>
-                                        <td>{{ $producto->Nombre_Producto }}</td>
-                                        <td>{{ $producto->Marca }}</td>
-                                        <td>{{ $producto->Stock ?? 'N/A' }}</td>
-                                        <td>{{ $producto->Descripcion }}</td>
-                                        <td class="text-success fw-bold">₡ {{ number_format($producto->Precio_Compra, 2) }}</td>
-                                        <td class="text-warning fw-bold">₡ {{ number_format($producto->Precio_Venta, 2) }}</td>
-                                        <td>{{ $producto->created_at ? \Carbon\Carbon::parse($producto->created_at)->format('d/m/Y H:i') : 'N/A' }}</td>
-                                        <td>{{ $producto->updated_at ? \Carbon\Carbon::parse($producto->updated_at)->format('d/m/Y H:i') : 'N/A' }}</td>
-                                        <td>{{ $producto->ubicacion ?? 'N/A' }}</td>
-                                        <td><span class="badge {{ $producto->Estado ? 'bg-success' : 'bg-danger' }}">{{ $producto->Estado ? 'Activo' : 'Inactivo' }}</span></td>
-                                        <td class="action-table-data text-center">
-                                            <div class="edit-delete-action d-flex justify-content-center gap-2">
-                                                <a class="me-2 edit-icon  p-2" href="{{ url('product-details') }}">
-                                                    <i data-feather="eye" class="feather-eye"></i>
-                                                </a>
-                                                <a class="me-2 p-2" href="{{ route('edit-product', $producto->Id_Producto) }}">
-                                                    <i data-feather="edit" class="feather-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn-change-state" 
-                                                   data-id="{{ $producto->Id_Producto }}" 
-                                                   data-bs-toggle="modal" 
-                                                   data-bs-target="#confirmStateModal">
-                                                    <i data-feather="trash-2" class="feather-trash-2"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+    <tr>
+        <td>{{ $producto->Nombre_Producto }}</td>
+        <td class="text-warning fw-bold">
+    ₡ {{ number_format($producto->Precio_Venta, 2) }}
+    @if ($producto->descuento > 0)
+        <span class="text-success">(Descuento: {{ $producto->descuento }}%)</span>
+        <br>
+        <strong>Precio con Descuento: ₡ {{ number_format($producto->Precio_Venta * (1 - $producto->descuento / 100), 2) }}</strong>
+    @endif
+</td>
+
+        <td>{{ $producto->Marca }}</td>
+        <td>{{ $producto->Stock ?? 'N/A' }}</td>
+        <td>{{ $producto->Descripcion }}</td>
+        <td class="text-success fw-bold">₡ {{ number_format($producto->Precio_Compra, 2) }}</td>
+        <td class="text-warning fw-bold">₡ {{ number_format($producto->Precio_Venta, 2) }}</td>
+        <td>{{ $producto->created_at ? \Carbon\Carbon::parse($producto->created_at)->format('d/m/Y H:i') : 'N/A' }}</td>
+        <td>{{ $producto->updated_at ? \Carbon\Carbon::parse($producto->updated_at)->format('d/m/Y H:i') : 'N/A' }}</td>
+        <td>{{ $producto->ubicacion ?? 'N/A' }}</td>
+        <td><span class="badge {{ $producto->Estado ? 'bg-success' : 'bg-danger' }}">{{ $producto->Estado ? 'Activo' : 'Inactivo' }}</span></td>
+
+        <!-- Add the discount form here -->
+        <td>
+            <form action="{{ route('product-discount', $producto->Id_Producto) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="number" name="descuento" value="{{ $producto->descuento }}" class="form-control" min="0" max="100" step="0.01" placeholder="Descuento (%)">
+                <button type="submit" class="btn btn-primary mt-2">Aplicar Descuento</button>
+            </form>
+        </td>
+
+        <td class="action-table-data text-center">
+            <div class="edit-delete-action d-flex justify-content-center gap-2">
+                <a class="me-2 edit-icon p-2" href="{{ url('product-details') }}">
+                    <i data-feather="eye" class="feather-eye"></i>
+                </a>
+                <a class="me-2 p-2" href="{{ route('edit-product', $producto->Id_Producto) }}">
+                    <i data-feather="edit" class="feather-edit"></i>
+                </a>
+                <a href="#" class="btn-change-state" 
+                   data-id="{{ $producto->Id_Producto }}" 
+                   data-bs-toggle="modal" 
+                   data-bs-target="#confirmStateModal">
+                    <i data-feather="trash-2" class="feather-trash-2"></i>
+                </a>
+            </div>
+        </td>
+    </tr>
+@endforeach
+
                             </tbody>
                         </table>
                     </div>

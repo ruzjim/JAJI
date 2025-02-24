@@ -9,10 +9,12 @@ use App\Models\producto;
 class ProductController extends Controller
 {
     public function producto()
-    {
-                $producto = Producto::all();
-                return view('product-list', compact('producto'));
-    }
+{
+    // Paginate the products, showing 10 products per page
+    $producto = Producto::paginate(10);
+    return view('product-list', compact('producto'));
+}
+
     
     public function guardarProducto(Request $request)
     {
@@ -30,6 +32,27 @@ class ProductController extends Controller
     
         return redirect()->route('product-list')->with('success', 'Producto creado correctamente.');
     }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $search = $request->get('query');  // Get the search query from the request
+            
+            // Search for products by name or brand
+            $products = Producto::where('Nombre_Producto', 'like', '%' . $search . '%')
+                                ->orWhere('Marca', 'like', '%' . $search . '%')  // You can add more fields here if needed
+                                ->get();
+            
+            // Log the result for debugging purposes
+            \Log::info($products); // This will log the products to the storage/logs/laravel.log file
+            
+            // Return the products as a JSON response
+            return response()->json($products);
+        }
+    }
+
+
+
     
     
     public function editarProductoGet($Id_Producto)
@@ -57,6 +80,24 @@ class ProductController extends Controller
 
         return redirect()->route('product-list')->with('success', 'Producto actualizado correctamente.');
     }
+
+    public function updateDiscount(Request $request, $Id_Producto)
+{
+    $producto = Producto::findOrFail($Id_Producto);
+
+    // Validate the discount value
+    $validatedData = $request->validate([
+        'descuento' => 'required|numeric|min:0|max:100',
+    ]);
+
+    // Update the discount for the product
+    $producto->descuento = $validatedData['descuento'];
+    $producto->save();
+
+    // Redirect back to the product list with a success message
+    return redirect()->route('product-list')->with('success', 'Descuento aplicado correctamente.');
+}
+
     
     public function cambiarEstado($Id_Producto)
     {
