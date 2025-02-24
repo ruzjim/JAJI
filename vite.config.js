@@ -28,7 +28,9 @@ export default defineConfig({
                     'resources/js/script.js',
                     'resources/js/productos.js',
                     'resources/js/puntos.js',
-                    'resources/js/productoPuntos',],
+                    'resources/js/productoPuntos',
+                    'resources/js/addproducts.js',
+                ],
                     
             refresh: true,
         }),
