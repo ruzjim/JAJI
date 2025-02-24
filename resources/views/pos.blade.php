@@ -2,6 +2,12 @@
 @extends('layout.mainlayout')
 @section('content')
     @vite(['resources/js/addproducts.js'])
+    <style>
+        .product-wrap{
+            height: auto;
+            overflow-y: auto;
+        }
+    </style>
 
     <div class="page-wrapper pos-pg-wrapper ms-0">
         <div class="content pos-design p-0">
@@ -184,7 +190,7 @@
                             <div class="head-text d-flex align-items-center justify-content-between">
                                 <h6 class="d-flex align-items-center mb-0">Productos Agregados<span class="count" id="contadorArticulos">0</span></h6>
                                 <a href="javascript:void(0);" class="d-flex align-items-center text-danger"><span
-                                        class="me-1"><i data-feather="x" class="feather-16"></i></span>Limpiar</a>
+                                        class="me-1"><i data-feather="x" class="feather-16"></i></span>Cancelar compra</a>
                             </div>
                             <div class="product-wrap" id="ListaProductos">
 
