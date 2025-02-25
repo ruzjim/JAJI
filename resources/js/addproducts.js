@@ -1,3 +1,5 @@
+console.log("Hola Mundo");
+
 document.addEventListener("DOMContentLoaded", function () {
     let listaProductos = document.getElementById("ListaProductos");
     let escaner = document.getElementById("escaner");

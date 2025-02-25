@@ -1,8 +1,19 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import { viteStaticCopy } from 'vite-plugin-static-copy'
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
+    server: {
+        cors: true,  // Habilitar CORS en el servidor de desarrollo
+        origin: 'http://localhost:5173',  // Asegurar origen correcto en desarrollo
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8000',  // Redirigir peticiones API al backend de Laravel
+                changeOrigin: true,
+                secure: false,
+            },
+        },
+    },
     build: {
         manifest: true,
         rtl: true,
@@ -22,53 +33,28 @@ export default defineConfig({
         },
     },
     plugins: [
-        
         laravel({
-            input: ['resources/css/style.css',
-                    'resources/js/script.js',
-                    'resources/js/productos.js',
-                    'resources/js/puntos.js',
-                    'resources/js/productoPuntos',
-                    'resources/js/addproducts.js',
-                ],
-                    
+            input: [
+                'resources/css/style.css',
+                'resources/js/script.js',
+                'resources/js/productos.js',
+                'resources/js/puntos.js',
+                'resources/js/productoPuntos.js',
+                'resources/js/addproducts.js',
+            ],
             refresh: true,
         }),
 
         viteStaticCopy({
             targets: [
-                {
-                    src: 'resources/css',
-                    dest: ''
-                },
-                {
-                    src: 'resources/fonts',
-                    dest: ''
-                },
-                {
-                    src: 'resources/img',
-                    dest: ''
-                },
-                {
-                    src: 'resources/js',
-                    dest: ''
-                },
-                {
-                    src: 'resources/json',
-                    dest: ''
-                },
-                {
-                    src: 'resources/plugins',
-                    dest: ''
-                },
-                {
-                    src: 'resources/scss',
-                    dest: ''
-                },
-            ]
+                { src: 'resources/css', dest: '' },
+                { src: 'resources/fonts', dest: '' },
+                { src: 'resources/img', dest: '' },
+                { src: 'resources/js', dest: '' },
+                { src: 'resources/json', dest: '' },
+                { src: 'resources/plugins', dest: '' },
+                { src: 'resources/scss', dest: '' },
+            ],
         }),
     ],
-
 });
-
-
