@@ -76,10 +76,10 @@ if ($('#topclientes').length > 0) {
     }
     
     if ($('#total-productos-por-vencer').length > 0) {
-        fetch('/total-productos-por-vencer')  // Llamamos a la ruta que devuelve el total de productos por vencer
+        fetch('/total-productos-por-vencer') 
             .then(response => response.json())
             .then(data => {
-                // Actualizamos el contenido del elemento con el número de productos por vencer
+              
                 $('#total-productos-por-vencer').text(data.total_productos_por_vencer);
             })
             .catch(error => console.error("Error al obtener el total de productos por vencer:", error));

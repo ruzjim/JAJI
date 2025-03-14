@@ -113,7 +113,7 @@ Route::get('/productos_a_vencer', [EstadisticasController::class, 'productosPorV
 Route::get('/total-productos-expirados', [EstadisticasController::class, 'totalProductosExpirados']);
 Route::get('/total-productos-stock-bajo', [EstadisticasController::class, 'totalProductosStockBajo']);
 Route::get('/total-productos-por-vencer', [EstadisticasController::class, 'totalProductosPorVencer']);
-
+ 
 
 
 

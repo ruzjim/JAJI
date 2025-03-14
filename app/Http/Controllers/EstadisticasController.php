@@ -10,6 +10,12 @@ use App\Models\Producto;
 
 class EstadisticasController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->actualizarProductosExpirados(); 
+    }
+
     public function topUsuarios()
     {
         $topUsuarios = User::select('users.name')
@@ -133,7 +139,6 @@ public function actualizarProductosExpirados()
             ->where('Expirado', 0)
             ->update(['Expirado' => 1]);
 
-        return response()->json(['message' => 'Productos expirados actualizados correctamente.']);
     } catch (\Exception $e) {
         return response()->json([
             'error' => 'Error al actualizar productos expirados',
@@ -142,12 +147,6 @@ public function actualizarProductosExpirados()
     }
 }
 
-protected function schedule(Schedule $schedule)
-{
-    $schedule->call(function () {
-        app(\App\Http\Controllers\EstadisticasController::class)->actualizarProductosExpirados();
-    })->daily();
-}
     
 
 
