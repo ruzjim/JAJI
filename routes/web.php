@@ -107,7 +107,7 @@ Route::get('/puntos_totales_users', [PuntosUsersController::class, 'buscarPorCed
 Route::get('/top-usuarios', [EstadisticasController::class, 'topUsuarios']);
 Route::get('/total-usuarios', [EstadisticasController::class, 'totalUsuarios']);
 Route::get('/productos-stock-bajo', [EstadisticasController::class, 'ProductosStockBajo']);
-Route::get('/productos-a-vencer', [EstadisticasController::class, 'productosPorVencer'])->name('productos.a-vencer');
+Route::get('/index', [EstadisticasController::class, 'productosPorVencer']);
 Route::get('/stockbajo', [EstadisticasController::class, 'productosStockBajo2']);
 Route::get('/productos_a_vencer', [EstadisticasController::class, 'productosPorVencer2']);
 Route::get('/total-productos-expirados', [EstadisticasController::class, 'totalProductosExpirados']);

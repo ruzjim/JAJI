@@ -85,12 +85,14 @@ class EstadisticasController extends Controller
         try {
             $hoy = now()->format('Y-m-d');
             $semanaDespues = now()->addWeek()->format('Y-m-d');
-
-            return Producto::where('Estado', 1)
+    
+            $productos = Producto::where('Estado', 1)
                 ->whereBetween('Fecha_De_Caducidad', [$hoy, $semanaDespues])
                 ->orderBy('Fecha_De_Caducidad')
                 ->limit(5)
                 ->get(['Nombre_Producto', 'Marca', 'Fecha_De_Caducidad']);
+    
+            return view('index', compact('productos'));
             
         } catch (\Exception $e) {
             return response()->json([

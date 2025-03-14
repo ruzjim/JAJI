@@ -115,38 +115,6 @@ if ($('#topclientes').length > 0) {
             
     }
     
-    
-    if (document.querySelector('#productos-expiran')) {
-        const tablaBody = document.querySelector('#productos-expiran tbody');
-
-        console.log('hola'); // Ahora correctamente posicionado antes del fetch
-
-        fetch('/productos-a-vencer')
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    let html = '';
-                    data.forEach(producto => {
-                        html += `
-                            <tr>
-                                <td>${producto.Nombre_Producto}</td>
-                                <td>${producto.Marca}</td>
-                                <td>${new Date(producto.Fecha_De_Caducidad).toLocaleDateString()}</td>
-                            </tr>
-                        `;
-                    });
-                    tablaBody.innerHTML = html;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                tablaBody.innerHTML = `
-                    <tr>
-                        <td colspan="3" class="text-center">Error al cargar los datos</td>
-                    </tr>
-                `;
-            });
-    }
 
 
 });

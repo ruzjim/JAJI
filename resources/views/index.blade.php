@@ -123,21 +123,30 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive" id="productos-expiran">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nombre del Producto</th>
-                                    <th>Marca</th>
-                                    <th>Fecha de Expiración</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Content will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Producto</th>
+                    <th>Marca</th>
+                    <th>Fecha de Expiración</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($productos as $producto)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $producto->Nombre_Producto }}</td>
+                        <td>{{ $producto->Marca }}</td>
+                        <td>{{ \Carbon\Carbon::parse($producto->Fecha_De_Caducidad)->toFormattedDateString() }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+
             </div>
         </div>
     </div>
