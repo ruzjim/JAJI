@@ -2,54 +2,64 @@
 @extends('layout.mainlayout')
 @section('content')
 @vite(['resources/js/estadisticas.js'])
+
 <div class="page-wrapper">
     <div class="content">
         <div class="row">
             <div class="col-xl-3 col-sm-6 col-12 d-flex">
-                <div class="dash-count">
-                    <div class="dash-counts">
-                        <h4 id="total-usuarios">0</h4> 
-                        <h5>Usuarios</h5>
+                <a href="{{ url('customers') }}" class="w-100">
+                    <div class="dash-count">
+                        <div class="dash-counts">
+                            <h4 id="total-usuarios">0</h4>
+                            <h5>Usuarios</h5>
+                        </div>
+                        <div class="dash-imgs">
+                            <i data-feather="user"></i>
+                        </div>
                     </div>
-                    <div class="dash-imgs">
-                        <i data-feather="user"></i>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="col-xl-3 col-sm-6 col-12 d-flex">
-                <div class="dash-count das1">
-                    <div class="dash-counts">
-                        <h4 id="total-productos-expirados">0</h4>
-                        <h5>Total De Productos Expirados</h5>
+                <a href="{{ url('productos-expirados') }}" class="w-100">
+                    <div class="dash-count das1">
+                        <div class="dash-counts">
+                            <h4 id="total-productos-expirados">0</h4>
+                            <h5>Total De Productos Expirados</h5>
+                        </div>
+                        <div class="dash-imgs">
+                            <i data-feather="alert-triangle"></i>
+                        </div>
                     </div>
-                    <div class="dash-imgs">
-                        <i data-feather="alert-triangle"></i>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="col-xl-3 col-sm-6 col-12 d-flex">
-                <div class="dash-count das2">
-                    <div class="dash-counts">
-                        <h4 id="total-productos-stock-bajo">0</h4>
-                        <h5>Productos Con Bajo Stock</h5>
+                <a href="{{ url('stockbajo') }}" class="w-100">
+                    <div class="dash-count das2">
+                        <div class="dash-counts">
+                            <h4 id="total-productos-stock-bajo">0</h4>
+                            <h5>Productos Con Bajo Stock</h5>
+                        </div>
+                        <div class="dash-imgs">
+                            <i data-feather="archive"></i>
+                        </div>
                     </div>
-                    <div class="dash-imgs">
-                       <i data-feather="archive"></i>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="col-xl-3 col-sm-6 col-12 d-flex">
-                <div class="dash-count">
-                    <div class="dash-counts">
-                        <h4 id="total-productos-por-vencer">0</h4> 
-                        <h5>Productos Pronto A Expirar</h5>
+                <a href="{{ url('productos_a_vencer') }}" class="w-100">
+                    <div class="dash-count">
+                        <div class="dash-counts">
+                            <h4 id="total-productos-por-vencer">0</h4>
+                            <h5>Productos Pronto A Expirar</h5>
+                        </div>
+                        <div class="dash-imgs">
+                            <i data-feather="clock"></i>
+                        </div>
                     </div>
-                    <div class="dash-imgs">
-                       <i data-feather="clock"></i>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
+
         <!-- Button trigger modal -->
 
         <div class="row">
@@ -93,7 +103,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
+                                    <!-- Content will be populated here -->
                                 </tbody>
                             </table>
                         </div>
@@ -102,34 +112,33 @@
             </div>
 
             <div class="card table-list-card">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h4 class="card-title mb-0">Productos A Punto De Expirar</h4>
-        <div class="view-all-link">
-            <a href="{{ url('productos_a_vencer') }}" class="view-all d-flex align-items-center">
-                Ver Todo<span class="ps-2 d-flex align-items-center">
-                    <i data-feather="arrow-right" class="feather-16"></i>
-                </span>
-            </a>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive" id="productos-expiran">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Nombre del Producto</th>
-                        <th>Marca</th>
-                        <th>Fecha de Expiración</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="card-title mb-0">Productos A Punto De Expirar</h4>
+                    <div class="view-all-link">
+                        <a href="{{ url('productos_a_vencer') }}" class="view-all d-flex align-items-center">
+                            Ver Todo<span class="ps-2 d-flex align-items-center">
+                                <i data-feather="arrow-right" class="feather-16"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" id="productos-expiran">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre del Producto</th>
+                                    <th>Marca</th>
+                                    <th>Fecha de Expiración</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Content will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
