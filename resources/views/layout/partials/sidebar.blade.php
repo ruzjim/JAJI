@@ -72,13 +72,13 @@
                                 href="{{ url('add-product') }}"><i data-feather="plus-square"></i><span>Crear
                                     Producto</span></a></li>
                         <li class="{{ Request::is('stockbajo') ? 'active' : '' }}"><a
-                                href="{{ url('stockbajo') }}"><i data-feather="codesandbox"></i><span>Productos Con Stock Bajo
+                                href="{{ url('stockbajo') }}"><i data-feather="archive"></i><span>Productos Con Stock Bajo
                                     </span></a></li>
                          <li class="{{ Request::is('productos_a_vencer') ? 'active' : '' }}"><a
-                                href="{{ url('productos_a_vencer') }}"><i data-feather="box"></i><span>Productos
+                                href="{{ url('productos_a_vencer') }}"><i data-feather="clock"></i><span>Productos
                                     Por Expirar</span></a></li>
                                     <li class="{{ Request::is('productos-expirados') ? 'active' : '' }}"><a
-                                href="{{ url('productos-expirados') }}"><i data-feather="box"></i><span>Productos Expirados</span></a></li>
+                                href="{{ url('productos-expirados') }}"><i data-feather="alert-triangle"></i><span>Productos Expirados</span></a></li>
                         <!-- <li class="{{ Request::is('low-stocks') ? 'active' : '' }}"><a
                                 href="{{ url('low-stocks') }}"><i data-feather="trending-down"></i><span>Low
                                     Stocks</span></a></li> 
