@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
-class producto extends model
+class Producto extends model
 {
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -27,8 +27,10 @@ class producto extends model
         'Descripcion',
         'Precio_Compra',
         'Precio_Venta',
+        'Fecha_De_Caducidad',
         'ubicacion',
         'Estado',
+        'Expirado'
     ];
 
     public $timestamps = true;

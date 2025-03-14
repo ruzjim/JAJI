@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\puntoController;
 use App\Http\Controllers\ProductoPuntosController;
 use App\Http\Controllers\PuntosUsersController;
+use App\Http\Controllers\EstadisticasController;
 
 
 /*
@@ -76,6 +77,9 @@ Route::post('/add-product', [ProductController::class, 'guardarProducto'])->name
 Route::get('/edit-product/{Id_Producto}', [ProductController::class, 'editarProductoGet'])->name('edit-product');
 Route::post('/edit-product/{Id_Producto}', [ProductController::class, 'actualizarProducto'])->name('update-product');
 Route::get('/cambiar-estado/{Id_Producto}', [ProductController::class, 'cambiarEstado'])->name('cambiar-estado');
+Route::get('/productos-expirados', [ProductController::class, 'productosExpirados'])->name('productos-expirados');
+Route::get('/actualizar-expirados', [EstadisticasController::class, 'actualizarProductosExpirados']);
+
 
 //Rutas Puntos
 Route::get('/puntos', [PuntoController::class, 'puntos'])->name('puntos');
@@ -98,6 +102,20 @@ Route::get('/cambiar-estado-producto-punto/{id}', [ProductoPuntosController::cla
 //Rutas para buscar la cantidad de puntos por numero de cedula de usuario
 Route::get('/puntos_users', [PuntosUsersController::class, 'puntosUsersList'])->name('puntos_users');
 Route::get('/puntos_totales_users', [PuntosUsersController::class, 'buscarPorCedula'])->name('puntos_users_buscar');
+
+//Estadisticas
+Route::get('/top-usuarios', [EstadisticasController::class, 'topUsuarios']);
+Route::get('/total-usuarios', [EstadisticasController::class, 'totalUsuarios']);
+Route::get('/productos-stock-bajo', [EstadisticasController::class, 'ProductosStockBajo']);
+Route::get('/productos-a-vencer', [EstadisticasController::class, 'productosPorVencer'])->name('productos.a-vencer');
+Route::get('/stockbajo', [EstadisticasController::class, 'productosStockBajo2']);
+Route::get('/productos_a_vencer', [EstadisticasController::class, 'productosPorVencer2']);
+Route::get('/total-productos-expirados', [EstadisticasController::class, 'totalProductosExpirados']);
+Route::get('/total-productos-stock-bajo', [EstadisticasController::class, 'totalProductosStockBajo']);
+Route::get('/total-productos-por-vencer', [EstadisticasController::class, 'totalProductosPorVencer']);
+
+
+
 
 
 Route::get('/expired-products', function () {

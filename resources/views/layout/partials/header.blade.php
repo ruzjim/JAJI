@@ -16,7 +16,7 @@
             <i data-feather="chevrons-left" class="feather-16"></i>
         </a>
     </div>
-    <!-- /Logo -->
+    <!-- /Logo 
 
     <a id="mobile_btn" class="mobile_btn" href="#sidebar">
         <span class="bar-icon">
@@ -26,10 +26,10 @@
         </span>
     </a>
 
-    <!-- Header Menu -->
-    <ul class="nav user-menu">
+     Header Menu -->
+    <ul class="nav user-menu d-flex justify-content-between">
 
-        <!-- Search -->
+        <!-- Search 
         <li class="nav-item nav-searchinputs">
             <div class="top-nav-search">
                 <a href="javascript:void(0);" class="responsive-search">
@@ -82,10 +82,10 @@
                 </form>
             </div>
         </li>
-        <!-- /Search -->
+        /Search -->
 
 
-        <!-- Select Store -->
+        <!-- Select Store 
         <li class="nav-item dropdown has-arrow main-drop select-store-dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle nav-link select-store" data-bs-toggle="dropdown">
                 <span class="user-info">
@@ -117,9 +117,9 @@
                 </a>
             </div>
         </li>
-        <!-- /Select Store -->
+        /Select Store -->
 
-        <!-- Flag -->
+        <!-- Flag 
         <li class="nav-item dropdown has-arrow flag-nav nav-item-box">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
                 <img src="{{ URL::asset('/build/img/flags/us.png') }}" alt="Language" class="img-fluid">
@@ -139,7 +139,7 @@
                 </a>
             </div>
         </li>
-        <!-- /Flag -->
+        /Flag 
 
         <li class="nav-item nav-item-box">
             <a href="javascript:void(0);" id="btnFullscreen">
@@ -151,8 +151,8 @@
                 <i data-feather="mail"></i>
                 <span class="badge rounded-pill">1</span>
             </a>
-        </li>
-        <!-- Notifications -->
+        </li>-->
+        <!-- Notifications 
         <li class="nav-item dropdown nav-item-box">
             <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                 <i data-feather="bell"></i><span class="badge rounded-pill">2</span>
@@ -258,7 +258,7 @@
                 </div>
             </div>
         </li>
-        <!-- /Notifications -->
+         /Notifications -->
 
         <li class="nav-item nav-item-box">
             <a href="{{ url('general-settings') }}"><i data-feather="settings"></i></a>
@@ -287,13 +287,13 @@
                             <h5>Super Admin</h5>
                         </div>
                     </div>
-                    <hr class="m-0">
+                   <!-- <hr class="m-0">
                     <a class="dropdown-item" href="{{ url('profile') }}"> <i class="me-2"
                             data-feather="user"></i> My Profile</a>
                     <a class="dropdown-item" href="{{ url('general-settings') }}"><i class="me-2"
                             data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
-                    
+                -->
                 
                     <a class="dropdown-item logout pb-0" href="{{ route('logout') }}" >
                         <img src="{{ URL::asset('/build/img/icons/log-out.svg') }}" class="me-2" alt="img">Logout

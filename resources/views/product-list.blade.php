@@ -30,6 +30,7 @@
                                     <th>Fecha De Modificación</th>
                                     <th>Ubicación</th>
                                     <th>Estado</th>
+                                    <th>¿Expirado?</th>
                                     <th class="no-sort">Acción</th>
                                 </tr>
                             </thead>
@@ -46,6 +47,7 @@
                                         <td>{{ $producto->updated_at ? \Carbon\Carbon::parse($producto->updated_at)->format('d/m/Y H:i') : 'N/A' }}</td>
                                         <td>{{ $producto->ubicacion ?? 'N/A' }}</td>
                                         <td><span class="badge {{ $producto->Estado ? 'bg-success' : 'bg-danger' }}">{{ $producto->Estado ? 'Activo' : 'Inactivo' }}</span></td>
+                                        <td><span class="badge {{ $producto->Expirado ? 'bg-danger' : 'bg-success' }}">{{ $producto->Expirado ? 'Si' : 'No' }}</span></td>
                                         <td class="action-table-data text-center">
                                             <div class="edit-delete-action d-flex justify-content-center gap-2">
                                                 <a class="me-2 edit-icon  p-2" href="{{ url('product-details') }}">

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('ubicacion')->nullable()->default('No disponible');
             $table->tinyInteger('Estado')->default(1);
+            $table->tinyInteger('Expirado')->default(0);
+            $table->date('Fecha_De_Caducidad')->nullable();
         });
     }
 
