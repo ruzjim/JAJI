@@ -10,31 +10,30 @@ use Illuminate\Support\Facades\DB;
 class PuntosUsersController extends Controller
 {
     public function puntosUsersList()
-    {
-        $usuarios = User::select('users.id', 'users.name', 'users.cedula', 'users.email', 'users.telefono')
-            ->selectRaw('(SELECT SUM(p.Puntos_Obtenidos) 
-                          FROM puntos_users pu 
-                          JOIN producto_puntos pp ON pu.Id_PuntosFK = pp.Id_PuntosFK 
-                          JOIN puntos p ON pp.Id_PuntosFK = p.Id_Puntos 
-                          WHERE pu.Id_UsersFK = users.id) AS total_puntos')
-            ->get();
+{
+    $usuarios = User::select('users.id', 'users.name', 'users.cedula', 'users.email', 'users.telefono')
+        ->selectRaw('(SELECT SUM(p.Puntos_Obtenidos) 
+                      FROM puntos_users pu 
+                      JOIN puntos p ON pu.Id_PuntosFK = p.Id_Puntos 
+                      WHERE pu.Id_UsersFK = users.id) AS total_puntos')
+        ->get();
 
-        return view('puntos_users', compact('usuarios'));
-    }
+    return view('puntos_users', compact('usuarios'));
+}
 
-    public function buscarPorCedula(Request $request)
-    {
-        $cedula = $request->input('cedula');
+public function buscarPorCedula(Request $request)
+{
+    $cedula = $request->input('cedula');
 
-        $usuario = User::where('cedula', $cedula)
-            ->select('users.id', 'users.name', 'users.cedula', 'users.email', 'users.telefono')
-            ->selectRaw('(SELECT SUM(p.Puntos_Obtenidos) 
-                          FROM puntos_users pu 
-                          JOIN producto_puntos pp ON pu.Id_PuntosFK = pp.Id_PuntosFK 
-                          JOIN puntos p ON pp.Id_PuntosFK = p.Id_Puntos 
-                          WHERE pu.Id_UsersFK = users.id) AS total_puntos')
-            ->first();
+    $usuario = User::where('cedula', $cedula)
+        ->select('users.id', 'users.name', 'users.cedula', 'users.email', 'users.telefono')
+        ->selectRaw('(SELECT SUM(p.Puntos_Obtenidos) 
+                      FROM puntos_users pu 
+                      JOIN puntos p ON pu.Id_PuntosFK = p.Id_Puntos 
+                      WHERE pu.Id_UsersFK = users.id) AS total_puntos')
+        ->first();
 
-        return view('puntos_totales_users', compact('usuario'));
-    }
+    return view('puntos_totales_users', compact('usuario'));
+}
+
 }

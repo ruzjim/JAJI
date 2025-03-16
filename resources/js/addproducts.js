@@ -67,6 +67,10 @@ document.addEventListener("DOMContentLoaded", function () {
             listaProductos.insertAdjacentHTML("beforeend", productoHTML);
             feather.replace(); // Refrescar los iconos de Feather
         }
+
+        // Juan Pa Aquí: Llamamos a `calcularTotalCompra()` inmediatamente después de agregar un producto
+        calcularTotalCompra();
+
     }
 
     // Agregar event listener para eliminar productos al hacer clic en el basurero
@@ -140,4 +144,58 @@ document.addEventListener("DOMContentLoaded", function () {
         // Actualizamos el contador con el total de artículos
         contadorArticulos.textContent = cantidadProductos;
     }
+    // Juan Pa - Código optimizado
+    function calcularTotalCompra() {
+        let total = 0;
+        let totalDescuento = 0; // Juan Pa Aquí: Variable para almacenar el total de descuentos
+
+        // Obtener todos los productos en la lista
+        let productosEnLista = document.querySelectorAll("#ListaProductos .producto");
+
+        productosEnLista.forEach(producto => {
+            let cantidad = parseInt(producto.querySelector(".cantidad").value) || 1;
+            let precioElemento = producto.querySelector("p"); // Tomamos el precio ya calculado
+            let precio = parseFloat(precioElemento.textContent.replace(/[₡$,]/g, '')) || 0;
+
+            // Juan Pa Aquí: Calcular el descuento total
+            let precioOriginal = parseFloat(producto.querySelector(".bg-success")?.textContent.split('₡')[1]) || precio;
+            let descuentoPorUnidad = precioOriginal - precio;
+            totalDescuento += descuentoPorUnidad * cantidad;
+
+            total += precio * cantidad;
+        });
+
+        // Actualizar el total en la tabla
+        let totalElemento = document.getElementById("totalCompra");
+        if (totalElemento) {
+            totalElemento.textContent = "₡ " + total.toLocaleString();
+        }
+
+        // Juan Pa Aquí: Actualizar el total de descuentos en la tabla
+        let descuentoElemento = document.getElementById("totalDescuento");
+        if (descuentoElemento) {
+            descuentoElemento.textContent = "-₡ " + totalDescuento.toLocaleString();
+        }
+    }
+
+
+    // Evento para actualizar total solo cuando cambie la cantidad
+    document.querySelector("#ListaProductos").addEventListener("input", function (event) {
+        if (event.target.classList.contains("cantidad")) {
+            calcularTotalCompra();
+        }
+    });
+
+    // Evento para actualizar total cuando se agregue o elimine un producto
+    document.querySelector("#ListaProductos").addEventListener("click", function (event) {
+        let target = event.target;
+
+        if (target.closest(".delete-icon") || target.closest(".inc") || target.closest(".dec")) {
+            calcularTotalCompra(); // Se ejecuta inmediatamente sin `setTimeout`
+        }
+    });
+
+    // Llamar la función al inicio para mostrar el total inicial
+    calcularTotalCompra();
+    
 });

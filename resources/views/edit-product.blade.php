@@ -47,7 +47,7 @@
                                             <div class="col-lg-4 col-sm-6 col-12">
                                                 <div class="mb-3 add-product">
                                                     <label class="form-label">Precio De Compra</label>
-                                                    <input type="text" name="Precio_Compra" value="{{ old('Precio_Compra', $producto->Precio_Compra) }}" class="form-control" required>
+                                                    <input type="text" name="Precio_Compra" value="{{ old('Precio_Compra', $producto->Precio_Compra) }}" class="form-control" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-sm-6 col-12">
@@ -62,6 +62,22 @@
                                                     <input type="text" name="ubicacion" value="{{ old('ubicacion', $producto->ubicacion) }}" class="form-control" required>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-4 col-sm-6 col-12">
+                                                 <div class="mb-3 add-product">
+                                                    <label class="form-label">Fecha de Caducidad</label>
+                                                    <input type="date" name="Fecha_De_Caducidad" value="{{ old('Fecha_De_Caducidad', $producto->Fecha_De_Caducidad) }}" class="form-control" required>
+                                                   </div>
+                                             </div>
+                                             <div class="col-lg-4 col-sm-6 col-12">
+                                                  <div class="mb-3 add-product">
+                                                     <label class="form-label">¿Expirado?</label>
+                                                     <input type="hidden" name="Expirado" value="0">
+                                                     <select name="Expirado" class="form-control" required>
+                                                     <option value="0" {{ $producto->Expirado == 0 ? 'selected' : '' }}>No</option>
+                                                     <option value ="1" {{ $producto->Expirado == 1 ? 'selected' : '' }}>Si</option>
+                                                                             </select>
+                                                     </div>
+                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="input-blocks summer-description-box transfer mb-3">

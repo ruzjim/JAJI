@@ -60,7 +60,13 @@
                                                     <input type="text" name="ubicacion" placeholder="Ej. Pasillo 1" class="form-control" required>
                                                 </div>
                                             </div>
-                                        </div>
+                                             <div class="col-lg-4 col-sm-6 col-12">
+                                                 <div class="mb-3 add-product">
+                                                    <label class="form-label">Fecha de Caducidad</label>
+                                                    <input type="date" name="Fecha_De_Caducidad" class="form-control" required>
+                                                   </div>
+                                             </div>
+                                         </div>
                                         <div class="col-lg-12">
                                             <div class="input-blocks summer-description-box transfer mb-3">
                                                 <label>Description</label>

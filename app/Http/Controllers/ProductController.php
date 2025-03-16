@@ -24,7 +24,12 @@ class ProductController extends Controller
             'Precio_Compra' => 'required|numeric|min:0',
             'Precio_Venta' => 'required|numeric|min:0',
             'ubicacion' => 'required|string|max:100',
+            'Fecha_De_Caducidad' => 'nullable|date|after_or_equal:today',
         ]);
+
+        if ($request->has('Fecha_De_Caducidad')) {
+            $validatedData['Fecha_De_Caducidad'] = \Carbon\Carbon::parse($request->Fecha_De_Caducidad)->format('Y-m-d');
+        }
     
         Producto::create($validatedData);
     
@@ -50,11 +55,19 @@ class ProductController extends Controller
             'Precio_Compra'      => 'required|numeric|min:0',
             'Precio_Venta'      => 'required|numeric|min:0',
             'ubicacion'         => 'required|string|max:255',
+            'Fecha_De_Caducidad' => 'nullable|date|after_or_equal:today',
             'Estado'             => 'nullable|integer|min:0',
+            'Expirado' => 'nullable|integer|min:0|max:1',
+
+
         ]);
 
-        $producto->update($validatedData);
+        if ($request->has('Fecha_De_Caducidad')) {
+            $validatedData['Fecha_De_Caducidad'] = \Carbon\Carbon::parse($request->Fecha_De_Caducidad)->format('Y-m-d');
+        }
 
+        $producto->update($validatedData);
+        
         return redirect()->route('product-list')->with('success', 'Producto actualizado correctamente.');
     }
     
@@ -65,5 +78,11 @@ class ProductController extends Controller
         $producto->save();
         return redirect()->route('product-list')->with('success', 'Estado del producto actualizado correctamente.');
     }
-    
+
+    public function productosExpirados()
+{
+    $productos = Producto::where('Expirado', 1)->get();
+    return view('productos-expirados', compact('productos'));
+}
+
 }

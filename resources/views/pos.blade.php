@@ -237,7 +237,7 @@
                             </div>
                         </div>
                         <div class="block-section">
-                            <div class="selling-info">
+                            {{-- <div class="selling-info">
                                 <div class="row">
                                     <div class="col-12 col-sm-4">
                                         <div class="input-block">
@@ -277,10 +277,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="order-total">
                                 <table class="table table-responsive table-borderless">
-                                    <tr>
+                                    {{--<tr>
                                         <td>Sub Total</td>
                                         <td class="text-end">$60,454</td>
                                     </tr>
@@ -295,15 +295,15 @@
                                     <tr>
                                         <td>Sub Total</td>
                                         <td class="text-end">$60,454</td>
-                                    </tr>
+                                    </tr>--}}
                                     <tr>
-                                        <td class="danger">Discount (10%)</td>
-                                        <td class="danger text-end">$15.21</td>
-                                    </tr>
+                                        <td class="text-success fw-bold">Total Descuento (Usted Ahorra)</td> <!-- Juan Pa Aquí: Cambiamos a color verde y negrita -->
+                                        <td class="text-success text-end fw-bold" id="totalDescuento">-₡ 0</td> <!-- Juan Pa Aquí: Aplicamos el mismo estilo -->
+                                    </tr>                                                                        
                                     <tr>
                                         <td>Total</td>
-                                        <td class="text-end">$64,024.5</td>
-                                    </tr>
+                                        <td class="text-end" id="totalCompra">₡ 0</td>
+                                    </tr>                                    
                                 </table>
                             </div>
                         </div>
@@ -316,7 +316,7 @@
                                         <a href="javascript:void(0);">
                                             <img src="{{ URL::asset('/build/img/icons/cash-pay.svg') }}"
                                                 alt="Payment Method">
-                                            <span>Cash</span>
+                                            <span>Efectivo</span>
                                         </a>
                                     </div>
                                 </div>
@@ -325,11 +325,11 @@
                                         <a href="javascript:void(0);">
                                             <img src="{{ URL::asset('/build/img/icons/credit-card.svg') }}"
                                                 alt="Payment Method">
-                                            <span>Debit Card</span>
+                                            <span>Tarjeta</span>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-4 item">
+                                {{-- <div class="col-md-6 col-lg-4 item">
                                     <div class="default-cover">
                                         <a href="javascript:void(0);">
                                             <img src="{{ URL::asset('/build/img/icons/qr-scan.svg') }}"
@@ -337,28 +337,27 @@
                                             <span>Scan</span>
                                         </a>
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                         <div class="d-grid btn-block">
                             <a class="btn btn-secondary" href="javascript:void(0);">
-                                Grand Total : $64,024.5
+                                 Total A Pagar: ₡ 0
                             </a>
                         </div>
                         <div class="btn-row d-sm-flex align-items-center justify-content-between">
-                            <a href="javascript:void(0);" class="btn btn-info btn-icon flex-fill"
+                            {{-- <a href="javascript:void(0);" class="btn btn-info btn-icon flex-fill"
                                 data-bs-toggle="modal" data-bs-target="#hold-order"><span
                                     class="me-1 d-flex align-items-center"><i data-feather="pause"
-                                        class="feather-16"></i></span>Hold</a>
+                                        class="feather-16"></i></span>Hold</a>--}}
                             <a href="javascript:void(0);" class="btn btn-danger btn-icon flex-fill"><span
                                     class="me-1 d-flex align-items-center"><i data-feather="trash-2"
-                                        class="feather-16"></i></span>Void</a>
+                                        class="feather-16"></i></span>Cancelar Compra</a>
                             <a href="javascript:void(0);" class="btn btn-success btn-icon flex-fill"
                                 data-bs-toggle="modal" data-bs-target="#payment-completed"><span
                                     class="me-1 d-flex align-items-center"><i data-feather="credit-card"
-                                        class="feather-16"></i></span>Payment</a>
+                                        class="feather-16"></i></span>Proceder al Pago</a>
                         </div>
-
                     </aside>
                 </div>
             </div>
