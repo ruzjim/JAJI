@@ -142,7 +142,7 @@
                                 <div class="col-md-6 col-lg-4 item">
                                     <div class="default-cover">
                                         <a href="javascript:void(0);">
-                                            <img src="{{ URL::asset('/build/img/icons/cash-pay.svg') }}"
+                                            <img src="{{ URL::asset('/build/img/icons/cash-pay.svg') }}" width="20"
                                                 alt="Payment Method">
                                             <span>Efectivo</span>
                                         </a>
@@ -151,9 +151,18 @@
                                 <div class="col-md-6 col-lg-4 item">
                                     <div class="default-cover">
                                         <a href="javascript:void(0);">
-                                            <img src="{{ URL::asset('/build/img/icons/credit-card.svg') }}"
+                                            <img src="{{ URL::asset('/build/img/icons/credit-card.svg') }}" width="20"
                                                 alt="Payment Method">
                                             <span>Tarjeta</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 item">
+                                    <div class="default-cover">
+                                        <a href="javascript:void(0);">
+                                            <img src="{{ URL::asset('/build/img/icons/sinpe.png') }}" width="20"
+                                                alt="Payment Method">
+                                            <span>Sinpe Movil</span>
                                         </a>
                                     </div>
                                 </div>
