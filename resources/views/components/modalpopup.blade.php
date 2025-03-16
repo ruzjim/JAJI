@@ -6817,6 +6817,10 @@
                                 {{-- <div class="invoice-user-name"><span>Invoice No: </span><span>CS132453</span></div> --}}
                             </div>
                             <div class="col-sm-12 col-md-12">
+                                <div class="invoice-user-name"><span>Metodo de Pago: </span><span id="metodoRecibo">Metodo</span></div>
+                                {{-- <div class="invoice-user-name"><span>Invoice No: </span><span>CS132453</span></div> --}}
+                            </div>
+                            <div class="col-sm-12 col-md-12">
                                 {{-- <div class="invoice-user-name"><span>Customer Id: </span><span>#LL93784</span></div> --}}
                                 <div class="invoice-user-name"><span>Fecha y Hora: </span><span>{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}</span></div>
                             </div>
@@ -6887,7 +6891,7 @@
                     </div>
                 </div>
                 <div class="text-center invoice-bar">
-                <a href="javascript:void(0);" class="btn btn-primary m-2">Imprimir</a>
+                <a href="javascript:void(0);" class="btn btn-primary m-2" id="imprimirRecibo">Imprimir</a>
             </div>
 
             </div>

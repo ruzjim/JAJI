@@ -117,13 +117,16 @@
                             <script>
                                 document.addEventListener('DOMContentLoaded', function () {
                                     const paymentMethodInput = document.getElementById('paymentMethod');
+                                    const metodoRecibo = document.getElementById('metodoRecibo');
                                     const paymentMethods = document.querySelectorAll('.methods .item a');
 
                                     paymentMethods.forEach(method => {
                                         method.addEventListener('click', function () {
                                             paymentMethods.forEach(m => m.classList.remove('selected'));
                                             this.classList.add('selected');
-                                            paymentMethodInput.value = this.querySelector('span').innerText;
+                                            const selectedMethod = this.querySelector('span').innerText;
+                                            paymentMethodInput.value = selectedMethod;
+                                            metodoRecibo.innerText = selectedMethod;
                                         });
                                     });
                                 });

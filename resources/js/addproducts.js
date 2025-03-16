@@ -94,11 +94,29 @@ document.addEventListener("DOMContentLoaded", function () {
         if (totalCompraReciboElemento) {
             totalCompraReciboElemento.textContent = "₡ " + (subtotalCompraRecibo - totalDescuentoRecibo).toLocaleString();
         }
-        // Mostrar el modal print-receipt
-        $('#print-receipt').modal('show');
+        // Verificar si hay productos en la lista antes de mostrar el modal
+        if (document.querySelectorAll("#ListaProductos .producto").length > 0) {
+            let metodoPagoSeleccionado = document.querySelector(".methods .item a.selected");
+
+            if (metodoPagoSeleccionado) {
+                $('#print-receipt').modal('show');
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Método de pago no seleccionado',
+                    text: 'Por favor, seleccione un método de pago antes de imprimir el recibo.',
+                });
+            }
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'No hay productos',
+                text: 'No hay productos en la lista para imprimir el recibo.',
+            });
+        }
     });
 
-    document.getElementById("print-receipt").addEventListener("click", function () {
+    document.getElementById("imprimirRecibo").addEventListener("click", function () {
         let printContents = document.getElementById("reciboaImprimir").outerHTML;
         let originalContents = document.body.innerHTML;
 
