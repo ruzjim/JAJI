@@ -4,6 +4,18 @@ document.addEventListener("DOMContentLoaded", function () {
     let listaProductos = document.getElementById("ListaProductos");
     let escaner = document.getElementById("escaner");
     let limpiarBtn = document.querySelector(".head-text .text-danger"); // Seleccionamos el botón "Limpiar"
+
+    document.querySelectorAll(".producto-card").forEach(card => {
+        card.addEventListener("click", function () {
+            let productId = this.getAttribute("data-id"); // Obtiene el ID del producto
+            let producto = productos.find(p => p.Id_Producto == productId); // Busca el producto en la lista
+            
+            if (producto) {
+                agregarProductoALista(producto); // Agrega el producto a la lista
+                actualizarContador(); // Actualiza el contador
+            }
+        });
+    });
     
     escaner.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {

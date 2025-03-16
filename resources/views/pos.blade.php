@@ -3,7 +3,7 @@
 @section('content')
     @vite(['resources/js/addproducts.js'])
     <style>
-        .product-wrap{
+        .product-wrap {
             height: auto;
             overflow-y: auto;
         }
@@ -14,7 +14,7 @@
             <div class="row align-items-start pos-wrapper">
                 <div class="col-md-12 col-lg-8">
                     <div class="pos-categories tabs_wrapper">
-                        
+
                         <div class="pos-products">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h5 class="mb-3">Productos</h5>
@@ -24,30 +24,35 @@
                                     <div class="row">
                                         @foreach ($productos as $producto)
                                             <div class="col-sm-2 col-md-6 col-lg-3 col-xl-3">
-                                            <div class="product-info default-cover card">
-                                                <a href="javascript:void(0);" class="img-bg">
-                                                    @if ($producto->imagen)
-                                                        <img src="{{ $producto->imagen }}"
-                                                            alt="Products" class="p-5" style="width: 70%;">
-                                                    @else
-                                                    <img src="https://icons.veryicon.com/png/o/miscellaneous/fu-jia-intranet/product-29.png"
-                                                        alt="Products" class="p-5" style="width: 70%;">
+                                                <div class="product-info default-cover card producto-card"
+                                                    data-id="{{ $producto->Id_Producto }}">
+                                                    <a href="javascript:void(0);" class="img-bg">
+                                                        @if ($producto->imagen)
+                                                            <img src="{{ $producto->imagen }}" alt="Products" class="p-5"
+                                                                style="width: 70%;">
+                                                        @else
+                                                            <img src="https://icons.veryicon.com/png/o/miscellaneous/fu-jia-intranet/product-29.png"
+                                                                alt="Products" class="p-5" style="width: 70%;">
+                                                        @endif
+                                                        <span><i data-feather="check" class="feather-16"></i></span>
+                                                    </a>
+                                                    <h6 class="cat-name"><a
+                                                            href="javascript:void(0);">{{ $producto->Marca }}</a></h6>
+                                                    <h6 class="product-name"><a
+                                                            href="javascript:void(0);">{{ $producto->Nombre_Producto }}</a>
+                                                    </h6>
+                                                    <span>{{ $producto->barcode }}</span>
+                                                    <div class="d-flex align-items-center justify-content-between price">
+                                                        <span>{{ $producto->Stock }} uds</span>
+                                                        <span class="d-none">{{ $producto->Id_Producto }}</span>
+                                                        <p>₡ {{ $producto->Precio_Venta }}</p>
+                                                    </div>
+                                                    @if ($producto->descuento > 0)
+                                                        <span
+                                                            class="badge bg-success p-2 text-dark bg-opacity-50 position-absolute top-1 start-1 rounded-circle p-2">-{{ $producto->descuento }}%</span>
                                                     @endif
-                                                    <span><i data-feather="check" class="feather-16"></i></span>
-                                                </a>
-                                                <h6 class="cat-name"><a href="javascript:void(0);">{{ $producto->Marca }}</a></h6>
-                                                <h6 class="product-name"><a href="javascript:void(0);">{{ $producto->Nombre_Producto }}</a>
-                                                </h6>
-                                                <div class="d-flex align-items-center justify-content-between price">
-                                                    <span>{{ $producto->Stock }} uds</span>
-                                                    <span class="d-none">{{ $producto->Id_Producto }}</span>
-                                                    <p>₡ {{ $producto->Precio_Venta }}</p>
                                                 </div>
-                                                @if ($producto->descuento > 0)
-                                                    <span class="badge bg-success p-2 text-dark bg-opacity-50 position-absolute top-1 start-1 rounded-circle p-2">-{{ $producto->descuento }}%</span>
-                                                @endif
                                             </div>
-                                        </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -58,7 +63,7 @@
                 {{-- @dump($productos) --}}
                 <div class="col-md-12 col-lg-4 ps-0">
                     <aside class="product-order-list">
-                       <div class="customer-info block-section">
+                        <div class="customer-info block-section">
                             <h6>Customer Information</h6>
                             <div class="input-block d-flex align-items-center">
                                 <div class="flex-grow-1">
@@ -73,35 +78,39 @@
                             <h6>Escanear Artículos</h6>
                             <div class="input-block d-flex align-items-center">
                                 <div class="flex-grow-1">
-                                    <input type="text" class="form-control" placeholder="Escanea el articulo" id="escaner" autofocus>
+                                    <input type="text" class="form-control" placeholder="Escanea el articulo"
+                                        id="escaner" autofocus>
                                 </div>
                             </div>
                         </div>
                         <div class="product-added block-section">
                             <div class="head-text d-flex align-items-center justify-content-between">
-                                <h6 class="d-flex align-items-center mb-0">Productos Agregados<span class="count" id="contadorArticulos">0</span></h6>
+                                <h6 class="d-flex align-items-center mb-0">Productos Agregados<span class="count"
+                                        id="contadorArticulos">0</span></h6>
                                 <a href="javascript:void(0);" class="d-flex align-items-center text-danger"><span
                                         class="me-1"><i data-feather="x" class="feather-16"></i></span>Cancelar compra</a>
                             </div>
                             <div class="product-wrap" id="ListaProductos">
 
-                                
+
 
 
                             </div>
                         </div>
                         <div class="block-section">
-                            
+
                             <div class="order-total">
                                 <table class="table table-responsive table-borderless">
                                     <tr>
-                                        <td class="text-success fw-bold">Total Descuento (Usted Ahorra)</td> <!-- Juan Pa Aquí: Cambiamos a color verde y negrita -->
-                                        <td class="text-success text-end fw-bold" id="totalDescuento">-₡ 0</td> <!-- Juan Pa Aquí: Aplicamos el mismo estilo -->
-                                    </tr>                                                                        
+                                        <td class="text-success fw-bold">Total Descuento (Usted Ahorra)</td>
+                                        <!-- Juan Pa Aquí: Cambiamos a color verde y negrita -->
+                                        <td class="text-success text-end fw-bold" id="totalDescuento">-₡ 0</td>
+                                        <!-- Juan Pa Aquí: Aplicamos el mismo estilo -->
+                                    </tr>
                                     <tr>
                                         <td>Total</td>
                                         <td class="text-end" id="totalCompra">₡ 0</td>
-                                    </tr>                                    
+                                    </tr>
                                 </table>
                             </div>
                         </div>
@@ -135,31 +144,30 @@
                                             <span>Scan</span>
                                         </a>
                                     </div>
-                                </div>--}}
+                                </div> --}}
                             </div>
                         </div>
                         <<div class="d-grid btn-block">
                             <a class="btn btn-secondary" href="javascript:void(0);" id="totalPagar">
                                 Total A Pagar: ₡ 0
                             </a>
-                        </div>                        
-                        <div class="btn-row d-sm-flex align-items-center justify-content-between">
-                            {{-- <a href="javascript:void(0);" class="btn btn-info btn-icon flex-fill"
+                </div>
+                <div class="btn-row d-sm-flex align-items-center justify-content-between">
+                    {{-- <a href="javascript:void(0);" class="btn btn-info btn-icon flex-fill"
                                 data-bs-toggle="modal" data-bs-target="#hold-order"><span
                                     class="me-1 d-flex align-items-center"><i data-feather="pause"
-                                        class="feather-16"></i></span>Hold</a>--}}
-                            <a href="javascript:void(0);" class="btn btn-danger btn-icon flex-fill"><span
-                                    class="me-1 d-flex align-items-center"><i data-feather="trash-2"
-                                        class="feather-16"></i></span>Cancelar Compra</a>
-                            <a href="javascript:void(0);" class="btn btn-success btn-icon flex-fill"
-                                data-bs-toggle="modal" data-bs-target="#payment-completed"><span
-                                    class="me-1 d-flex align-items-center"><i data-feather="credit-card"
-                                        class="feather-16"></i></span>Proceder al Pago</a>
-                        </div>
-                    </aside>
+                                        class="feather-16"></i></span>Hold</a> --}}
+                    <a href="javascript:void(0);" class="btn btn-danger btn-icon flex-fill"><span
+                            class="me-1 d-flex align-items-center"><i data-feather="trash-2"
+                                class="feather-16"></i></span>Cancelar Compra</a>
+                    <a href="javascript:void(0);" class="btn btn-success btn-icon flex-fill" data-bs-toggle="modal"
+                        data-bs-target="#payment-completed"><span class="me-1 d-flex align-items-center"><i
+                                data-feather="credit-card" class="feather-16"></i></span>Proceder al Pago</a>
                 </div>
+                </aside>
             </div>
         </div>
+    </div>
     </div>
     <script>
         let productos = @json($productos);
