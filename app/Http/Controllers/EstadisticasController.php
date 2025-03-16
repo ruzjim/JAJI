@@ -91,8 +91,8 @@ class EstadisticasController extends Controller
                 ->orderBy('Fecha_De_Caducidad')
                 ->limit(5)
                 ->get(['Nombre_Producto', 'Marca', 'Fecha_De_Caducidad']);
-    
-            return view('index', compact('productos'));
+                
+                return view('index')->with('productos', $productos);
             
         } catch (\Exception $e) {
             return response()->json([
