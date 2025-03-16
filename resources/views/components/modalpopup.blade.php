@@ -6792,13 +6792,13 @@
     <!-- Print Receipt -->
     <div class="modal fade modal-default" id="print-receipt" aria-labelledby="print-receipt">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content"> 
                 <div class="d-flex justify-content-end">
                     <button type="button" class="close p-0" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body"  id="reciboaImprimir">
                     <div class="icon-head text-center">
                         <a href="{{ url('pos-design') }}">
                             <img src="{{ URL::asset('/build/img/logo.png')}}" width="100" height="30" alt="Receipt Logo">
@@ -6810,7 +6810,7 @@
                         <p class="mb-0">Email: <a href="mailto:minisupervalle@gmail.com">minisupervalle@gmail.com</a></p>
                     </div>
                     <div class="tax-invoice">
-                        <h6 class="text-center">Proforma</h6>
+                        <h6 class="text-center">Recibo</h6>
                         <div class="row">
                             <div class="col-sm-12 col-md-12">
                                 <div class="invoice-user-name"><span>Nombre: </span><span>Nombre cliente</span></div>
@@ -6838,18 +6838,7 @@
                                 <td>3</td>
                                 <td class="text-end">$150</td>
                             </tr>
-                            <tr>
-                                <td>2. Iphone 14</td>
-                                <td>$50</td>
-                                <td>2</td>
-                                <td class="text-end">$100</td>
-                            </tr>
-                            <tr>
-                                <td>3. Apple Series 8</td>
-                                <td>$50</td>
-                                <td>3</td>
-                                <td class="text-end">$150</td>
-                            </tr>
+                           
                         </tbody>
                         <tbody>
                             <tr>
@@ -6895,9 +6884,12 @@
                         </a> --}}
                         <p>Factua # 586545</p>
                         <p>Gracias por su compra. Vuelva pronto</p>
-                        <a href="javascript:void(0);" class="btn btn-primary">Imprimir</a>
                     </div>
                 </div>
+                <div class="text-center invoice-bar">
+                <a href="javascript:void(0);" class="btn btn-primary m-2">Imprimir</a>
+            </div>
+
             </div>
         </div>
     </div>

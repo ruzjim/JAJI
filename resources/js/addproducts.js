@@ -96,6 +96,38 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    document.getElementById("print-receipt").addEventListener("click", function () {
+        let printContents = document.getElementById("reciboaImprimir").outerHTML;
+        let originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = `
+            <html>
+                <head>
+                    <title>Recibo</title>
+                    <style>
+                        /* Aquí puedes agregar estilos personalizados para el PDF */
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        th, td {
+                            
+                            padding: 8px;
+                            text-align: left;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${printContents}
+                </body>
+            </html>
+        `;
+
+        window.print();
+        document.body.innerHTML = originalContents;
+        location.reload(); // Recargar la página para restaurar el contenido original
+    });
+
     function agregarProductoALista(producto) {
         // Verificar si el producto ya está en la lista
         let productoExistente = document.querySelector(
