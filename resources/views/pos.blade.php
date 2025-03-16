@@ -112,6 +112,29 @@
                         </div>
                         <div class="block-section payment-method">
                             <h6>Payment Method</h6>
+                            <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const paymentMethodInput = document.getElementById('paymentMethod');
+                                    const paymentMethods = document.querySelectorAll('.methods .item a');
+
+                                    paymentMethods.forEach(method => {
+                                        method.addEventListener('click', function () {
+                                            paymentMethods.forEach(m => m.classList.remove('selected'));
+                                            this.classList.add('selected');
+                                            paymentMethodInput.value = this.querySelector('span').innerText;
+                                        });
+                                    });
+                                });
+                            </script>
+
+                            <style>
+                                .methods .item a.selected {
+                                    border: 2px solid #007bff;
+                                    border-radius: 5px;
+                                }
+                            </style>
                             <div class="row d-flex align-items-center justify-content-center methods">
                                 <div class="col-md-6 col-lg-4 item">
                                     <div class="default-cover">
@@ -142,8 +165,7 @@
                     <a href="javascript:void(0);" class="btn btn-danger btn-icon flex-fill"><span
                             class="me-1 d-flex align-items-center"><i data-feather="trash-2"
                                 class="feather-16"></i></span>Cancelar Compra</a>
-                    <a href="javascript:void(0);" class="btn btn-success btn-icon flex-fill cargaElementos" data-bs-toggle="modal"
-                        data-bs-target="#print-receipt"><span class="me-1 d-flex align-items-center"><i
+                    <a href="javascript:void(0);" class="btn btn-success btn-icon flex-fill cargaElementos"><span class="me-1 d-flex align-items-center"><i
                                 data-feather="credit-card" class="feather-16"></i></span>Proceder al Pago</a>
                 </div>
                 </aside>

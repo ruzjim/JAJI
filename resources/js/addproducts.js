@@ -94,6 +94,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (totalCompraReciboElemento) {
             totalCompraReciboElemento.textContent = "₡ " + (subtotalCompraRecibo - totalDescuentoRecibo).toLocaleString();
         }
+        // Mostrar el modal print-receipt
+        $('#print-receipt').modal('show');
     });
 
     document.getElementById("print-receipt").addEventListener("click", function () {
@@ -343,4 +345,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Llamar la función al inicio para mostrar el total inicial
     calcularTotalCompra();
+
+
+
+    
 });

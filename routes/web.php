@@ -53,20 +53,20 @@ Route::get('/pos', [POSController::class, 'index'])->name('pos');
 
 
 
-Route::get('index', [CustomAuthController::class, 'dashboard']);
-Route::get('signin', [CustomAuthController::class, 'index'])->name('signin');
-Route::post('custom-login', [CustomAuthController::class, 'customSignin'])->name('signin.custom');
-Route::get('register', [CustomAuthController::class, 'registration'])->name('register');
-Route::post('custom-register', [CustomAuthController::class, 'customRegister'])->name('register.custom');
+// Route::get('index', [CustomAuthController::class, 'dashboard']);
+// Route::get('signin', [CustomAuthController::class, 'index'])->name('signin');
+// Route::post('custom-login', [CustomAuthController::class, 'customSignin'])->name('signin.custom');
+// Route::get('register', [CustomAuthController::class, 'registration'])->name('register');
+// Route::post('custom-register', [CustomAuthController::class, 'customRegister'])->name('register.custom');
 Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
-Route::get('/', function () {
-    return view('index');
-})->name('index')->middleware('auth');
+// Route::get('/', function () {
+//     return view('index');
+// })->name('index')->middleware('auth');
 
-Route::get('/index', function () {
-    return view('index');
-})->name('index');
+// Route::get('/index', function () {
+//     return view('index');
+// })->name('index');
 
 //Rutas producto
 Route::get('/product-list', [ProductController::class, 'producto'])->name('product-list');
@@ -108,6 +108,7 @@ Route::get('/top-usuarios', [EstadisticasController::class, 'topUsuarios']);
 Route::get('/total-usuarios', [EstadisticasController::class, 'totalUsuarios']);
 Route::get('/productos-stock-bajo', [EstadisticasController::class, 'ProductosStockBajo']);
 Route::get('/index', [EstadisticasController::class, 'productosPorVencer']);
+Route::get('/', [EstadisticasController::class, 'productosPorVencer']);
 Route::get('/stockbajo', [EstadisticasController::class, 'productosStockBajo2']);
 Route::get('/productos_a_vencer', [EstadisticasController::class, 'productosPorVencer2']);
 Route::get('/total-productos-expirados', [EstadisticasController::class, 'totalProductosExpirados']);
