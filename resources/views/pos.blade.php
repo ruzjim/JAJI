@@ -64,7 +64,7 @@
                 <div class="col-md-12 col-lg-4 ps-0">
                     <aside class="product-order-list">
                         <div class="customer-info block-section">
-                            <h6>Customer Information</h6>
+                            <h6>Información del cliente</h6>
                             <div class="input-block d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <input type="text" class="form-control" placeholder="Cédula de Cliente">
@@ -91,10 +91,6 @@
                                         class="me-1"><i data-feather="x" class="feather-16"></i></span>Cancelar compra</a>
                             </div>
                             <div class="product-wrap" id="ListaProductos">
-
-
-
-
                             </div>
                         </div>
                         <div class="block-section">
@@ -114,7 +110,6 @@
                                 </table>
                             </div>
                         </div>
-
                         <div class="block-section payment-method">
                             <h6>Payment Method</h6>
                             <div class="row d-flex align-items-center justify-content-center methods">
@@ -136,39 +131,26 @@
                                         </a>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6 col-lg-4 item">
-                                    <div class="default-cover">
-                                        <a href="javascript:void(0);">
-                                            <img src="{{ URL::asset('/build/img/icons/qr-scan.svg') }}"
-                                                alt="Payment Method">
-                                            <span>Scan</span>
-                                        </a>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
-                        <<div class="d-grid btn-block">
-                            <a class="btn btn-secondary" href="javascript:void(0);" id="totalPagar">
+                        <div class="d-grid btn-block">
+                            <span class="btn btn-secondary" id="totalPagar">
                                 Total A Pagar: ₡ 0
-                            </a>
+                            </span>
                 </div>
                 <div class="btn-row d-sm-flex align-items-center justify-content-between">
-                    {{-- <a href="javascript:void(0);" class="btn btn-info btn-icon flex-fill"
-                                data-bs-toggle="modal" data-bs-target="#hold-order"><span
-                                    class="me-1 d-flex align-items-center"><i data-feather="pause"
-                                        class="feather-16"></i></span>Hold</a> --}}
                     <a href="javascript:void(0);" class="btn btn-danger btn-icon flex-fill"><span
                             class="me-1 d-flex align-items-center"><i data-feather="trash-2"
                                 class="feather-16"></i></span>Cancelar Compra</a>
-                    <a href="javascript:void(0);" class="btn btn-success btn-icon flex-fill" data-bs-toggle="modal"
-                        data-bs-target="#payment-completed"><span class="me-1 d-flex align-items-center"><i
+                    <a href="javascript:void(0);" class="btn btn-success btn-icon flex-fill cargaElementos" data-bs-toggle="modal"
+                        data-bs-target="#print-receipt"><span class="me-1 d-flex align-items-center"><i
                                 data-feather="credit-card" class="feather-16"></i></span>Proceder al Pago</a>
                 </div>
                 </aside>
             </div>
         </div>
     </div>
-    </div>
+    
     <script>
         let productos = @json($productos);
     </script>

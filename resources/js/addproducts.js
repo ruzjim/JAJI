@@ -5,18 +5,18 @@ document.addEventListener("DOMContentLoaded", function () {
     let escaner = document.getElementById("escaner");
     let limpiarBtn = document.querySelector(".head-text .text-danger"); // Seleccionamos el botón "Limpiar"
 
-    document.querySelectorAll(".producto-card").forEach(card => {
+    document.querySelectorAll(".producto-card").forEach((card) => {
         card.addEventListener("click", function () {
             let productId = this.getAttribute("data-id"); // Obtiene el ID del producto
-            let producto = productos.find(p => p.Id_Producto == productId); // Busca el producto en la lista
-            
+            let producto = productos.find((p) => p.Id_Producto == productId); // Busca el producto en la lista
+
             if (producto) {
                 agregarProductoALista(producto); // Agrega el producto a la lista
                 actualizarContador(); // Actualiza el contador
             }
         });
     });
-    
+
     escaner.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             event.preventDefault(); // Evita que el formulario se envíe si está dentro de uno
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (codigoBarras === "") return;
 
             // Buscar el producto en la variable productos por código de barras
-            let producto = productos.find(p => p.barcode == codigoBarras);
+            let producto = productos.find((p) => p.barcode == codigoBarras);
 
             if (producto) {
                 agregarProductoALista(producto);
@@ -34,32 +34,109 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Producto no encontrado");
             }
 
-            escaner.value = ""; // Limpiar input después de ingresar
+            escaner.value = ""; // Limpia input después de ingresar
+        }
+    });
+
+    $(".cargaElementos").on("click", function () {
+        let tbody = document.getElementById("print-receipt-table");
+        tbody.innerHTML = ""; // Limpiar el contenido existente
+
+        document.querySelectorAll("#ListaProductos .producto").forEach((productoElemento) => {
+            let productId = productoElemento.getAttribute("data-id");
+            let producto = productos.find((p) => p.Id_Producto == productId);
+
+            if (producto) {
+                let cantidad = parseInt(productoElemento.querySelector(".cantidad").value) || 1;
+                let precioDescuento = producto.Precio_Venta - producto.Precio_Venta * (producto.descuento / 100);
+                let totalPrecio = precioDescuento * cantidad;
+
+                let filaHTML = `
+                    <tr>
+                        <td>${producto.Nombre_Producto}</td>
+                        <td>₡${producto.Precio_Venta} ${producto.descuento > 0 ? '<span style="color: green;">-' + producto.descuento + '%</span>' : ''} </td>
+                        <td>${cantidad}</td>
+                        <td class="text-end">₡${totalPrecio.toFixed(2)}</td>
+                    </tr>
+                `;
+
+                tbody.insertAdjacentHTML("beforeend", filaHTML);
+            }
+        });
+ 
+        let subtotalCompraRecibo = 0;
+        let totalDescuentoRecibo = 0;
+
+        document.querySelectorAll("#ListaProductos .producto").forEach((productoElemento) => {
+            let productId = productoElemento.getAttribute("data-id");
+            let producto = productos.find((p) => p.Id_Producto == productId);
+
+            if (producto) {
+            let cantidad = parseInt(productoElemento.querySelector(".cantidad").value) || 1;
+            let totalPrecioSinDescuento = producto.Precio_Venta * cantidad;
+            let totalDescuento = (producto.Precio_Venta * (producto.descuento / 100)) * cantidad;
+            subtotalCompraRecibo += totalPrecioSinDescuento;
+            totalDescuentoRecibo += totalDescuento;
+            }
+        });
+
+        let subtotalReciboElemento = document.getElementById("subtotalRecibo");
+        if (subtotalReciboElemento) {
+            subtotalReciboElemento.textContent = "₡ " + subtotalCompraRecibo.toLocaleString();
+        }
+
+        let descuentoReciboElemento = document.getElementById("descuentoRecibo");
+        if (descuentoReciboElemento) {
+            descuentoReciboElemento.textContent = "-₡ " + totalDescuentoRecibo.toLocaleString();
+        }
+
+        let totalCompraReciboElemento = document.getElementById("TotalCompraRecibo");
+        if (totalCompraReciboElemento) {
+            totalCompraReciboElemento.textContent = "₡ " + (subtotalCompraRecibo - totalDescuentoRecibo).toLocaleString();
         }
     });
 
     function agregarProductoALista(producto) {
         // Verificar si el producto ya está en la lista
-        let productoExistente = document.querySelector(`#ListaProductos .producto[data-id="${producto.Id_Producto}"]`);
+        let productoExistente = document.querySelector(
+            `#ListaProductos .producto[data-id="${producto.Id_Producto}"]`
+        );
 
         if (productoExistente) {
             let cantidadInput = productoExistente.querySelector(".cantidad");
             cantidadInput.value = parseInt(cantidadInput.value) + 1; // Sumar cantidad
         } else {
             // Crear nuevo elemento de producto en la lista
-            let precioDescuento = producto.Precio_Venta - (producto.Precio_Venta * (producto.descuento / 100));
-            console.log(producto.Precio_Venta, producto.descuento, precioDescuento);
-            
+            let precioDescuento =
+                producto.Precio_Venta -
+                producto.Precio_Venta * (producto.descuento / 100);
+            // console.log(
+            //     producto.Precio_Venta,
+            //     producto.descuento,
+            //     precioDescuento
+            // );
+
             let productoHTML = `
-                <div class="product-list d-flex align-items-center justify-content-between producto" data-id="${producto.Id_Producto}">
+                <div class="product-list d-flex align-items-center justify-content-between producto" data-id="${
+                    producto.Id_Producto
+                }">
                     <div class="d-flex align-items-center product-info">
                         <a href="javascript:void(0);" class="img-bg">
-                            <img src="${producto.imagen || 'https://icons.veryicon.com/png/o/miscellaneous/fu-jia-intranet/product-29.png'}" alt="Producto">
+                            <img src="${
+                                producto.imagen ||
+                                "https://icons.veryicon.com/png/o/miscellaneous/fu-jia-intranet/product-29.png"
+                            }" alt="Producto">
                         </a>
                         <div class="info">
                             <span>${producto.barcode}</span>
-                            <h6><a href="javascript:void(0);">${producto.Nombre_Producto}</a></h6>
-                            ${producto.descuento > 0 ? `<span class="bg-success text-dark bg-opacity-50">₡ ${producto.Precio_Venta} - ${producto.descuento}%</span>` : ''}
+                            <h6><a href="javascript:void(0);">${
+                                producto.Nombre_Producto
+                            }</a></h6>
+                            ${
+                                producto.descuento > 0
+                                    ? `<span class="bg-success text-dark bg-opacity-50">₡ ${producto.Precio_Venta} - ${producto.descuento}%</span>`
+                                    : ""
+                            }
                             <p>₡ ${precioDescuento}</p>
                         </div>
                     </div>
@@ -82,10 +159,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Juan Pa Aquí: Llamamos a `calcularTotalCompra()` inmediatamente después de agregar un producto
         calcularTotalCompra();
-
     }
 
-    // Agregar event listener para eliminar productos al hacer clic en el basurero
+    // eliminar productos al hacer clic en el basurero
     listaProductos.addEventListener("click", function (event) {
         // Eliminar producto al hacer clic en el basurero
         if (event.target.closest(".delete-icon")) {
@@ -109,7 +185,8 @@ document.addEventListener("DOMContentLoaded", function () {
             let productoElemento = event.target.closest(".producto");
             let cantidadInput = productoElemento.querySelector(".cantidad");
             let nuevaCantidad = parseInt(cantidadInput.value) - 1;
-            if (nuevaCantidad >= 1) { // Asegurarse de que no baje de 1
+            if (nuevaCantidad >= 1) {
+                // Asegurarse de que no baje de 1
                 cantidadInput.value = nuevaCantidad; // Disminuir cantidad
             }
             actualizarContador(); // Actualizar el contador
@@ -119,23 +196,23 @@ document.addEventListener("DOMContentLoaded", function () {
     // Función para limpiar la lista de productos con SweetAlert
     limpiarBtn.addEventListener("click", function () {
         Swal.fire({
-            title: '¿Estás seguro?',
+            title: "¿Estás seguro?",
             text: "¡Esto eliminará todos los productos de la lista!",
-            icon: 'warning',
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, eliminar todo',
-            cancelButtonText: 'Cancelar'
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sí, eliminar todo",
+            cancelButtonText: "Cancelar",
         }).then((result) => {
             if (result.isConfirmed) {
                 // Limpiar todos los productos de la lista
-                listaProductos.innerHTML = ''; // Eliminar todos los elementos dentro de la lista
+                listaProductos.innerHTML = ""; // Eliminar todos los elementos dentro de la lista
                 actualizarContador(); // Actualizar el contador después de limpiar
                 Swal.fire(
-                    '¡Eliminado!',
-                    'Todos los productos han sido eliminados.',
-                    'success'
+                    "¡Eliminado!",
+                    "Todos los productos han sido eliminados.",
+                    "success"
                 );
             }
         });
@@ -143,16 +220,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function actualizarContador() {
         let cantidadProductos = 0;
-    
+
         // Recorremos todos los productos en la lista
         let productosEnLista = listaProductos.querySelectorAll(".producto");
-    
+
         // Para cada producto, sumamos la cantidad
-        productosEnLista.forEach(producto => {
-            let cantidad = parseInt(producto.querySelector(".cantidad").value) || 0; // Obtenemos la cantidad
+        productosEnLista.forEach((producto) => {
+            let cantidad =
+                parseInt(producto.querySelector(".cantidad").value) || 0; // Obtenemos la cantidad
             cantidadProductos += cantidad; // Sumamos la cantidad
         });
-    
+
         // Actualizamos el contador con el total de artículos
         contadorArticulos.textContent = cantidadProductos;
     }
@@ -162,15 +240,25 @@ document.addEventListener("DOMContentLoaded", function () {
         let totalDescuento = 0; // Juan Pa Aquí: Variable para almacenar el total de descuentos
 
         // Obtener todos los productos en la lista
-        let productosEnLista = document.querySelectorAll("#ListaProductos .producto");
+        let productosEnLista = document.querySelectorAll(
+            "#ListaProductos .producto"
+        );
 
-        productosEnLista.forEach(producto => {
-            let cantidad = parseInt(producto.querySelector(".cantidad").value) || 1;
+        productosEnLista.forEach((producto) => {
+            let cantidad =
+                parseInt(producto.querySelector(".cantidad").value) || 1;
             let precioElemento = producto.querySelector("p"); // Tomamos el precio ya calculado
-            let precio = parseFloat(precioElemento.textContent.replace(/[₡$,]/g, '')) || 0;
+            let precio =
+                parseFloat(precioElemento.textContent.replace(/[₡$,]/g, "")) ||
+                0;
 
             // Juan Pa Aquí: Calcular el descuento total
-            let precioOriginal = parseFloat(producto.querySelector(".bg-success")?.textContent.split('₡')[1]) || precio;
+            let precioOriginal =
+                parseFloat(
+                    producto
+                        .querySelector(".bg-success")
+                        ?.textContent.split("₡")[1]
+                ) || precio;
             let descuentoPorUnidad = precioOriginal - precio;
             totalDescuento += descuentoPorUnidad * cantidad;
 
@@ -186,36 +274,41 @@ document.addEventListener("DOMContentLoaded", function () {
         // Juan Pa Aquí: Actualizar el total de descuentos en la tabla
         let descuentoElemento = document.getElementById("totalDescuento");
         if (descuentoElemento) {
-            descuentoElemento.textContent = "-₡ " + totalDescuento.toLocaleString();
+            descuentoElemento.textContent =
+                "-₡ " + totalDescuento.toLocaleString();
         }
         // Juan Pa Aquí: Actualizar el total a pagar en el botón
         let totalPagarElemento = document.getElementById("totalPagar");
         if (totalPagarElemento) {
-            totalPagarElemento.textContent = "Total A Pagar: ₡ " + total.toLocaleString();
+            totalPagarElemento.textContent =
+                "Total A Pagar: ₡ " + total.toLocaleString();
         }
-
-
-        
     }
 
-
     // Evento para actualizar total solo cuando cambie la cantidad
-    document.querySelector("#ListaProductos").addEventListener("input", function (event) {
-        if (event.target.classList.contains("cantidad")) {
-            calcularTotalCompra();
-        }
-    });
+    document
+        .querySelector("#ListaProductos")
+        .addEventListener("input", function (event) {
+            if (event.target.classList.contains("cantidad")) {
+                calcularTotalCompra();
+            }
+        });
 
     // Evento para actualizar total cuando se agregue o elimine un producto
-    document.querySelector("#ListaProductos").addEventListener("click", function (event) {
-        let target = event.target;
+    document
+        .querySelector("#ListaProductos")
+        .addEventListener("click", function (event) {
+            let target = event.target;
 
-        if (target.closest(".delete-icon") || target.closest(".inc") || target.closest(".dec")) {
-            calcularTotalCompra(); // Se ejecuta inmediatamente sin `setTimeout`
-        }
-    });
+            if (
+                target.closest(".delete-icon") ||
+                target.closest(".inc") ||
+                target.closest(".dec")
+            ) {
+                calcularTotalCompra(); // Se ejecuta inmediatamente sin `setTimeout`
+            }
+        });
 
     // Llamar la función al inicio para mostrar el total inicial
     calcularTotalCompra();
-    
 });

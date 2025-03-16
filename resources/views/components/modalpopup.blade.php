@@ -6805,20 +6805,20 @@
                         </a>
                     </div>
                     <div class="text-center info text-center">
-                        <h6>Dreamguys Technologies Pvt Ltd.,</h6>
-                        <p class="mb-0">Phone Number: +1 5656665656</p>
-                        <p class="mb-0">Email: <a href="mailto:example@gmail.com">example@gmail.com</a></p>
+                        <h6>Mini Super del Valle,</h6>
+                        <p class="mb-0">Telefono: 85868586</p>
+                        <p class="mb-0">Email: <a href="mailto:minisupervalle@gmail.com">minisupervalle@gmail.com</a></p>
                     </div>
                     <div class="tax-invoice">
-                        <h6 class="text-center">Tax Invoice</h6>
+                        <h6 class="text-center">Proforma</h6>
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <div class="invoice-user-name"><span>Name: </span><span>John Doe</span></div>
-                                <div class="invoice-user-name"><span>Invoice No: </span><span>CS132453</span></div>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="invoice-user-name"><span>Nombre: </span><span>Nombre cliente</span></div>
+                                {{-- <div class="invoice-user-name"><span>Invoice No: </span><span>CS132453</span></div> --}}
                             </div>
-                            <div class="col-sm-12 col-md-6">
-                                <div class="invoice-user-name"><span>Customer Id: </span><span>#LL93784</span></div>
-                                <div class="invoice-user-name"><span>Date: </span><span>01.07.2022</span></div>
+                            <div class="col-sm-12 col-md-12">
+                                {{-- <div class="invoice-user-name"><span>Customer Id: </span><span>#LL93784</span></div> --}}
+                                <div class="invoice-user-name"><span>Fecha y Hora: </span><span>{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}</span></div>
                             </div>
                         </div>
                     </div>
@@ -6826,12 +6826,12 @@
                         <thead>
                             <tr>
                                 <th># Item</th>
-                                <th>Price</th>
+                                <th>Precio</th>
                                 <th>Qty</th>
                                 <th class="text-end">Total</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="print-receipt-table">
                             <tr>
                                 <td>1. Red Nike Laser</td>
                                 <td>$50</td>
@@ -6850,18 +6850,20 @@
                                 <td>3</td>
                                 <td class="text-end">$150</td>
                             </tr>
+                        </tbody>
+                        <tbody>
                             <tr>
                                 <td colspan="4">
                                     <table class="table-borderless w-100 table-fit">
                                         <tr>
                                             <td>Sub Total :</td>
-                                            <td class="text-end">$700.00</td>
+                                            <td class="text-end" id="subtotalRecibo">$700.00</td>
                                         </tr>
                                         <tr>
-                                            <td>Discount :</td>
-                                            <td class="text-end">-$50.00</td>
+                                            <td>Descuento :</td>
+                                            <td class="text-end" id="descuentoRecibo">-$50.00</td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td>Shipping :</td>
                                             <td class="text-end">0.00</td>
                                         </tr>
@@ -6876,10 +6878,10 @@
                                         <tr>
                                             <td>Due :</td>
                                             <td class="text-end">$0.00</td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
-                                            <td>Total Payable :</td>
-                                            <td class="text-end">$655.00</td>
+                                            <td>Total a pagar :</td>
+                                            <td class="text-end" id="TotalCompraRecibo">$655.00</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -6887,14 +6889,13 @@
                         </tbody>
                     </table>
                     <div class="text-center invoice-bar">
-                        <p>**VAT against this challan is payable through central registration. Thank you for your
-                            business!</p>
-                        <a href="{{ url('pos-design') }}">
+                        <p>**Autorizado mediante oficio 151515 del ministerio de hacienda</p>
+                        {{-- <a href="{{ url('pos-design') }}"> esto es un QR que lleva a la pagina de la tienda
                             <img src="{{ URL::asset('/build/img/barcode/barcode-03.jpg')}}" alt="Barcode">
-                        </a>
-                        <p>Sale 31</p>
-                        <p>Thank You For Shopping With Us. Please Come Again</p>
-                        <a href="javascript:void(0);" class="btn btn-primary">Print Receipt</a>
+                        </a> --}}
+                        <p>Factua # 586545</p>
+                        <p>Gracias por su compra. Vuelva pronto</p>
+                        <a href="javascript:void(0);" class="btn btn-primary">Imprimir</a>
                     </div>
                 </div>
             </div>
