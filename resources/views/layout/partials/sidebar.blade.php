@@ -53,6 +53,85 @@
                     </ul>
                 </li>
                 <li class="submenu-open">
+                        <h6 class="submenu-hdr">Notificaciones</h6>
+                        <ul>
+                           <!-- <li class="{{ Request::is('sales-report') ? 'active' : '' }}"><a
+                                    href="{{ url('sales-report') }}"><i data-feather="bar-chart-2"></i><span>Sales
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('purchase-report') ? 'active' : '' }}"><a
+                                    href="{{ url('purchase-report') }}"><i data-feather="pie-chart"></i><span>Purchase
+                                        report</span></a></li>
+                            <li class="{{ Request::is('inventory-report') ? 'active' : '' }}"><a
+                                    href="{{ url('inventory-report') }}"><i data-feather="inbox"></i><span>Inventory
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('invoice-report') ? 'active' : '' }}"><a
+                                    href="{{ url('invoice-report') }}"><i data-feather="file"></i><span>Invoice
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('supplier-report') ? 'active' : '' }}"><a
+                                    href="{{ url('supplier-report') }}"><i data-feather="user-check"></i><span>Supplier
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('customer-report') ? 'active' : '' }}"><a
+                                    href="{{ url('customer-report') }}"><i data-feather="user"></i><span>Customer
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('expense-report') ? 'active' : '' }}"><a
+                                    href="{{ url('expense-report') }}"><i data-feather="file"></i><span>Expense
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('income-report') ? 'active' : '' }}"><a
+                                    href="{{ url('income-report') }}"><i data-feather="bar-chart"></i><span>Income
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('tax-reports') ? 'active' : '' }}"><a
+                                    href="{{ url('tax-reports') }}"><i data-feather="database"></i><span>Tax
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('profit-and-loss') ? 'active' : '' }}"><a
+                                    href="{{ url('profit-and-loss') }}"><i data-feather="pie-chart"></i><span>Profit &
+                                        Loss</span></a></li>-->
+                            <li class="{{ Request::is('notificaciones') ? 'active' : '' }}">
+                            <a href="{{ url('notificaciones') }}"><i data-feather="bell"></i><span>Gestión de Notificaciones
+                            </span></a></li>
+
+                        </ul> 
+                        
+                    </li>
+                    <li class="submenu-open">
+                        <h6 class="submenu-hdr">Mensajes</h6>
+                        <ul>
+                           <!-- <li class="{{ Request::is('sales-report') ? 'active' : '' }}"><a
+                                    href="{{ url('sales-report') }}"><i data-feather="bar-chart-2"></i><span>Sales
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('purchase-report') ? 'active' : '' }}"><a
+                                    href="{{ url('purchase-report') }}"><i data-feather="pie-chart"></i><span>Purchase
+                                        report</span></a></li>
+                            <li class="{{ Request::is('inventory-report') ? 'active' : '' }}"><a
+                                    href="{{ url('inventory-report') }}"><i data-feather="inbox"></i><span>Inventory
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('invoice-report') ? 'active' : '' }}"><a
+                                    href="{{ url('invoice-report') }}"><i data-feather="file"></i><span>Invoice
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('supplier-report') ? 'active' : '' }}"><a
+                                    href="{{ url('supplier-report') }}"><i data-feather="user-check"></i><span>Supplier
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('customer-report') ? 'active' : '' }}"><a
+                                    href="{{ url('customer-report') }}"><i data-feather="user"></i><span>Customer
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('expense-report') ? 'active' : '' }}"><a
+                                    href="{{ url('expense-report') }}"><i data-feather="file"></i><span>Expense
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('income-report') ? 'active' : '' }}"><a
+                                    href="{{ url('income-report') }}"><i data-feather="bar-chart"></i><span>Income
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('tax-reports') ? 'active' : '' }}"><a
+                                    href="{{ url('tax-reports') }}"><i data-feather="database"></i><span>Tax
+                                        Report</span></a></li>
+                            <li class="{{ Request::is('profit-and-loss') ? 'active' : '' }}"><a
+                                    href="{{ url('profit-and-loss') }}"><i data-feather="pie-chart"></i><span>Profit &
+                                        Loss</span></a></li>-->
+                            <li class="{{ Request::is('stockcritico') ? 'active' : '' }}">
+                            <a href="{{ url('stockcritico') }}"><i data-feather="bar-chart-2"></i> <span>Inventario Crítico
+                            </span></a></li>
+                        </ul> 
+                        
+                    </li>
+                <li class="submenu-open">
                     <h6 class="submenu-hdr">Inventario</h6>
                     <ul>
                         <li class="{{ Request::is('product-list','product-details') ? 'active' : '' }}"><a
@@ -73,10 +152,7 @@
                                     Producto</span></a></li>
                         <li class="{{ Request::is('stockbajo') ? 'active' : '' }}"><a
                                 href="{{ url('stockbajo') }}"><i data-feather="archive"></i><span>Productos Con Stock Bajo
-                                    </span></a></li>
-                        <li class="{{ Request::is('stockcritico') ? 'active' : '' }}">
-                                <a href="{{ url('stockcritico') }}"><i data-feather="bar-chart-2"></i> <span>Inventario Crítico
-                                </span></a></li>                
+                                    </span></a></li>                
                          <li class="{{ Request::is('productos_a_vencer') ? 'active' : '' }}"><a
                                 href="{{ url('productos_a_vencer') }}"><i data-feather="clock"></i><span>Productos
                                     Por Expirar</span></a></li>
@@ -295,8 +371,12 @@
                                     Report</span></a></li>
                         <li class="{{ Request::is('profit-and-loss') ? 'active' : '' }}"><a
                                 href="{{ url('profit-and-loss') }}"><i data-feather="pie-chart"></i><span>Profit &
-                                    Loss</span></a></li>
-                    </ul> -->
+                                    Loss</span></a></li>-->
+                        <li class="{{ Request::is('stockcritico') ? 'active' : '' }}">
+                        <a href="{{ url('stockcritico') }}"><i data-feather="bar-chart-2"></i> <span>Inventario Crítico
+                        </span></a></li>
+                    </ul> 
+                    
                 </li>
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Manejo De Usuarios</h6>

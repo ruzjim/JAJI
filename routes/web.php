@@ -67,6 +67,17 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 // Route::get('/index', function () {
 //     return view('index');
 // })->name('index');
+//Rutas Notificaciones
+use App\Http\Controllers\NotificacionController;
+
+Route::get('/notificaciones', [NotificacionController::class, 'index'])->name('notificaciones'); // Juan Pa + Cambio hecho
+Route::get('/crear-notificacion', function () { return view('crear-notificacion'); })->name('crear_notificacion'); // Juan Pa + Cambio hecho
+Route::post('/guardar-notificacion', [NotificacionController::class, 'crear'])->name('guardar_notificacion'); // Juan Pa + Cambio hecho
+Route::get('/cambiar-estado-notificacion/{id}', [NotificacionController::class, 'cambiarEstado'])->name('cambiar_estado_notificacion'); // Juan Pa + Cambio hecho
+Route::get('/eliminar-notificacion/{id}', [NotificacionController::class, 'eliminar'])->name('eliminar_notificacion'); // Juan Pa + Cambio hecho
+Route::post('/actualizar-mensaje-notificacion/{id}', [NotificacionController::class, 'actualizarMensaje'])->name('actualizar_mensaje_notificacion'); // Juan Pa + Cambio hecho
+
+
 
 //Rutas producto
 Route::get('/product-list', [ProductController::class, 'producto'])->name('product-list');
