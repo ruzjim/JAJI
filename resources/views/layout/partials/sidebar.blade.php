@@ -74,6 +74,9 @@
                         <li class="{{ Request::is('stockbajo') ? 'active' : '' }}"><a
                                 href="{{ url('stockbajo') }}"><i data-feather="archive"></i><span>Productos Con Stock Bajo
                                     </span></a></li>
+                        <li class="{{ Request::is('stockcritico') ? 'active' : '' }}">
+                                <a href="{{ url('stockcritico') }}"><i data-feather="bar-chart-2"></i> <span>Inventario Crítico
+                                </span></a></li>                
                          <li class="{{ Request::is('productos_a_vencer') ? 'active' : '' }}"><a
                                 href="{{ url('productos_a_vencer') }}"><i data-feather="clock"></i><span>Productos
                                     Por Expirar</span></a></li>
