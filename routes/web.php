@@ -9,6 +9,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\puntoController;
 use App\Http\Controllers\ProductoPuntosController;
 use App\Http\Controllers\PuntosUsersController;
+use App\Http\Controllers\PromotionController;
+
+
 
 
 /*
@@ -22,11 +25,16 @@ use App\Http\Controllers\PuntosUsersController;
 |
 */
 
+Route::get('/admin/promotions', [PromotionController::class, 'index'])->name('promotions.index');
+Route::post('/admin/promotions/store', [PromotionController::class, 'store'])->name('promotions.store');
+Route::post('/admin/promotions/delete', [PromotionController::class, 'destroy'])->name('promotions.destroy');
 Route::post('/register', [authController::class, 'register'])->name('register');
 Route::post('/login', [authController::class, 'login'])->name('login');
 Route::get('/logout', [authController::class, 'logout'])->name('logout');
 Route::get('/signin', [authController::class, 'signin'])->name('signin');
 Route::get('/register', [authController::class, 'registerr'])->name('register');
+Route::get('/admin/promotions', [PromotionController::class, 'index'])->name('promotions.index');
+Route::post('/admin/promotions/upload', [PromotionController::class, 'upload'])->name('promotions.upload');
 
 Route::get('/customers', [ClientesController::class, 'index'])->name('customers');
 Route::post('/agregarCliente', [ClientesController::class, 'agregarCliente'])->name('agregarCliente');

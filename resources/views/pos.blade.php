@@ -22,6 +22,27 @@
                             class="feather-16"></i></span>Transaction</a>
             </div>
 
+            <div class="alert alert-warning text-center" role="alert">
+    🔴 <strong>¡Aviso Importante!</strong> Para la compra de productos como <strong>cigarrillos y cerveza</strong>, se solicitará identificación. ¡Gracias por su comprensión! 🔴
+</div>
+
+<style>
+    .alert-warning {
+        background-color: #0056b3; /* Azul oscuro */
+        color: #ffffff; /* Texto blanco */
+        font-size: 18px;
+        font-weight: bold;
+        padding: 15px;
+        border-radius: 8px;
+        border: 2px solid #003366; /* Azul más oscuro */
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+
             <div class="row align-items-start pos-wrapper">
                 <div class="col-md-12 col-lg-8">
                     <div class="pos-categories tabs_wrapper">
@@ -127,6 +148,45 @@
                                 </li>
                             </ul>
                         </div>
+                        @php
+                            $promotionImages = collect(Storage::files('public/promotions'))
+                                                ->map(fn($image) => Storage::url($image));
+                        @endphp
+
+                        @if($promotionImages->count())
+                            <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    @foreach($promotionImages as $index => $image)
+                                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                            <img src="{{ $image }}" class="d-block w-100" alt="Promotion">
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        @endif
+
+
+                        <style>
+                            .promo-banner {
+                                width: 100%;
+                                text-align: center;
+                                margin-bottom: 20px;
+                            }
+                            .promo-banner img {
+                                max-width: 100%;
+                                border-radius: 10px;
+                            }
+                        </style>
+
                         <div class="pos-products">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h5 class="mb-3">Productos</h5>
