@@ -80,6 +80,10 @@ Route::get('/cambiar-estado/{Id_Producto}', [ProductController::class, 'cambiarE
 Route::get('/productos-expirados', [ProductController::class, 'productosExpirados'])->name('productos-expirados');
 Route::get('/actualizar-expirados', [EstadisticasController::class, 'actualizarProductosExpirados']);
 
+// Rutas para el Reporte de Inventario Crítico
+Route::get('/stockcritico', [ProductController::class, 'stockCritico'])->name('stock_critico'); //Juan Pa + Cambio hecho
+Route::get('/descargar-csv', [ProductController::class, 'descargarCsv'])->name('descargar_csv'); //Juan Pa + Cambio hecho
+
 
 //Rutas Puntos
 Route::get('/puntos', [PuntoController::class, 'puntos'])->name('puntos');
