@@ -340,11 +340,11 @@
                                 </div>--}}
                             </div>
                         </div>
-                        <div class="d-grid btn-block">
-                            <a class="btn btn-secondary" href="javascript:void(0);">
-                                 Total A Pagar: ₡ 0
+                        <<div class="d-grid btn-block">
+                            <a class="btn btn-secondary" href="javascript:void(0);" id="totalPagar">
+                                Total A Pagar: ₡ 0
                             </a>
-                        </div>
+                        </div>                        
                         <div class="btn-row d-sm-flex align-items-center justify-content-between">
                             {{-- <a href="javascript:void(0);" class="btn btn-info btn-icon flex-fill"
                                 data-bs-toggle="modal" data-bs-target="#hold-order"><span

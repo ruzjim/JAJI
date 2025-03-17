@@ -176,6 +176,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (descuentoElemento) {
             descuentoElemento.textContent = "-₡ " + totalDescuento.toLocaleString();
         }
+        // Juan Pa Aquí: Actualizar el total a pagar en el botón
+        let totalPagarElemento = document.getElementById("totalPagar");
+        if (totalPagarElemento) {
+            totalPagarElemento.textContent = "Total A Pagar: ₡ " + total.toLocaleString();
+        }
+
+
+        
     }
 
 
