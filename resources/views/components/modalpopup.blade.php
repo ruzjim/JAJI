@@ -6886,7 +6886,7 @@
                         {{-- <a href="{{ url('pos-design') }}"> esto es un QR que lleva a la pagina de la tienda
                             <img src="{{ URL::asset('/build/img/barcode/barcode-03.jpg')}}" alt="Barcode">
                         </a> --}}
-                        <p>Factua # 586545</p>
+                        <p>Factura # 586545</p>
                         <p>Gracias por su compra. Vuelva pronto</p>
                     </div>
                 </div>
