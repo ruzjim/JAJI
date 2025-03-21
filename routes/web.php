@@ -10,7 +10,7 @@ use App\Http\Controllers\puntoController;
 use App\Http\Controllers\ProductoPuntosController;
 use App\Http\Controllers\PuntosUsersController;
 use App\Http\Controllers\EstadisticasController;
-
+use App\Http\Controllers\VentaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +98,7 @@ Route::post('/producto_puntos', [ProductoPuntosController::class, 'store'])->nam
 Route::get('/editar-producto_puntos/{id}', [ProductoPuntosController::class, 'editar'])->name('editar-producto_puntos');
 Route::put('/editar-producto_puntos/{id}', [ProductoPuntosController::class, 'update'])->name('editar-producto_puntos.update');
 Route::get('/cambiar-estado-producto-punto/{id}', [ProductoPuntosController::class, 'cambiarEstadoProductosPuntos'])->name('cambiar-estado-producto-punto');
+Route::get('/producto/{producto_id}/puntos', [ProductoPuntosController::class, 'obtenerPuntosPorProducto']);
 
 //Rutas para buscar la cantidad de puntos por numero de cedula de usuario
 Route::get('/puntos_users', [PuntosUsersController::class, 'puntosUsersList'])->name('puntos_users');
@@ -114,10 +115,12 @@ Route::get('/productos_a_vencer', [EstadisticasController::class, 'productosPorV
 Route::get('/total-productos-expirados', [EstadisticasController::class, 'totalProductosExpirados']);
 Route::get('/total-productos-stock-bajo', [EstadisticasController::class, 'totalProductosStockBajo']);
 Route::get('/total-productos-por-vencer', [EstadisticasController::class, 'totalProductosPorVencer']);
- 
 
+//Ventas
+Route::post('/completar-venta', [VentaController::class, 'store']);
 
-
+//Puntos ganados por usuario
+Route::post('/check-user', [ClientesController::class, 'checkUser']);
 
 Route::get('/expired-products', function () {
     return view('expired-products');

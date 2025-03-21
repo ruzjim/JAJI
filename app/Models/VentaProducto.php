@@ -14,6 +14,7 @@ class VentaProducto extends Model
     protected $fillable = [
         'Id_VentaFK',
         'Id_ProductoFK',
+        'Cantidad',
     ];
 
     public $timestamps = true;

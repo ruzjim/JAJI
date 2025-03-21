@@ -141,7 +141,7 @@
                             <div class="row d-flex align-items-center justify-content-center methods">
                                 <div class="col-md-6 col-lg-4 item">
                                     <div class="default-cover">
-                                        <a href="javascript:void(0);">
+                                        <a href="javascript:void(0);" class="metodo-pago" data-id="1">
                                             <img src="{{ URL::asset('/build/img/icons/cash-pay.svg') }}" width="20"
                                                 alt="Payment Method">
                                             <span>Efectivo</span>
@@ -150,16 +150,16 @@
                                 </div>
                                 <div class="col-md-6 col-lg-4 item">
                                     <div class="default-cover">
-                                        <a href="javascript:void(0);">
+                                        <a href="javascript:void(0);" class="metodo-pago" data-id="2">
                                             <img src="{{ URL::asset('/build/img/icons/credit-card.svg') }}" width="20"
                                                 alt="Payment Method">
-                                            <span>Tarjeta</span>
+                                            <span>Tarjeta Cred/Debito</span>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-4 item">
                                     <div class="default-cover">
-                                        <a href="javascript:void(0);">
+                                        <a href="javascript:void(0);" class="metodo-pago" data-id="3">
                                             <img src="{{ URL::asset('/build/img/icons/sinpe.png') }}" width="20"
                                                 alt="Payment Method">
                                             <span>Sinpe Movil</span>
@@ -172,18 +172,49 @@
                             <span class="btn btn-secondary" id="totalPagar">
                                 Total A Pagar: ₡ 0
                             </span>
+                            <button class="btn btn-primary mt-2" id="contadorPuntosBtn" disabled>
+                                 Puntos Obtenidos: <span id="totalPuntos">0</span>
+                            </button>
                 </div>
                 <div class="btn-row d-sm-flex align-items-center justify-content-between">
                     <a href="javascript:void(0);" class="btn btn-danger btn-icon flex-fill"><span
                             class="me-1 d-flex align-items-center"><i data-feather="trash-2"
                                 class="feather-16"></i></span>Cancelar Compra</a>
-                    <a href="javascript:void(0);" class="btn btn-success btn-icon flex-fill cargaElementos"><span class="me-1 d-flex align-items-center"><i
+
+                                <a href="javascript:void(0);" class="btn btn-warning btn-icon flex-fill"  id="abrirModalPuntosBtn">
+                                  <span class="me-1 d-flex align-items-center">
+                                  <i class="fa-solid fa-coins fa-lg"></i>&nbsp;&nbsp;
+                                  </span>Agregar Puntos
+                                 </a>
+                                 
+                    <a href="javascript:void(0);" class="btn btn-success btn-icon flex-fill cargaElementos" id="procesarPago"><span class="me-1 d-flex align-items-center"><i
                                 data-feather="credit-card" class="feather-16"></i></span>Proceder al Pago</a>
                 </div>
                 </aside>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="puntosModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar Puntos al Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formPuntos">
+                    <div class="mb-3">
+                        <label class="form-label">Cédula del Cliente</label>
+                        <input type="text" class="form-control" id="cedula" required>
+                    </div>
+                    <input type="hidden" id="venta_id" value="{{ $ventaActual->Id_Venta ?? '' }}">
+                    <button type="submit" class="btn btn-primary">Agregar Puntos</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
     
     <script>
         let productos = @json($productos);

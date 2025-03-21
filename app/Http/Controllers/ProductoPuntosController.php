@@ -66,4 +66,29 @@ class ProductoPuntosController extends Controller
     return redirect()->route('producto_puntos')->with('success', 'Estado del producto actualizado correctamente.');
 }
 
+public function obtenerPuntosPorProducto($producto_id)
+{
+    $productoPunto = ProductoPunto::where('Id_ProductoFK', $producto_id)
+                                   ->where('Estado', 1)
+                                   ->first();
+
+    if ($productoPunto) {
+        $punto = Punto::find($productoPunto->Id_PuntosFK);
+
+        if ($punto) {
+            return response()->json([
+                'success' => true,
+                'puntos_obtenidos' => $punto->Puntos_Obtenidos,
+            ]);
+        }
+    }
+
+    return response()->json([
+        'success' => false,
+        'message' => 'No se encontraron puntos asociados.',
+    ]);
+}
+
+
+
 }

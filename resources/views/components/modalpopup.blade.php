@@ -6794,7 +6794,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content"> 
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="close p-0" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close p-0" data-bs-dismiss="modal" aria-label="Close" onclick="location.reload();">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>

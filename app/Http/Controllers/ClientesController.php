@@ -38,5 +38,16 @@ class ClientesController extends Controller
 
         return redirect()->back()->with('message', 'Cliente agregado correctamente');
     }
+
+    public function checkUser(Request $request)
+    {
+        $request->validate(['cedula' => 'required|string']);
+        
+        $user = User::where('cedula', $request->cedula)->first();
+        
+        return response()->json([
+            'exists' => $user !== null
+        ]);
+    }
  
 }

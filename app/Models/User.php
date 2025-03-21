@@ -47,4 +47,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function pagos()
+    {
+        return $this->hasMany(Pago::class, 'Id_ClienteFK');
+    }
+
+    public function puntos()
+{
+    return $this->belongsToMany(Punto::class, 'puntos_users', 'Id_UsersFK', 'Id_PuntosFK')
+             ->withPivot('created_at', 'updated_at');
+}
+
+public function puntosAcumulados()
+{
+    return $this->hasMany(PuntoUser::class, 'Id_UsersFK');
+}
+
 }

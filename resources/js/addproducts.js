@@ -1,6 +1,7 @@
 console.log("Hola Mundo");
 
 document.addEventListener("DOMContentLoaded", function () {
+    let productosEnCarrito = [];
     let listaProductos = document.getElementById("ListaProductos");
     let escaner = document.getElementById("escaner");
     let limpiarBtn = document.querySelector(".head-text .text-danger"); // Seleccionamos el botón "Limpiar"
@@ -148,12 +149,76 @@ document.addEventListener("DOMContentLoaded", function () {
         location.reload(); // Recargar la página para restaurar el contenido original
     });
 
+    document.getElementById("procesarPago").addEventListener("click", function(e) {        
+        const metodoPago = document.querySelector('.methods a.selected');
+        if (!metodoPago) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Método de pago no seleccionado',
+                text: 'Por favor, seleccione un método de pago antes de imprimir el recibo.',
+            });
+            return;
+        }
+        
+        const metodoPagoId = parseInt(metodoPago.getAttribute('data-id')) || 0;
+
+    if (metodoPagoId === 0 || metodoPagoId > 3) {
+        alert('Método de pago inválido o no seleccionado');
+        return;
+    }
+        
+        const productos = Array.from(document.querySelectorAll('#ListaProductos .producto'));
+        
+        const payload = {
+            productos: Array.from(document.querySelectorAll('#ListaProductos .producto')).map(item => ({
+                id: parseInt(item.getAttribute('data-id')),
+                cantidad: parseInt(item.querySelector('.cantidad').value)
+            })),
+            metodo_pago_id: parseInt(document.querySelector('.methods a.selected')?.getAttribute('data-id') || 0),
+            total: parseFloat(document.getElementById('totalPagar').textContent.replace(/[^\d.]/g, '')),
+            cedula: cedulaCliente
+        };
+        
+        console.log('Enviando payload:', payload);
+        console.log('Cédula enviada:', payload.cedula);
+        
+        fetch('/completar-venta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (!response.ok) { 
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then(data => console.log('Respuesta:', data))
+        .catch(error => console.error('Error:', error.message));
+        
+    });
+
+
+    document.querySelectorAll('.methods a.metodo-pago').forEach(item => {
+    item.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.methods a.metodo-pago').forEach(el => {
+            el.classList.remove('selected');
+        });
+        this.classList.add('selected');
+    });
+    });
+    
+
     function agregarProductoALista(producto) {
         // Verificar si el producto ya está en la lista
         let productoExistente = document.querySelector(
             `#ListaProductos .producto[data-id="${producto.Id_Producto}"]`
         );
-
+    
         if (productoExistente) {
             let cantidadInput = productoExistente.querySelector(".cantidad");
             cantidadInput.value = parseInt(cantidadInput.value) + 1; // Sumar cantidad
@@ -162,34 +227,23 @@ document.addEventListener("DOMContentLoaded", function () {
             let precioDescuento =
                 producto.Precio_Venta -
                 producto.Precio_Venta * (producto.descuento / 100);
-            // console.log(
-            //     producto.Precio_Venta,
-            //     producto.descuento,
-            //     precioDescuento
-            // );
-
+    
             let productoHTML = `
-                <div class="product-list d-flex align-items-center justify-content-between producto" data-id="${
-                    producto.Id_Producto
-                }">
+                <div class="product-list d-flex align-items-center justify-content-between producto" data-id="${producto.Id_Producto}">
                     <div class="d-flex align-items-center product-info">
                         <a href="javascript:void(0);" class="img-bg">
-                            <img src="${
-                                producto.imagen ||
-                                "https://icons.veryicon.com/png/o/miscellaneous/fu-jia-intranet/product-29.png"
-                            }" alt="Producto">
+                            <img src="${producto.imagen || 'https://icons.veryicon.com/png/o/miscellaneous/fu-jia-intranet/product-29.png'}" alt="Producto">
                         </a>
                         <div class="info">
                             <span>${producto.barcode}</span>
-                            <h6><a href="javascript:void(0);">${
-                                producto.Nombre_Producto
-                            }</a></h6>
+                            <h6><a href="javascript:void(0);">${producto.Nombre_Producto}</a></h6>
                             ${
                                 producto.descuento > 0
                                     ? `<span class="bg-success text-dark bg-opacity-50">₡ ${producto.Precio_Venta} - ${producto.descuento}%</span>`
                                     : ""
                             }
                             <p>₡ ${precioDescuento}</p>
+                            <p class="puntos-obtenidos"></p> <!-- Espacio para mostrar puntos obtenidos -->
                         </div>
                     </div>
                     <div class="qty-item text-center">
@@ -204,14 +258,45 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
             `;
-
+    
             listaProductos.insertAdjacentHTML("beforeend", productoHTML);
-            feather.replace(); // Refrescar los iconos de Feather
-        }
+            feather.replace();
 
-        // Juan Pa Aquí: Llamamos a `calcularTotalCompra()` inmediatamente después de agregar un producto
+            productosEnCarrito.push({
+                id: producto.Id_Producto,
+                cantidad: 1
+            });
+        }
+    
+        fetch(`/producto/${producto.Id_Producto}/puntos`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    puntosProductos.set(producto.Id_Producto, data.puntos_obtenidos);
+                    updateTotalPuntos();
+                    let productoElement = document.querySelector(
+                        `#ListaProductos .producto[data-id="${producto.Id_Producto}"]`
+                    );
+                    let puntosElement = productoElement.querySelector(".puntos-obtenidos");
+                    puntosElement.textContent = `Gana ${data.puntos_obtenidos} puntos`;
+                } else {
+                    console.log(data.message);
+                }
+            })
+            .catch(error => console.log('Error al obtener puntos:', error));
+    
         calcularTotalCompra();
     }
+
+    document.querySelector('#ListaProductos').addEventListener('click', function(e) {
+        if (e.target.closest('.delete-icon')) {
+            const producto = e.target.closest('.producto');
+            const productId = parseInt(producto.getAttribute('data-id'));
+            puntosProductos.delete(productId);
+            updateTotalPuntos();
+        }
+    });
+    
 
     // eliminar productos al hacer clic en el basurero
     listaProductos.addEventListener("click", function (event) {
@@ -364,7 +449,55 @@ document.addEventListener("DOMContentLoaded", function () {
     // Llamar la función al inicio para mostrar el total inicial
     calcularTotalCompra();
 
-
-
+    let puntosProductos = new Map();
+    let cedulaCliente = null;
     
+    // Actualizar puntos al modificar productos
+    function updateTotalPuntos() {
+        let total = 0;
+        document.querySelectorAll('#ListaProductos .producto').forEach(producto => {
+            const productId = parseInt(producto.getAttribute('data-id'));
+            const cantidad = parseInt(producto.querySelector('.cantidad').value);
+            const puntos = puntosProductos.get(productId) || 0;
+            total += puntos * cantidad;
+        });
+        document.getElementById('totalPuntos').textContent = total;
+    }
+    
+    // Manejar modal de puntos
+    document.querySelector('.btn-warning').addEventListener('click', () => {
+        if (puntosProductos.size > 0) {
+            $('#puntosModal').modal('show');
+        }
+    });
+    
+    // Validar cédula
+    document.getElementById('formPuntos').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const cedula = document.getElementById('cedula').value.replace(/[^0-9]/g, '');
+        
+        fetch('/check-user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ cedula })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.exists) {
+                cedulaCliente = cedula;
+                $('#puntosModal').modal('hide');
+            } else {
+                Swal.fire('Error', 'Usuario no encontrado', 'error');
+            }
+        });
+    });
+
+    document.getElementById('abrirModalPuntosBtn').addEventListener('click', () => {
+        if (puntosProductos.size > 0) {
+            $('#puntosModal').modal('show');
+        }
+    });
 });

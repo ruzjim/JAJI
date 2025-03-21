@@ -30,4 +30,9 @@ class punto extends Model
      {
          return $this->hasMany(ProductoPunto::class, 'Id_PuntosFK', 'Id_Puntos');
      }
+
+     public function users()
+{
+    return $this->belongsToMany(User::class, 'puntos_users', 'Id_PuntosFK', 'Id_UsersFK');
+}
 }
