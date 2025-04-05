@@ -51,10 +51,10 @@ export default defineConfig({
                     src: 'resources/js',
                     dest: ''
                 },
-                {
-                    src: 'resources/json',
-                    dest: ''
-                },
+                // {
+                //     src: 'resources/json',
+                //     dest: ''
+                // },
                 {
                     src: 'resources/plugins',
                     dest: ''
