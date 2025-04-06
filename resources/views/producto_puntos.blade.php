@@ -25,6 +25,7 @@
                                 <th>Cantidad De Puntos</th>
                                 <th>Estado</th>
                                 <th>Descripción del Punto</th>
+                                <th>Fecha de Expiración</th>
                                 <th>Fecha de Asignación</th>
                                 <th class="no-sort">Acción</th>
                             </tr>
@@ -37,6 +38,13 @@
                                     <td>{{ $pp->punto->Puntos_Obtenidos ?? 'Sin Puntos' }}</td>
                                     <td><span class="badge {{ $pp->Estado ? 'bg-success' : 'bg-danger' }}">{{ $pp->Estado ? 'Activo' : 'Inactivo' }}</span></td>
                                     <td>{{ $pp->punto->Descripcion ?? 'Sin descripción' }}</td>
+                                    <td>
+                                        @if($pp->Fecha_De_Caducidad)
+                                            {{\Carbon\Carbon::parse($pp->Fecha_De_Caducidad)->format('d/m/Y')}}
+                                        @else
+                                            N/A
+                                        @endif
+                                    </td>
                                     <td>{{ $pp->created_at ? \Carbon\Carbon::parse($pp->created_at)->format('d/m/Y H:i') : 'N/A' }}</td>
                                     <td class="action-table-data text-center">
                                         <div class="edit-delete-action d-flex justify-content-center gap-2">

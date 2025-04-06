@@ -56,12 +56,15 @@ class User extends Authenticatable
     public function puntos()
 {
     return $this->belongsToMany(Punto::class, 'puntos_users', 'Id_UsersFK', 'Id_PuntosFK')
-             ->withPivot('created_at', 'updated_at');
+             ->using(PuntoUser::class)
+             ->withPivot('Fecha_De_Caducidad', 'Estado')
+             ->withTimestamps(); // Si tu tabla tiene timestamps
 }
 
 public function puntosAcumulados()
 {
     return $this->hasMany(PuntoUser::class, 'Id_UsersFK');
 }
+
 
 }

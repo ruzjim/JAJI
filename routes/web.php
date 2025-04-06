@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductoPuntosController;
 use App\Http\Controllers\PuntosUsersController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\VentaController;
+use App\Http\Controllers\ReportesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +104,9 @@ Route::get('/producto/{producto_id}/puntos', [ProductoPuntosController::class, '
 //Rutas para buscar la cantidad de puntos por numero de cedula de usuario
 Route::get('/puntos_users', [PuntosUsersController::class, 'puntosUsersList'])->name('puntos_users');
 Route::get('/puntos_totales_users', [PuntosUsersController::class, 'buscarPorCedula'])->name('puntos_users_buscar');
+Route::get('/lista-puntos-users', [PuntosUsersController::class, 'listarUsuariosConPuntos'])->name('lista.puntos.users');
+Route::get('/expirar-puntos-anual', [PuntosUsersController::class, 'expirarPuntosAnual'])->name('expirar.puntos.anual');
+
 
 //Estadisticas
 Route::get('/top-usuarios', [EstadisticasController::class, 'topUsuarios']);
@@ -121,6 +125,13 @@ Route::post('/completar-venta', [VentaController::class, 'store']);
 
 //Puntos ganados por usuario
 Route::post('/check-user', [ClientesController::class, 'checkUser']);
+
+//Reportes
+Route::get('/productos_mas_vendidos', [ReportesController::class, 'productosMasVendidos']);
+Route::get('/producto_users_mas_puntos', [ReportesController::class, 'puntosUsersList']);
+Route::get('/reporte_diario_ventas', [ReportesController::class, 'reporteDiarioVentas'])->name('reportes.ventas-diarias');
+
+
 
 Route::get('/expired-products', function () {
     return view('expired-products');

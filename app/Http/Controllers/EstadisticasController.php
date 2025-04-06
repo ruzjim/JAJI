@@ -59,9 +59,11 @@ class EstadisticasController extends Controller
     {
         $productos = DB::table('producto')
             ->where('Estado', 1)
+            ->where('Stock', '>', 0)
             ->where('Stock', '<', 10)
             ->whereNotNull('Stock')
             ->select('Id_Producto', 'Nombre_Producto', 'Marca', 'Stock')
+            ->orderBy('Stock', 'asc')
             ->limit(8)
             ->get();
 

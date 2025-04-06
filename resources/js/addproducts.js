@@ -7,15 +7,23 @@ document.addEventListener("DOMContentLoaded", function () {
     let limpiarBtn = document.querySelector(".head-text .text-danger"); // Seleccionamos el botón "Limpiar"
 
     document.querySelectorAll(".producto-card").forEach((card) => {
-        card.addEventListener("click", function () {
-            let productId = this.getAttribute("data-id"); // Obtiene el ID del producto
-            let producto = productos.find((p) => p.Id_Producto == productId); // Busca el producto en la lista
-
-            if (producto) {
-                agregarProductoALista(producto); // Agrega el producto a la lista
-                actualizarContador(); // Actualiza el contador
+        let productId = card.getAttribute("data-id");
+        let producto = productos.find((p) => p.Id_Producto == productId);
+        
+        if (producto) {
+            if (producto.Stock <= 0) {
+                card.classList.add("producto-agotado");
+                card.innerHTML += `<div class="agotado-badge">AGOTADO</div>`;
+                card.style.opacity = "0.6";
+                card.style.pointerEvents = "none";
+            } else {
+                // Configurar evento click solo para productos con stock
+                card.addEventListener("click", function() {
+                    agregarProductoALista(producto);
+                    actualizarContador();
+                });
             }
-        });
+        }
     });
 
     escaner.addEventListener("keypress", function (event) {
@@ -218,6 +226,15 @@ document.addEventListener("DOMContentLoaded", function () {
         let productoExistente = document.querySelector(
             `#ListaProductos .producto[data-id="${producto.Id_Producto}"]`
         );
+
+        if (producto.Stock <= 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Producto agotado',
+                text: `El producto ${producto.Nombre_Producto} está agotado y no puede ser vendido.`,
+            });
+            return;
+        }
     
         if (productoExistente) {
             let cantidadInput = productoExistente.querySelector(".cantidad");

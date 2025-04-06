@@ -39,4 +39,17 @@ class Producto extends model
     {
         return $this->hasMany(ProductoPunto::class, 'Id_ProductoFK', 'Id_Producto');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+    
+        static::updating(function ($producto) {
+            // Si el stock llega a 0, cambiar estado a Inactivo (0)
+            if ($producto->Stock <= 0) {
+                $producto->Estado = 0;
+            }
+        });
+    }
+
 }

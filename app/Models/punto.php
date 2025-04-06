@@ -21,6 +21,7 @@ class punto extends Model
          'Puntos_Obtenidos',
          'Estado',
          'Descripcion',
+
          
      ];
  

@@ -263,6 +263,18 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Reportes</h6>
                     <ul>
+                    <li class="{{ Request::is('productos_mas_vendidos') ? 'active' : '' }}"><a
+                    href="{{ url('productos_mas_vendidos') }}"><i data-feather="alert-triangle"></i><span>Productos Más Vendidos</span></a></li>
+
+                    <li class="{{ Request::is('producto_users_mas_puntos') ? 'active' : '' }}"><a
+                    href="{{ url('producto_users_mas_puntos') }}"><i data-feather="alert-triangle"></i><span>Usuarios Con Más Puntos</span></a></li>
+
+                    <li class="{{ Request::is('reporte_diario_ventas') ? 'active' : '' }}"><a
+                    href="{{ url('reporte_diario_ventas') }}"><i data-feather="alert-triangle"></i><span>Venta Del Día De Hoy</span></a></li>
+
+
+
+
                        <!-- <li class="{{ Request::is('sales-report') ? 'active' : '' }}"><a
                                 href="{{ url('sales-report') }}"><i data-feather="bar-chart-2"></i><span>Sales
                                     Report</span></a></li>

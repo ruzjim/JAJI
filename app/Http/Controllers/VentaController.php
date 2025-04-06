@@ -17,46 +17,52 @@ use App\Models\Punto;
 class VentaController extends Controller
 {
     public function store(Request $request)
-    {
-        try {
-            $validated = $request->validate([
-                'productos' => 'required|array',
-                'productos.*.id' => 'required|integer|exists:producto,Id_Producto',
-                'productos.*.cantidad' => 'required|integer|min:1',
-                'metodo_pago_id' => 'required|integer|in:1,2,3',
-                'total' => 'required|numeric|min:0',
-                'cedula' => 'nullable|string'
+{
+    try {
+        $validated = $request->validate([
+            'productos' => 'required|array',
+            'productos.*.id' => 'required|integer|exists:producto,Id_Producto',
+            'productos.*.cantidad' => 'required|integer|min:1',
+            'metodo_pago_id' => 'required|integer|in:1,2,3',
+            'total' => 'required|numeric|min:0',
+            'cedula' => 'nullable|string'
+        ]);
+
+        return DB::transaction(function () use ($request) {
+            // Verificar stock antes de iniciar la transacción
+            $productosSinStock = [];
+            foreach ($request->productos as $item) {
+                $producto = Producto::findOrFail($item['id']);
+                if ($producto->Stock <= 0) {
+                    $productosSinStock[] = $producto->Nombre_Producto;
+                } elseif ($producto->Stock < $item['cantidad']) {
+                    throw new \Exception("Stock insuficiente para: {$producto->Nombre_Producto}");
+                }
+            }
+
+            if (!empty($productosSinStock)) {
+                throw new \Exception("Los siguientes productos están agotados: " . implode(', ', $productosSinStock));
+            }
+
+            // Resto del código de procesamiento de venta...
+            $pago = Pago::findOrFail($request->metodo_pago_id);
+
+            $venta = Venta::create([
+                'Monto_Total' => $request->total,
+                'Id_PagoFK' => $pago->Id_Pago,
             ]);
-    
-            return DB::transaction(function () use ($request) {
-                // Verificar stock
-                foreach ($request->productos as $item) {
-                    $producto = Producto::lockForUpdate()->findOrFail($item['id']);
-                    if ($producto->Stock < $item['cantidad']) {
-                        throw new \Exception("Stock insuficiente para: {$producto->Nombre_Producto}");
-                    }
-                }
-    
-                $pago = Pago::findOrFail($request->metodo_pago_id);
-    
-                // Crear venta
-                $venta = Venta::create([
-                    'Monto_Total' => $request->total,
-                    'Id_PagoFK' => $pago->Id_Pago,
+
+            foreach ($request->productos as $item) {
+                $producto = Producto::lockForUpdate()->find($item['id']);
+                
+                VentaProducto::create([
+                    'Id_ProductoFK' => $producto->Id_Producto,
+                    'Id_VentaFK' => $venta->Id_Venta,
+                    'Cantidad' => $item['cantidad']
                 ]);
-    
-                // Procesar productos
-                foreach ($request->productos as $item) {
-                    $producto = Producto::find($item['id']);
-                    
-                    VentaProducto::create([
-                        'Id_ProductoFK' => $producto->Id_Producto,
-                        'Id_VentaFK' => $venta->Id_Venta,
-                        'Cantidad' => $item['cantidad']
-                    ]);
-    
-                    $producto->decrement('Stock', $item['cantidad']);
-                }
+
+                $producto->decrement('Stock', $item['cantidad']);
+            }
     
                 // Obtener productos únicos para puntos
                 $productosUnicos = collect($request->productos)->unique('id')->pluck('id');
@@ -91,11 +97,16 @@ if ($request->cedula) {
                 if ($user && !empty($puntosAsignar)) {
                     foreach ($puntosAsignar as $punto) {
                         // Crear entrada en puntos_users por cada punto
+
+                        $fechaExpiracion = now()->endOfYear();
+
                         PuntoUser::create([
                             'Id_UsersFK' => $user->id,
                             'Id_PuntosFK' => $punto->Id_Puntos,
                             'created_at' => now(), // Fuerza la fecha actual
                             'updated_at' => now(),
+                            'Fecha_De_Caducidad' => $fechaExpiracion->format('Y-m-d'), // Formato DATE de MySQL
+                            'Estado' => 1
                         ]);
                         
                         // Crear entrada en venta_puntos (sin firstOrCreate)
