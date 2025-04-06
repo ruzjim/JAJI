@@ -122,6 +122,9 @@ Route::get('/total-productos-por-vencer', [EstadisticasController::class, 'total
 
 //Ventas
 Route::post('/completar-venta', [VentaController::class, 'store']);
+Route::get('/cierrecaja', [VentaController::class, 'cierrecaja'])->name('cierrecaja');
+Route::post('/CerrarCaja', [VentaController::class, 'CerrarCaja'])->name('CerrarCaja');
+
 
 //Puntos ganados por usuario
 Route::post('/check-user', [ClientesController::class, 'checkUser']);

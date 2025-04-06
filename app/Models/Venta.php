@@ -13,11 +13,11 @@ class Venta extends Model
     protected $primaryKey = 'Id_Venta';
     public $timestamps = true;
 
-    protected $fillable = ['Monto_Total', 'Id_PagoFK'];
+    protected $fillable = ['Monto_Total', 'Id_PagoFK', 'idCierre','idusuario'];
 
     public function pago()
     {
-        return $this->belongsTo(Pago::class, 'Id_PagoFK', 'Id_Pago');
+        return $this->belongsTo(Pago::class, 'Id_PagoFK', 'Id_Pago' );
     }
 
     public function puntos()

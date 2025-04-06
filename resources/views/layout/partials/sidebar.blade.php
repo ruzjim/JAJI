@@ -102,7 +102,7 @@
                                     data-feather="align-justify"></i><span>Print
                                     Barcode</span></a></li>-->
                         <li class="{{ Request::is('qrcode') ? 'active' : '' }}"><a href="{{ url('qrcode') }}"><i
-                                    data-feather="maximize"></i><span>Imprimir Codigó QR</span></a>
+                                    data-feather="maximize"></i><span>Imprimir Código QR</span></a>
                         </li>
                     </ul>
                 </li>
@@ -121,7 +121,7 @@
                     </ul>
                 </li>-->
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">Sales</h6>
+                    <h6 class="submenu-hdr">Ventas</h6>
                     <ul>
                         <!--<li class="{{ Request::is('sales-list') ? 'active' : '' }}"><a
                                 href="{{ url('sales-list') }}"><i
@@ -137,7 +137,9 @@
                                     data-feather="save"></i><span>Quotation</span></a>
                         </li>-->
                         <li class="{{ Request::is('pos') ? 'active' : '' }}"><a href="{{ url('pos') }}"><i
-                                    data-feather="hard-drive"></i><span>POS</span></a></li>
+                                data-feather="hard-drive"></i><span>POS</span></a></li>
+                        <li class="{{ Request::is('cierrecaja') ? 'active' : '' }}"><a href="{{ url('cierrecaja') }}">
+                                <i class="fa-solid fa-money-bill-transfer"></i><span class="ms-2">Cierre de caja</span></a></li>
                     </ul>
                 </li>
                <!-- <li class="submenu-open">

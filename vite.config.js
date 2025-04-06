@@ -41,7 +41,8 @@ export default defineConfig({
                 'resources/js/puntos.js',
                 'resources/js/productoPuntos.js',
                 'resources/js/addproducts.js',
-                'resources/js/estadisticas.js'
+                'resources/js/estadisticas.js',
+                'resources/js/cierrecaja.js',
             ],
             refresh: true,
         }),
@@ -52,7 +53,6 @@ export default defineConfig({
                 { src: 'resources/fonts', dest: '' },
                 { src: 'resources/img', dest: '' },
                 { src: 'resources/js', dest: '' },
-                { src: 'resources/json', dest: '' },
                 { src: 'resources/plugins', dest: '' },
                 { src: 'resources/scss', dest: '' },
             ],
