@@ -9,16 +9,38 @@ use App\Models\producto;
 class ProductController extends Controller
 {
     public function producto()
-    {
-                $producto = Producto::all();
-                return view('product-list', compact('producto'));
+{
+    // Actualizar estado de todos los productos antes de mostrarlos
+    $productos = Producto::all();
+    
+    foreach ($productos as $producto) {
+        // Calcular expiración
+        $expirado = 0;
+        if ($producto->Fecha_De_Caducidad) {
+            $fechaCaducidad = \Carbon\Carbon::parse($producto->Fecha_De_Caducidad);
+            $expirado = $fechaCaducidad->isPast() ? 1 : 0;
+        }
+
+        // Actualizar Estado si está expirado o sin stock
+        if ($expirado == 1 || $producto->Stock <= 0) {
+            $producto->Estado = 0;
+            $producto->Expirado = $expirado;
+            $producto->save();
+        }
     }
+
+    // Obtener productos actualizados
+    $producto = Producto::all();
+    return view('product-list', compact('producto'));
+}
     
     public function guardarProducto(Request $request)
     {
         $validatedData = $request->validate([
+            'barcode' => 'nullable|string|max:100',
             'Nombre_Producto' => 'required|string|max:100',
             'Marca' => 'required|string|max:100',
+            'imagen' => 'nullable|string|max:255',
             'Stock' => 'nullable|integer|min:0',
             'Descripcion' => 'required|string|max:300',
             'Precio_Compra' => 'required|numeric|min:0',
@@ -54,8 +76,10 @@ class ProductController extends Controller
     $producto = Producto::findOrFail($Id_Producto);
 
     $validatedData = $request->validate([
+        'barcode' => 'nullable|string|max:100',
         'Nombre_Producto' => 'required|string|max:100',
         'Marca' => 'required|string|max:100',
+        'imagen' => 'nullable|string|max:255',
         'Stock' => 'nullable|integer|min:0',
         'Descripcion' => 'required|string|max:300',
         'Precio_Compra' => 'required|numeric|min:0',
@@ -94,17 +118,27 @@ class ProductController extends Controller
     return redirect()->route('product-list')->with('success', 'Producto actualizado correctamente.');
 }
     
-    public function cambiarEstado($Id_Producto)
-    {
-        $producto = Producto::findOrFail($Id_Producto);
-        if ($producto->Estado == 0 && $producto->Stock <= 0) {
-            return redirect()->route('product-list')->with('error', 'No se puede activar un producto sin stock.');
-        }
+public function cambiarEstado($Id_Producto)
+{
+    $producto = Producto::findOrFail($Id_Producto);
+    
+    // Si intenta activar un producto expirado o sin stock
+    if ($producto->Estado == 0) { 
+        $expirado = $producto->Fecha_De_Caducidad 
+            ? \Carbon\Carbon::parse($producto->Fecha_De_Caducidad)->isPast() 
+            : false;
+        $sinStock = $producto->Stock <= 0;
         
-        $producto->Estado = !$producto->Estado; 
-        $producto->save();
-        return redirect()->route('product-list')->with('success', 'Estado del producto actualizado correctamente.');
+        if ($expirado || $sinStock) {
+            return redirect()->route('product-list')->with('error', 'No se puede activar: producto expirado o sin stock.');
+        }
     }
+    
+    $producto->Estado = !$producto->Estado;
+    $producto->save();
+    
+    return redirect()->route('product-list')->with('success', 'Estado actualizado.');
+}
 
     public function productosExpirados()
 {

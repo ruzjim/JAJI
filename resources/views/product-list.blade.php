@@ -21,16 +21,18 @@
                             <thead class="bg-primary text-white">
                                 <tr>
                                     <th>Producto</th>
+                                    <th>Barcode</th>
                                     <th>Marca</th>
                                     <th>Stock</th>
                                     <th>Descripción</th>
                                     <th>Precio De Compra</th>
                                     <th>Precio De Venta</th>
-                                    <th>Fecha De Creación</th>
-                                    <th>Fecha De Modificación</th>
                                     <th>Ubicación</th>
                                     <th>Estado</th>
                                     <th>¿Expirado?</th>
+                                    <th>Fecha De Expiración</th>
+                                    <th>Fecha De Creación</th>
+                                    <th>Fecha De Modificación</th>
                                     <th class="no-sort">Acción</th>
                                 </tr>
                             </thead>
@@ -38,16 +40,18 @@
                                 @foreach ($producto as $producto)
                                     <tr>
                                         <td>{{ $producto->Nombre_Producto }}</td>
+                                        <td>{{ $producto->barcode }}</td>
                                         <td>{{ $producto->Marca }}</td>
                                         <td>{{ $producto->Stock ?? 'N/A' }}</td>
                                         <td>{{ $producto->Descripcion }}</td>
                                         <td class="text-success fw-bold">₡ {{ number_format($producto->Precio_Compra, 2) }}</td>
                                         <td class="text-warning fw-bold">₡ {{ number_format($producto->Precio_Venta, 2) }}</td>
-                                        <td>{{ $producto->created_at ? \Carbon\Carbon::parse($producto->created_at)->format('d/m/Y H:i') : 'N/A' }}</td>
-                                        <td>{{ $producto->updated_at ? \Carbon\Carbon::parse($producto->updated_at)->format('d/m/Y H:i') : 'N/A' }}</td>
                                         <td>{{ $producto->ubicacion ?? 'N/A' }}</td>
                                         <td><span class="badge {{ $producto->Estado ? 'bg-success' : 'bg-danger' }}">{{ $producto->Estado ? 'Activo' : 'Inactivo' }}</span></td>
                                         <td><span class="badge {{ $producto->Expirado ? 'bg-danger' : 'bg-success' }}">{{ $producto->Expirado ? 'Si' : 'No' }}</span></td>
+                                        <td>{{ $producto->Fecha_De_Caducidad ? \Carbon\Carbon::parse($producto->Fecha_De_Caducidad)->format('d/m/Y H:i') : 'N/A' }}</td>
+                                        <td>{{ $producto->created_at ? \Carbon\Carbon::parse($producto->created_at)->format('d/m/Y H:i') : 'N/A' }}</td>
+                                        <td>{{ $producto->updated_at ? \Carbon\Carbon::parse($producto->updated_at)->format('d/m/Y H:i') : 'N/A' }}</td>
                                         <td class="action-table-data text-center">
                                             <div class="edit-delete-action d-flex justify-content-center gap-2">
                                                 <a class="me-2 edit-icon  p-2" href="{{ url('product-details') }}">

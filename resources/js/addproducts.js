@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let producto = productos.find((p) => p.Id_Producto == productId);
         
         if (producto) {
+            card.setAttribute("data-stock", producto.Stock);
             if (producto.Stock <= 0) {
                 card.classList.add("producto-agotado");
                 card.innerHTML += `<div class="agotado-badge">AGOTADO</div>`;
@@ -21,10 +22,47 @@ document.addEventListener("DOMContentLoaded", function () {
                 card.addEventListener("click", function() {
                     agregarProductoALista(producto);
                     actualizarContador();
+                    actualizarEstadoAgotado();
                 });
             }
         }
     });
+    
+
+    function actualizarEstadoAgotado() {
+        // Calcular cantidades en el carrito
+        const productosEnCarrito = Array.from(document.querySelectorAll('#ListaProductos .producto')).map(item => ({
+            id: item.getAttribute('data-id'),
+            cantidad: parseInt(item.querySelector('.cantidad').value) || 0
+        }));
+        
+        const cantidadesEnCarrito = productosEnCarrito.reduce((acc, curr) => {
+            acc[curr.id] = (acc[curr.id] || 0) + curr.cantidad;
+            return acc;
+        }, {});
+    
+        // Actualizar cada tarjeta
+        document.querySelectorAll(".producto-card").forEach(card => {
+            const productId = card.getAttribute("data-id");
+            const stockOriginal = parseInt(card.getAttribute("data-stock"));
+            const stockDisponible = stockOriginal - (cantidadesEnCarrito[productId] || 0);
+            const agotadoBadge = card.querySelector('.agotado-badge');
+    
+            if (stockDisponible <= 0) {
+                if (!agotadoBadge) {
+                    card.innerHTML += `<div class="agotado-badge">¡AGOTADO!</div>`;
+                }
+                card.classList.add("producto-agotado");
+                card.style.opacity = "0.6";
+                card.style.pointerEvents = "none";
+            } else {
+                if (agotadoBadge) agotadoBadge.remove();
+                card.classList.remove("producto-agotado");
+                card.style.opacity = "1";
+                card.style.pointerEvents = "auto";
+            }
+        });
+    }
 
     escaner.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
@@ -323,6 +361,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (productoElemento) {
                 productoElemento.remove(); // Elimina el producto de la lista
                 actualizarContador(); // Actualizar el contador después de eliminar
+                actualizarEstadoAgotado();
             }
         }
 
@@ -332,6 +371,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let cantidadInput = productoElemento.querySelector(".cantidad");
             cantidadInput.value = parseInt(cantidadInput.value) + 1; // Aumentar cantidad
             actualizarContador(); // Actualizar el contador
+            actualizarEstadoAgotado();
         }
 
         // Disminuir cantidad al hacer clic en el botón "-"
@@ -344,6 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 cantidadInput.value = nuevaCantidad; // Disminuir cantidad
             }
             actualizarContador(); // Actualizar el contador
+            actualizarEstadoAgotado();
         }
     });
 
@@ -363,6 +404,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Limpiar todos los productos de la lista
                 listaProductos.innerHTML = ""; // Eliminar todos los elementos dentro de la lista
                 actualizarContador(); // Actualizar el contador después de limpiar
+                actualizarEstadoAgotado();
                 Swal.fire(
                     "¡Eliminado!",
                     "Todos los productos han sido eliminados.",

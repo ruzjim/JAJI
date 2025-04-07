@@ -21,8 +21,10 @@ class Producto extends model
     protected $table = 'producto';
     protected $primaryKey = 'Id_Producto';
     protected $fillable = [
+        'barcode',
         'Nombre_Producto',
         'Marca',
+        'imagen',
         'Stock',
         'Descripcion',
         'Precio_Compra',
@@ -44,9 +46,17 @@ class Producto extends model
     {
         parent::boot();
     
-        static::updating(function ($producto) {
-            // Si el stock llega a 0, cambiar estado a Inactivo (0)
-            if ($producto->Stock <= 0) {
+        static::saving(function ($producto) {
+            // Calcular Expirado
+            if ($producto->Fecha_De_Caducidad) {
+                $fechaCaducidad = \Carbon\Carbon::parse($producto->Fecha_De_Caducidad);
+                $producto->Expirado = $fechaCaducidad->isPast() ? 1 : 0;
+            } else {
+                $producto->Expirado = 0;
+            }
+    
+            // Calcular Estado
+            if ($producto->Expirado == 1 || $producto->Stock <= 0) {
                 $producto->Estado = 0;
             }
         });

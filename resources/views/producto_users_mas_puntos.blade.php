@@ -40,15 +40,17 @@
                                         </td>
                                         <td>
     @php
-        $puntosVigentes = $usuario->puntos()
+        $fechaCaducidad = $usuario->puntos()
             ->where('puntos_users.Estado', 1)
             ->whereRaw('YEAR(puntos_users.Fecha_De_Caducidad) >= YEAR(NOW())')
-            ->count();
+            ->max('Fecha_De_Caducidad');
     @endphp
-    
-    <span class="badge {{ $puntosVigentes > 0 ? 'bg-success' : 'bg-danger' }}">
-        {{ $puntosVigentes > 0 ? 'Activo' : 'Inactivo' }}
-    </span>
+
+    @if($fechaCaducidad)
+        {{ \Carbon\Carbon::parse($fechaCaducidad)->format('d/m/Y') }} {{-- Formatear fecha --}}
+    @else
+        N/A {{-- Mostrar "N/A" si no hay fecha --}}
+    @endif
 </td>
                                     </tr>
                                 @endforeach

@@ -100,12 +100,12 @@
                         </li>
                         <li class="{{ Request::is('barcode') ? 'active' : '' }}"><a href="{{ url('barcode') }}"><i
                                     data-feather="align-justify"></i><span>Print
-                                    Barcode</span></a></li>-->
+                                    Barcode</span></a></li>
                         <li class="{{ Request::is('qrcode') ? 'active' : '' }}"><a href="{{ url('qrcode') }}"><i
                                     data-feather="maximize"></i><span>Imprimir Código QR</span></a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <!--<li class="submenu-open">
                     <h6 class="submenu-hdr">Stock</h6>
                     <ul>
@@ -266,14 +266,16 @@
                     <h6 class="submenu-hdr">Reportes</h6>
                     <ul>
                     <li class="{{ Request::is('productos_mas_vendidos') ? 'active' : '' }}"><a
-                    href="{{ url('productos_mas_vendidos') }}"><i data-feather="alert-triangle"></i><span>Productos Más Vendidos</span></a></li>
+                    href="{{ url('productos_mas_vendidos') }}"><i data-feather="shopping-cart"></i><span>Productos Más Vendidos</span></a></li>
 
                     <li class="{{ Request::is('producto_users_mas_puntos') ? 'active' : '' }}"><a
-                    href="{{ url('producto_users_mas_puntos') }}"><i data-feather="alert-triangle"></i><span>Usuarios Con Más Puntos</span></a></li>
+                    href="{{ url('producto_users_mas_puntos') }}"><i data-feather="award"></i><span>Usuarios Con Más Puntos</span></a></li>
 
                     <li class="{{ Request::is('reporte_diario_ventas') ? 'active' : '' }}"><a
-                    href="{{ url('reporte_diario_ventas') }}"><i data-feather="alert-triangle"></i><span>Venta Del Día De Hoy</span></a></li>
+                    href="{{ url('reporte_diario_ventas') }}"><i data-feather="calendar"></i><span>Venta Del Día De Hoy</span></a></li>
 
+                    <li class="{{ Request::is('reporte_venta_fechas') ? 'active' : '' }}"><a
+                    href="{{ url('reporte_venta_fechas') }}"><i data-feather="bar-chart-2"></i><span>Reporte Ventas</span></a></li>
 
 
 
@@ -307,7 +309,7 @@
                         <li class="{{ Request::is('profit-and-loss') ? 'active' : '' }}"><a
                                 href="{{ url('profit-and-loss') }}"><i data-feather="pie-chart"></i><span>Profit &
                                     Loss</span></a></li>
-                    </ul> -->
+                    </ul> 
                 </li>
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Manejo De Usuarios</h6>
@@ -318,11 +320,11 @@
                         <li class="{{ Request::is('roles-permissions','permissions') ? 'active' : '' }}"><a
                                 href="{{ url('roles-permissions') }}"><i data-feather="shield"></i><span>Roles y
                                     Permisos</span></a></li>
-                        <!--<li class="{{ Request::is('delete-account') ? 'active' : '' }}"><a
+                        <li class="{{ Request::is('delete-account') ? 'active' : '' }}"><a
                                 href="{{ url('delete-account') }}"><i data-feather="lock"></i><span>Delete Account
-                                    Request</span></a></li> -->
+                                    Request</span></a></li> 
                     </ul>
-                </li>
+                </li>-->
                 <!--<li class="submenu-open">
                     <h6 class="submenu-hdr">Pages</h6>
                     <ul>

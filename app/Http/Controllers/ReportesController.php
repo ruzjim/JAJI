@@ -7,6 +7,7 @@ use App\Models\Producto;
 use App\Models\User;
 use App\Models\Venta;
 use App\Models\ventaProducto;
+use Carbon\Carbon;
 
 class ReportesController extends Controller
 {
@@ -85,5 +86,38 @@ public function reporteDiarioVentas()
     return view('reporte_diario_ventas', compact('totalVentas', 'productosVendidos'));
 }
 
+public function reportePorFechas(Request $request)
+{
+    $request->validate([
+        'fecha_inicio' => 'nullable|date',
+        'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio'
+    ]);
+
+    $fechaInicio = $request->filled('fecha_inicio') 
+        ? Carbon::parse($request->fecha_inicio)->startOfDay()
+        : now()->subDays(7)->startOfDay();
+
+    $fechaFin = $request->filled('fecha_fin')
+        ? Carbon::parse($request->fecha_fin)->endOfDay()
+        : now()->endOfDay();
+
+    $ventas = Venta::with([
+            'usuario:id,name',
+            'pago:Id_Pago,metodo_pago',
+            'productos.producto:Id_Producto,Nombre_Producto'
+        ])
+        ->whereBetween('Created_At', [$fechaInicio, $fechaFin])
+        ->orderBy('Created_At', 'desc')
+        ->get();
+
+    $totalVentas = $ventas->sum('Monto_Total');
+
+    return view('reporte_venta_fechas', compact(
+        'totalVentas',
+        'ventas',
+        'fechaInicio',
+        'fechaFin'
+    ));
+}
 
 }

@@ -25,4 +25,26 @@ class Venta extends Model
     return $this->belongsToMany(Punto::class, 'venta_puntos', 'Id_VentaFK', 'Id_PuntosFK')
                  ->withPivot('created_at', 'updated_at');
 }
+
+protected $casts = [
+    'Created_At' => 'datetime',
+    'Updated_At' => 'datetime',
+];
+
+// En el modelo Venta
+public function usuario()
+{
+    return $this->belongsTo(User::class, 'idusuario');
+}
+
+public function cierre()
+{
+    return $this->belongsTo(Cierre::class, 'idCierre');
+}
+
+public function productos()
+{
+    return $this->hasMany(VentaProducto::class, 'Id_VentaFK');
+}
+
 }

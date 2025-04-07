@@ -37,12 +37,11 @@ class EstadisticasController extends Controller
     }
 
     public function totalProductosExpirados()
-    {
-        $totalExpirados = Producto::where('Estado', 1)
-            ->where('Expirado', 1)
-            ->count();
-        return response()->json(['total_productos_expirados' => $totalExpirados]);
-    }
+{
+    $totalExpirados = Producto::where('Expirado', 1)->count();
+    return response()->json(['total_productos_expirados' => $totalExpirados]);
+}
+
 
     public function totalProductosStockBajo()
     {

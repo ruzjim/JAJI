@@ -133,8 +133,7 @@ Route::post('/check-user', [ClientesController::class, 'checkUser']);
 Route::get('/productos_mas_vendidos', [ReportesController::class, 'productosMasVendidos']);
 Route::get('/producto_users_mas_puntos', [ReportesController::class, 'puntosUsersList']);
 Route::get('/reporte_diario_ventas', [ReportesController::class, 'reporteDiarioVentas'])->name('reportes.ventas-diarias');
-
-
+Route::get('/reporte_venta_fechas', [ReportesController::class, 'reportePorFechas'])->name('reporte.ventas.fechas');
 
 Route::get('/expired-products', function () {
     return view('expired-products');
