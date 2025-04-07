@@ -19,6 +19,7 @@
                     </div>
                 </a>
             </div>
+            
             <div class="col-xl-3 col-sm-6 col-12 d-flex">
                 <a href="{{ url('productos-expirados') }}" class="w-100">
                     <div class="dash-count das1">
@@ -59,6 +60,20 @@
                 </a>
             </div>
         </div>
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <a href="{{ url('admin/promociones') }}" class="w-100">
+            <div class="dash-count das3">
+                <div class="dash-counts">
+                    <h4>{{ count($imagenesPromociones ?? []) }}</h4>
+                    <h5>Promociones</h5>
+                </div>
+                <div class="dash-imgs">
+                    <i data-feather="image"></i>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 
         <!-- Button trigger modal -->
 

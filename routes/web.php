@@ -3,6 +3,7 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\POSController;
 use App\Http\Controllers\ProductController;
@@ -48,10 +49,51 @@ Route::get('/pos', [POSController::class, 'index'])->name('pos');
 
 
 
+Route::get('/admin/promociones', function () {
+    $archivos = File::files(storage_path('app/public/promociones'));
+    $imagenesPromociones = collect($archivos)->map(function ($archivo) {
+        return asset('storage/promociones/' . basename($archivo));
+    });
+
+    return view('admin.promociones.index', compact('imagenesPromociones'));
+})->name('promociones.index');
+
+Route::post('/admin/promociones/subir', function (Request $request) {
+    $request->validate([
+        'imagen' => 'required|file|image|mimes:jpeg,jpg,png|max:2048',
+    ]);
+
+    if (!$request->hasFile('imagen')) {
+        return back()->with('error', 'No se recibió ningún archivo.');
+    }
+
+    $imagen = $request->file('imagen');
+
+    if (!$imagen->isValid()) {
+        return back()->with('error', 'El archivo no se subió correctamente.');
+    }
+
+    $nombreArchivo = uniqid('promo_') . '.' . $imagen->getClientOriginalExtension();
+
+    // ✅ Este método sí funcionará aunque el realPath sea falso
+    $imagen->move(storage_path('app/public/promociones'), $nombreArchivo);
+
+    return redirect()->route('promociones.index')->with('success', 'Imagen subida correctamente.');
+})->name('promociones.subir');
 
 
 
+Route::post('/admin/promociones/borrar', function (Request $request) {
+    $ruta = $request->input('imagen');
 
+    if ($ruta) {
+        $nombre = basename($ruta);
+        Storage::delete('public/promociones/' . $nombre);
+        return redirect()->route('promociones.index')->with('success', 'Imagen eliminada correctamente.');
+    }
+
+    return redirect()->route('promociones.index')->with('error', 'No se pudo eliminar la imagen.');
+})->name('promociones.borrar');
 
 
 // Route::get('index', [CustomAuthController::class, 'dashboard']);
