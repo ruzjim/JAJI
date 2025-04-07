@@ -29,7 +29,7 @@
                             @if(count($promociones))
                             <div class="mb-4 d-flex justify-content-center">
                                 <div id="promoCarousel" class="carousel slide shadow-sm rounded" data-bs-ride="carousel" data-bs-interval="5000" style="width: 100%; max-width: 550px;">
-                                    <div class="carousel-inner rounded" style="height: 200px; overflow: hidden;">
+                                    <div class="carousel-inner rounded" style="height: 300px; overflow: hidden;">
                                         @foreach($promociones as $index => $promo)
                                             <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                                                 <img src="{{ $promo }}" class="d-block w-100" alt="Promoción {{ $index + 1 }}" style="object-fit: cover; height: 100%;">
