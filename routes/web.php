@@ -3,6 +3,8 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\POSController;

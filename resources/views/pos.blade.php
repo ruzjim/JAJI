@@ -9,39 +9,45 @@
         }
     </style>
 
+
+
     <div class="page-wrapper pos-pg-wrapper ms-0">
         <div class="content pos-design p-0">
             <div class="row align-items-start pos-wrapper">
                 <div class="col-md-12 col-lg-8">
                     <div class="pos-categories tabs_wrapper">
 
+                            {{-- 🟨 Alerta legal --}}
+                            <div class="alert alert-warning d-flex align-items-center gap-2 mb-3" role="alert">
+                                <i class="fa-solid fa-id-card fa-lg"></i>
+                                <div>
+                                    Por ley se solicitará documento de identidad para la compra de cigarrillos, licor y productos restringidos.
+                                </div>
+                            </div>
+
+                            {{-- 🟧 Carrusel de promociones --}}
+                            @if(count($promociones))
+                            <div class="mb-4 d-flex justify-content-center">
+                                <div id="promoCarousel" class="carousel slide shadow-sm rounded" data-bs-ride="carousel" data-bs-interval="5000" style="width: 100%; max-width: 550px;">
+                                    <div class="carousel-inner rounded" style="height: 200px; overflow: hidden;">
+                                        @foreach($promociones as $index => $promo)
+                                            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                                <img src="{{ $promo }}" class="d-block w-100" alt="Promoción {{ $index + 1 }}" style="object-fit: cover; height: 100%;">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            @endif
+
+
                         <div class="pos-products">
-                        {{-- Banner de advertencia legal --}}
-<div class="alert alert-warning d-flex align-items-center gap-2" role="alert">
-    <i class="fa-solid fa-id-card fa-lg"></i>
-    <div>
-        Por ley se solicitará documento de identidad para la compra de cigarrillos, licor y productos restringidos.
-    </div>
-</div>
-{{-- Carrusel de Promociones (versión mediana) --}}
-<div id="promoCarousel" class="carousel slide mb-3 mx-auto" data-bs-ride="carousel" data-bs-interval="5000" style="max-width: 600px;">
-    <div class="carousel-inner rounded" style="height: 200px; overflow: hidden;">
-        <div class="carousel-item active">
-            <img src="{{ asset('storage/promociones/banner.jpg') }}" class="d-block w-100" alt="Promoción 1" style="object-fit: cover; height: 100%;">
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('storage/promociones/banner2.jpg') }}" class="d-block w-100" alt="Promoción 2" style="object-fit: cover; height: 100%;">
-        </div>
-    </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-</div>
-
                             <div class="d-flex align-items-center justify-content-between">
                                 <h5 class="mb-3">Productos</h5>
                             </div>
