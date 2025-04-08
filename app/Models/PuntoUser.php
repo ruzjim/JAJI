@@ -26,6 +26,6 @@ class PuntoUser extends Pivot // Cambia la herencia
 
     public function punto()
     {
-        return $this->belongsTo(Punto::class, 'Id_PuntosFK');
+        return $this->belongsTo(punto::class, 'Id_PuntosFK');
     }
 }
