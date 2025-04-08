@@ -3,35 +3,7 @@ import laravel from 'laravel-vite-plugin';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
-    server: {
-        cors: true,  // Habilitar CORS en el servidor de desarrollo
-        origin: 'http://localhost:5173',  // Asegurar origen correcto en desarrollo
-        proxy: {
-            '/api': {
-                target: 'http://localhost:8000',  // Redirigir peticiones API al backend de Laravel
-                changeOrigin: true,
-                secure: false,
-            },
-        },
-    },
-    build: {
-        manifest: true,
-        rtl: true,
-        outDir: 'public/build/',
-        cssCodeSplit: true,
-        rollupOptions: {
-            output: {
-                assetFileNames: (css) => {
-                    if (css.name.split('.').pop() == 'css') {
-                        return 'css/' + `[name]` + '.min.' + 'css';
-                    } else {
-                        return 'icons/' + css.name;
-                    }
-                },
-                entryFileNames: 'js/' + `[name]` + `.js`,
-            },
-        },
-    },
+    
     plugins: [
         laravel({
             input: [

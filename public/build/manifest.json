@@ -1,83 +1,83 @@
 {
   "resources/css/style.css": {
-    "file": "css/style.min.css",
+    "file": "assets/style-BPKg6-zF.css",
     "src": "resources/css/style.css",
     "isEntry": true
   },
   "resources/img/authentication/email-verification-img.jpg": {
-    "file": "icons/login-img.jpg",
+    "file": "assets/login-img-DAOPDEIm.jpg",
     "src": "resources/img/authentication/email-verification-img.jpg"
   },
   "resources/img/authentication/forgot-password-img.jpg": {
-    "file": "icons/login-img.jpg",
+    "file": "assets/login-img-DAOPDEIm.jpg",
     "src": "resources/img/authentication/email-verification-img.jpg"
   },
   "resources/img/authentication/login-img.jpg": {
-    "file": "icons/login-img.jpg",
+    "file": "assets/login-img-DAOPDEIm.jpg",
     "src": "resources/img/authentication/email-verification-img.jpg"
   },
   "resources/img/authentication/register-img.jpg": {
-    "file": "icons/login-img.jpg",
+    "file": "assets/login-img-DAOPDEIm.jpg",
     "src": "resources/img/authentication/email-verification-img.jpg"
   },
   "resources/img/authentication/reset-password-img.jpg": {
-    "file": "icons/login-img.jpg",
+    "file": "assets/login-img-DAOPDEIm.jpg",
     "src": "resources/img/authentication/email-verification-img.jpg"
   },
   "resources/img/coming-soon.png": {
-    "file": "icons/coming-soon.png",
+    "file": "assets/coming-soon-Dj08bcto.png",
     "src": "resources/img/coming-soon.png"
   },
   "resources/img/icons/calendars.svg": {
-    "file": "icons/calendars.svg",
+    "file": "assets/calendars-DEOTBeds.svg",
     "src": "resources/img/icons/calendars.svg"
   },
   "resources/img/icons/check.svg": {
-    "file": "icons/check.svg",
+    "file": "assets/check-BZMtedBA.svg",
     "src": "resources/img/icons/check.svg"
   },
   "resources/img/icons/dropdown.svg": {
-    "file": "icons/dropdown.svg",
+    "file": "assets/dropdown-CGbWMxNQ.svg",
     "src": "resources/img/icons/dropdown.svg"
   },
   "resources/js/addproducts.js": {
-    "file": "js/addproducts.js",
+    "file": "assets/addproducts-DIi1rcON.js",
     "name": "addproducts",
     "src": "resources/js/addproducts.js",
     "isEntry": true
   },
   "resources/js/cierrecaja.js": {
-    "file": "js/cierrecaja.js",
+    "file": "assets/cierrecaja-CfQcUG-P.js",
     "name": "cierrecaja",
     "src": "resources/js/cierrecaja.js",
     "isEntry": true
   },
   "resources/js/metricas.js": {
-    "file": "js/metricas.js",
+    "file": "assets/metricas-BqXLGjlN.js",
     "name": "metricas",
     "src": "resources/js/metricas.js",
     "isEntry": true
   },
   "resources/js/productoPuntos.js": {
-    "file": "js/productoPuntos.js",
+    "file": "assets/productoPuntos-BmlDQjSU.js",
     "name": "productoPuntos",
     "src": "resources/js/productoPuntos.js",
     "isEntry": true
   },
   "resources/js/productos.js": {
-    "file": "js/productos.js",
+    "file": "assets/productos-BpZ1UZEZ.js",
     "name": "productos",
     "src": "resources/js/productos.js",
     "isEntry": true
   },
   "resources/js/puntos.js": {
-    "file": "js/puntos.js",
+    "file": "assets/puntos-BpZ1UZEZ.js",
     "name": "puntos",
     "src": "resources/js/puntos.js",
     "isEntry": true
   },
   "resources/js/script.js": {
-    "file": "js/script.js",
+    "file": "assets/script-CcOo1goS.js",
     "name": "script",
     "src": "resources/js/script.js",
     "isEntry": true
