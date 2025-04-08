@@ -83,6 +83,7 @@ class EstadisticasController extends Controller
 
     public function productosPorVencer()
     {
+        dd('productosPorVencer');
         try {
             $hoy = now()->format('Y-m-d');
             $semanaDespues = now()->addWeek()->format('Y-m-d');
