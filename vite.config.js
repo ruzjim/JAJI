@@ -41,7 +41,7 @@ export default defineConfig({
                 'resources/js/puntos.js',
                 'resources/js/productoPuntos.js',
                 'resources/js/addproducts.js',
-                'resources/js/estadisticas.js',
+                'resources/js/metricas.js',
                 'resources/js/cierrecaja.js',
             ],
             refresh: true,

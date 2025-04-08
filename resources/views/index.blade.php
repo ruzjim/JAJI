@@ -1,7 +1,7 @@
 <?php $page = 'index'; ?>
 @extends('layout.mainlayout')
 @section('content')
-@vite(['resources/js/estadisticas.js'])
+@vite(['resources/js/metricas.js'])
 
 <div class="page-wrapper">
     <div class="content">
