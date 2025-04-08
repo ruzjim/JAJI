@@ -57,7 +57,7 @@ Route::get('/admin/promociones', function () {
     $imagenesPromociones = collect($archivos)->map(function ($archivo) {
         return asset('storage/app/public/promociones/' . basename($archivo));
     });
-dd  ($imagenesPromociones);
+// dd  ($imagenesPromociones);
     return view('admin.promociones.index', compact('imagenesPromociones'));
 })->name('promociones.index');
 
