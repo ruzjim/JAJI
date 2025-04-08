@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 if ($('#topclientes').length > 0) {
     
+    console.log('Prueba');
+    
     fetch('/top-usuarios')
         .then(response => response.json())
         .then(data => {
