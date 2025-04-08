@@ -17,7 +17,7 @@ class POSController extends Controller
         // Obtener imágenes de promociones desde storage
         $archivos = File::files(storage_path('app/public/promociones'));
         $promociones = collect($archivos)->map(function ($archivo) {
-            return asset('storage/promociones/' . basename($archivo));
+            return asset('promociones/' . basename($archivo));
         });
 
         return view('pos', compact('productos', 'promociones'));
