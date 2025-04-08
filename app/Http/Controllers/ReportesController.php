@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\User;
 use App\Models\Venta;
-use App\Models\ventaProducto;
+use App\Models\VentaProducto;
 use Carbon\Carbon;
 
 class ReportesController extends Controller
@@ -59,7 +59,7 @@ public function reporteDiarioVentas()
                         ->sum('Monto_Total');
 
     // Obtener productos vendidos hoy con cantidades
-    $productosVendidos = ventaProducto::with(['producto' => function($query) {
+    $productosVendidos = VentaProducto::with(['producto' => function($query) {
                             $query->select('Id_Producto', 'barcode', 'Nombre_Producto', 'Marca', 'Precio_Venta');
                         }])
                         ->whereHas('venta', function($query) use ($hoy, $manana) {
