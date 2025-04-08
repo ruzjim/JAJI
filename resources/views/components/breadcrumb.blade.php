@@ -260,7 +260,7 @@
         @if (Route::is(['customers']))
             <div class="page-btn">
                 <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#add-units"><i
-                        data-feather="plus-circle" class="me-2"></i>Add New Customer</a>
+                        data-feather="plus-circle" class="me-2"></i>Agregar nuevo Cliente</a>
             </div>
         @endif
         @if (Route::is(['coupons']))

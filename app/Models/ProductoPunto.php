@@ -15,6 +15,7 @@ class ProductoPunto extends Model
         'Id_ProductoFK',
         'Id_PuntosFK',
         'Estado',
+        'Fecha_De_Caducidad'
     ];
 
     public $timestamps = true;

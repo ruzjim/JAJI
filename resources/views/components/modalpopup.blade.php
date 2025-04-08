@@ -6792,33 +6792,37 @@
     <!-- Print Receipt -->
     <div class="modal fade modal-default" id="print-receipt" aria-labelledby="print-receipt">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content"> 
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="close p-0" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close p-0" data-bs-dismiss="modal" aria-label="Close" onclick="location.reload();">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body"  id="reciboaImprimir">
                     <div class="icon-head text-center">
                         <a href="{{ url('pos-design') }}">
                             <img src="{{ URL::asset('/build/img/logo.png')}}" width="100" height="30" alt="Receipt Logo">
                         </a>
                     </div>
                     <div class="text-center info text-center">
-                        <h6>Dreamguys Technologies Pvt Ltd.,</h6>
-                        <p class="mb-0">Phone Number: +1 5656665656</p>
-                        <p class="mb-0">Email: <a href="mailto:example@gmail.com">example@gmail.com</a></p>
+                        <h6>Mini Super del Valle,</h6>
+                        <p class="mb-0">Telefono: 85868586</p>
+                        <p class="mb-0">Email: <a href="mailto:minisupervalle@gmail.com">minisupervalle@gmail.com</a></p>
                     </div>
                     <div class="tax-invoice">
-                        <h6 class="text-center">Tax Invoice</h6>
+                        <h6 class="text-center">Recibo</h6>
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <div class="invoice-user-name"><span>Name: </span><span>John Doe</span></div>
-                                <div class="invoice-user-name"><span>Invoice No: </span><span>CS132453</span></div>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="invoice-user-name"><span>Nombre: </span><span>Nombre cliente</span></div>
+                                {{-- <div class="invoice-user-name"><span>Invoice No: </span><span>CS132453</span></div> --}}
                             </div>
-                            <div class="col-sm-12 col-md-6">
-                                <div class="invoice-user-name"><span>Customer Id: </span><span>#LL93784</span></div>
-                                <div class="invoice-user-name"><span>Date: </span><span>01.07.2022</span></div>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="invoice-user-name"><span>Metodo de Pago: </span><span id="metodoRecibo">Metodo</span></div>
+                                {{-- <div class="invoice-user-name"><span>Invoice No: </span><span>CS132453</span></div> --}}
+                            </div>
+                            <div class="col-sm-12 col-md-12">
+                                {{-- <div class="invoice-user-name"><span>Customer Id: </span><span>#LL93784</span></div> --}}
+                                <div class="invoice-user-name"><span>Fecha y Hora: </span><span>{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}</span></div>
                             </div>
                         </div>
                     </div>
@@ -6826,42 +6830,33 @@
                         <thead>
                             <tr>
                                 <th># Item</th>
-                                <th>Price</th>
+                                <th>Precio</th>
                                 <th>Qty</th>
                                 <th class="text-end">Total</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="print-receipt-table">
                             <tr>
                                 <td>1. Red Nike Laser</td>
                                 <td>$50</td>
                                 <td>3</td>
                                 <td class="text-end">$150</td>
                             </tr>
-                            <tr>
-                                <td>2. Iphone 14</td>
-                                <td>$50</td>
-                                <td>2</td>
-                                <td class="text-end">$100</td>
-                            </tr>
-                            <tr>
-                                <td>3. Apple Series 8</td>
-                                <td>$50</td>
-                                <td>3</td>
-                                <td class="text-end">$150</td>
-                            </tr>
+                           
+                        </tbody>
+                        <tbody>
                             <tr>
                                 <td colspan="4">
                                     <table class="table-borderless w-100 table-fit">
                                         <tr>
                                             <td>Sub Total :</td>
-                                            <td class="text-end">$700.00</td>
+                                            <td class="text-end" id="subtotalRecibo">$700.00</td>
                                         </tr>
                                         <tr>
-                                            <td>Discount :</td>
-                                            <td class="text-end">-$50.00</td>
+                                            <td>Descuento :</td>
+                                            <td class="text-end" id="descuentoRecibo">-$50.00</td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td>Shipping :</td>
                                             <td class="text-end">0.00</td>
                                         </tr>
@@ -6876,10 +6871,10 @@
                                         <tr>
                                             <td>Due :</td>
                                             <td class="text-end">$0.00</td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
-                                            <td>Total Payable :</td>
-                                            <td class="text-end">$655.00</td>
+                                            <td>Total a pagar :</td>
+                                            <td class="text-end" id="TotalCompraRecibo">$655.00</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -6887,16 +6882,18 @@
                         </tbody>
                     </table>
                     <div class="text-center invoice-bar">
-                        <p>**VAT against this challan is payable through central registration. Thank you for your
-                            business!</p>
-                        <a href="{{ url('pos-design') }}">
+                        <p>**Autorizado mediante oficio 151515 del ministerio de hacienda</p>
+                        {{-- <a href="{{ url('pos-design') }}"> esto es un QR que lleva a la pagina de la tienda
                             <img src="{{ URL::asset('/build/img/barcode/barcode-03.jpg')}}" alt="Barcode">
-                        </a>
-                        <p>Sale 31</p>
-                        <p>Thank You For Shopping With Us. Please Come Again</p>
-                        <a href="javascript:void(0);" class="btn btn-primary">Print Receipt</a>
+                        </a> --}}
+                        <p>Factua # 586545</p>
+                        <p>Gracias por su compra. Vuelva pronto</p>
                     </div>
                 </div>
+                <div class="text-center invoice-bar">
+                <a href="javascript:void(0);" class="btn btn-primary m-2" id="imprimirRecibo">Imprimir</a>
+            </div>
+
             </div>
         </div>
     </div>
@@ -6998,48 +6995,39 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="pos">
+                    <form action="agregarCliente" method="POST">
+                        @csrf
                         <div class="row">
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>Customer Name</label>
-                                    <input type="text" class="form-control">
+                            <div class="col-lg-6 pe-0">
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" name="name">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control">
+                            <div class="col-lg-6 pe-0">
+                                <div class="mb-3">
+                                    <label class="form-label">Cédula</label>
+                                    <input type="text" class="form-control" name="cedula">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>Phone</label>
-                                    <input type="text" class="form-control">
+                            <div class="col-lg-6 pe-0">
+                                <div class="mb-3">
+                                    <label class="form-label">Telefono</label>
+                                    <input type="number" class="form-control" name="telefono">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>Country</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>City</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-12 col-12">
-                                <div class="input-blocks">
-                                    <label>Address</label>
-                                    <input type="text">
+                            <div class="col-lg-12 pe-0">
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email">
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer d-sm-flex justify-content-end">
-                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-submit me-2">Submit</button>
+
+                        <div class="modal-footer-btn">
+                            <button type="button" class="btn btn-cancel me-2"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-submit">Guardar</button>
                         </div>
                     </form>
                 </div>
@@ -8379,80 +8367,38 @@
                     <div class="content">
                         <div class="modal-header border-0 custom-modal-header">
                             <div class="page-title">
-                                <h4>Add Customer</h4>
+                                <h4>Agregar Clientes</h4>
                             </div>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body custom-modal-body">
-                            <form action="customers">
-                                <div class="modal-title-head people-cust-avatar">
-                                    <h6>Avatar</h6>
-                                </div>
-                                <div class="new-employee-field">
-                                    <div class="profile-pic-upload">
-                                        <div class="profile-pic">
-                                            <span><i data-feather="plus-circle" class="plus-down-add"></i> Add
-                                                Image</span>
-                                        </div>
-                                        <div class="mb-3">
-                                            <div class="image-upload mb-0">
-                                                <input type="file">
-                                                <div class="image-uploads">
-                                                    <h4>Change Image</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <form action="agregarCliente" method="POST">
+                                @csrf
                                 <div class="row">
-                                    <div class="col-lg-4 pe-0">
+                                    <div class="col-lg-6 pe-0">
                                         <div class="mb-3">
-                                            <label class="form-label">Customer Name</label>
-                                            <input type="text" class="form-control">
+                                            <label class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" name="name">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 pe-0">
+                                    <div class="col-lg-6 pe-0">
                                         <div class="mb-3">
-                                            <label class="form-label">Email</label>
-                                            <input type="email" class="form-control">
+                                            <label class="form-label">Cédula</label>
+                                            <input type="text" class="form-control" name="cedula">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 pe-0">
-                                        <div class="input-blocks">
-                                            <label class="mb-2">Phone</label>
-                                            <input class="form-control form-control-lg group_formcontrol"
-                                                id="phone" name="phone" type="text">
+                                    <div class="col-lg-6 pe-0">
+                                        <div class="mb-3">
+                                            <label class="form-label">Telefono</label>
+                                            <input type="number" class="form-control" name="telefono">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 pe-0">
                                         <div class="mb-3">
-                                            <label class="form-label">Address</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 pe-0">
-                                        <div class="mb-3">
-                                            <label class="form-label">City</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 pe-0">
-                                        <div class="mb-3">
-                                            <label class="form-label">Country</label>
-                                            <select class="select">
-                                                <option>Choose</option>
-                                                <option>United Kingdom</option>
-                                                <option>United State</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3 input-blocks">
-                                            <label class="form-label">Descriptions</label>
-                                            <textarea class="form-control mb-1"></textarea>
-                                            <p>Maximum 60 Characters</p>
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" name="email">
                                         </div>
                                     </div>
                                 </div>
@@ -8460,7 +8406,7 @@
                                 <div class="modal-footer-btn">
                                     <button type="button" class="btn btn-cancel me-2"
                                         data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-submit">Submit</button>
+                                    <button type="submit" class="btn btn-submit">Guardar</button>
                                 </div>
                             </form>
                         </div>
