@@ -53,6 +53,9 @@ Route::get('/pos', [POSController::class, 'index'])->name('pos');
 
 
 Route::get('/admin/promociones', function () {
+    if (!file_exists(public_path('promociones'))) {
+        mkdir(public_path('promociones'), 0755, true);
+    }
     $archivos = File::files(public_path('promociones'));
     $imagenesPromociones = collect($archivos)->map(function ($archivo) {
         return asset('promociones/' . basename($archivo));
@@ -78,9 +81,6 @@ Route::post('/admin/promociones/subir', function (Request $request) {
 
     $nombreArchivo = uniqid('promo_') . '.' . $imagen->getClientOriginalExtension();
 
-    if (!file_exists(public_path('promociones'))) {
-        mkdir(public_path('promociones'), 0755, true);
-    }
     $imagen->move(public_path('promociones'), $nombreArchivo);
 
     return redirect()->route('promociones.index')->with('success', 'Imagen subida correctamente.');
