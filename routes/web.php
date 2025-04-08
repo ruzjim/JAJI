@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\POSController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\puntoController;
+use App\Http\Controllers\PuntoController;
 use App\Http\Controllers\ProductoPuntosController;
 use App\Http\Controllers\PuntosUsersController;
 use App\Http\Controllers\EstadisticasController;
