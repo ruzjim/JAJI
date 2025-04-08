@@ -15,6 +15,7 @@ use App\Http\Controllers\PuntosUsersController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ReportesController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +57,7 @@ Route::get('/admin/promociones', function () {
     $imagenesPromociones = collect($archivos)->map(function ($archivo) {
         return asset('storage/promociones/' . basename($archivo));
     });
-
+dd  ($imagenesPromociones);
     return view('admin.promociones.index', compact('imagenesPromociones'));
 })->name('promociones.index');
 
@@ -77,7 +78,6 @@ Route::post('/admin/promociones/subir', function (Request $request) {
 
     $nombreArchivo = uniqid('promo_') . '.' . $imagen->getClientOriginalExtension();
 
-    // ✅ Este método sí funcionará aunque el realPath sea falso
     $imagen->move(storage_path('app/public/promociones'), $nombreArchivo);
 
     return redirect()->route('promociones.index')->with('success', 'Imagen subida correctamente.');
