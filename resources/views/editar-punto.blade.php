@@ -34,6 +34,16 @@
                     </div>
 
                     <div class="row mb-3">
+    <label for="Fecha_De_Caducidad" class="col-md-2 col-form-label">Fecha Expiración</label>
+    <div class="col-md-10">
+        <input type="date" id="Fecha_De_Caducidad" name="Fecha_De_Caducidad" 
+               class="form-control" 
+               value="{{ old('Fecha_De_Caducidad', $punto->Fecha_De_Caducidad ? \Carbon\Carbon::parse($punto->Fecha_De_Caducidad)->format('Y-m-d') : '') }}"
+               min="{{ \Carbon\Carbon::today()->format('Y-m-d') }}">
+    </div>
+</div>
+
+                    <div class="row mb-3">
                         <div class="col-md-10 offset-md-2">
                             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                         </div>

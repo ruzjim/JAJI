@@ -15,12 +15,27 @@
                     <div class="row mb-3">
                         <label for="producto" class="col-md-2 col-form-label">Producto</label>
                         <div class="col-md-10">
-                            <input type="text" id="producto" class="form-control" value="{{ $productoPunto->producto->Nombre_Producto }} - {{ $productoPunto->producto->Marca }}" disabled>
+                            <input type="text" id="producto" class="form-control" 
+                                   value="{{ $productoPunto->producto->Nombre_Producto }} - {{ $productoPunto->producto->Marca }}" 
+                                   disabled>
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <label for="punto_id" class="col-md-2 col-form-label">Punto Para Asignar</label>
+                        <label for="Fecha_De_Caducidad" class="col-md-2 col-form-label">Fecha de Expiración <span class="text-danger">*</span></label>
+                        <div class="col-md-10">
+                            <input type="date" 
+                                   id="Fecha_De_Caducidad" 
+                                   name="Fecha_De_Caducidad" 
+                                   class="form-control"
+                                   value="{{ $productoPunto->Fecha_De_Caducidad ? \Carbon\Carbon::parse($productoPunto->Fecha_De_Caducidad)->format('Y-m-d') : '' }}"
+                                   min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="punto_id" class="col-md-2 col-form-label">Punto Para Asignar <span class="text-danger">*</span></label>
                         <div class="col-md-10">
                             <select id="punto_id" name="punto_id" class="form-control" required>
                                 <option value="">Seleccione un Punto</option>

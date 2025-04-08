@@ -72,7 +72,7 @@
                     id="home" aria-labelledby="home-tab">
                     <li class="submenu">
                         <a href="javascript:void(0);"
-                            class="{{ Request::is('index', '/', 'sales-dashboard') ? 'active subdrop' : '' }}"><span>Dashboard</span>
+                            class="{{ Request::is('index', '/', 'sales-dashboard') ? 'active subdrop' : '' }}"><span>Dashboard1</span>
                             <span class="menu-arrow"></span></a>
                         <ul>
                             <li><a href="{{ url('index') }}"

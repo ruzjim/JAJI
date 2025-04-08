@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('Puntos_Obtenitos')->nullable();
             $table->tinyInteger('Estado')->default(1);
             $table->string('Descripcion', 300);
+            $table->tinyInteger('Estado')->default(1)->after('Puntos_Obtenidos');
+            $table->date('Fecha_De_Caducidad')->nullable()->after('Estado');
         });
     }
 
@@ -27,5 +29,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('puntos');
+        Schema::table('puntos', function (Blueprint $table) {
+            $table->dropColumn('Estado');
+            $table->dropColumn('Fecha_De_Caducidad');
+        });
     }
 };

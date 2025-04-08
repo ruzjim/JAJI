@@ -4,21 +4,21 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">Main</h6>
+                    <h6 class="submenu-hdr">Menú Principal</h6>
                     <ul>
                         <li class="submenu">
                             <a href="javascript:void(0);"
                                 class="{{ Request::is('index', '/', 'sales-dashboard') ? 'active subdrop' : '' }}"><i
-                                    data-feather="grid"></i><span>Dashboard</span><span class="menu-arrow"></span></a>
+                                    data-feather="grid"></i><span>Panel</span><span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a href="{{ url('index') }}"
-                                        class="{{ Request::is('index', '/') ? 'active' : '' }}">Admin Dashboard</a></li>
-                                <li><a href="{{ url('sales-dashboard') }}"
+                                        class="{{ Request::is('index', '/') ? 'active' : '' }}">Panel De Estadisticas</a></li>
+                                <!--<li><a href="{{ url('sales-dashboard') }}"
                                         class="{{ Request::is('sales-dashboard') ? 'active' : '' }}">Sales Dashboard</a>
-                                </li>
+                                </li>-->
                             </ul>
                         </li>
-                        <li class="submenu">
+                        <li class="submenu d-none">
                             <a href="javascript:void(0);"
                                 class="{{ Request::is('chat', 'file-manager', 'file-archived','file-document','file-favourites','file-manager-seleted','file-recent','file-shared','notes', 'todo', 'email', 'calendar', 'call-history', 'audio-call', 'video-call','file-manager-deleted') ? 'active subdrop' : '' }} "><i
                                     data-feather="smartphone"></i><span>Application</span><span
@@ -53,10 +53,10 @@
                     </ul>
                 </li>
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">Inventory</h6>
+                    <h6 class="submenu-hdr">Inventario</h6>
                     <ul>
                         <li class="{{ Request::is('product-list','product-details') ? 'active' : '' }}"><a
-                                href="{{ url('product-list') }}"><i data-feather="box"></i><span>Productos</span></a>
+                                href="{{ url('product-list') }}"><i class="fa-brands fa-product-hunt"></i>&nbsp;&nbsp;<span>Productos</span></a>
                         </li>
                         <li class="{{ Request::is('puntos','puntos') ? 'active' : '' }}"><a
                                 href="{{ url('puntos') }}"><i class="fa-solid fa-money-bill-wave"></i>&nbsp;&nbsp;<span>Puntos</span></a>
@@ -71,12 +71,17 @@
                         <li class="{{ Request::is('add-product','edit-product') ? 'active' : '' }}"><a
                                 href="{{ url('add-product') }}"><i data-feather="plus-square"></i><span>Crear
                                     Producto</span></a></li>
-                        <li class="{{ Request::is('expired-products') ? 'active' : '' }}"><a
-                                href="{{ url('expired-products') }}"><i data-feather="codesandbox"></i><span>Expired
-                                    Products</span></a></li>
-                        <li class="{{ Request::is('low-stocks') ? 'active' : '' }}"><a
+                        <li class="{{ Request::is('stockbajo') ? 'active' : '' }}"><a
+                                href="{{ url('stockbajo') }}"><i data-feather="archive"></i><span>Productos Con Stock Bajo
+                                    </span></a></li>
+                         <li class="{{ Request::is('productos_a_vencer') ? 'active' : '' }}"><a
+                                href="{{ url('productos_a_vencer') }}"><i data-feather="clock"></i><span>Productos
+                                    Por Expirar</span></a></li>
+                                    <li class="{{ Request::is('productos-expirados') ? 'active' : '' }}"><a
+                                href="{{ url('productos-expirados') }}"><i data-feather="alert-triangle"></i><span>Productos Expirados</span></a></li>
+                        <!-- <li class="{{ Request::is('low-stocks') ? 'active' : '' }}"><a
                                 href="{{ url('low-stocks') }}"><i data-feather="trending-down"></i><span>Low
-                                    Stocks</span></a></li>
+                                    Stocks</span></a></li> 
                         <li class="{{ Request::is('category-list') ? 'active' : '' }}"><a
                                 href="{{ url('category-list') }}"><i
                                     data-feather="codepen"></i><span>Category</span></a></li>
@@ -97,11 +102,11 @@
                                     data-feather="align-justify"></i><span>Print
                                     Barcode</span></a></li>
                         <li class="{{ Request::is('qrcode') ? 'active' : '' }}"><a href="{{ url('qrcode') }}"><i
-                                    data-feather="maximize"></i><span>Print QR Code</span></a>
+                                    data-feather="maximize"></i><span>Imprimir Código QR</span></a>
                         </li>
                     </ul>
-                </li>
-                <li class="submenu-open">
+                </li> -->
+                <!--<li class="submenu-open">
                     <h6 class="submenu-hdr">Stock</h6>
                     <ul>
                         <li class="{{ Request::is('manage-stocks') ? 'active' : '' }}"><a
@@ -114,11 +119,11 @@
                                 href="{{ url('stock-transfer') }}"><i data-feather="truck"></i><span>Stock
                                     Transfer</span></a></li>
                     </ul>
-                </li>
+                </li>-->
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">Sales</h6>
+                    <h6 class="submenu-hdr">Ventas</h6>
                     <ul>
-                        <li class="{{ Request::is('sales-list') ? 'active' : '' }}"><a
+                        <!--<li class="{{ Request::is('sales-list') ? 'active' : '' }}"><a
                                 href="{{ url('sales-list') }}"><i
                                     data-feather="shopping-cart"></i><span>Sales</span></a></li>
                         <li class="{{ Request::is('invoice-report') ? 'active' : '' }}"><a
@@ -130,12 +135,14 @@
                         <li class="{{ Request::is('quotation-list') ? 'active' : '' }}"><a
                                 href="{{ url('quotation-list') }}"><i
                                     data-feather="save"></i><span>Quotation</span></a>
-                        </li>
+                        </li>-->
                         <li class="{{ Request::is('pos') ? 'active' : '' }}"><a href="{{ url('pos') }}"><i
-                                    data-feather="hard-drive"></i><span>POS</span></a></li>
+                                data-feather="hard-drive"></i><span>POS</span></a></li>
+                        <li class="{{ Request::is('cierrecaja') ? 'active' : '' }}"><a href="{{ url('cierrecaja') }}">
+                                <i class="fa-solid fa-money-bill-transfer"></i><span class="ms-2">Cierre de caja</span></a></li>
                     </ul>
                 </li>
-                <li class="submenu-open">
+               <!-- <li class="submenu-open">
                     <h6 class="submenu-hdr">Promo</h6>
                     <ul>
                         <li class="{{ Request::is('coupons') ? 'active' : '' }}"><a href="{{ url('coupons') }}"><i
@@ -174,14 +181,14 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li>-->
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">Peoples</h6>
+                    <h6 class="submenu-hdr">Usuarios</h6>
                     <ul>
                         <li class="{{ Request::is('customers') ? 'active' : '' }}"><a
-                                href="{{ url('customers') }}"><i data-feather="user"></i><span>Customers</span></a>
+                                href="{{ url('customers') }}"><i data-feather="user"></i><span>Usuarios</span></a>
                         </li>
-                        <li class="{{ Request::is('suppliers') ? 'active' : '' }}"><a
+                       <!-- <li class="{{ Request::is('suppliers') ? 'active' : '' }}"><a
                                 href="{{ url('suppliers') }}"><i data-feather="users"></i><span>Suppliers</span></a>
                         </li>
                         <li class="{{ Request::is('store-list') ? 'active' : '' }}"><a
@@ -252,13 +259,27 @@
                                 <li><a href="{{ url('payslip') }}"
                                         class="{{ Request::is('payslip') ? 'active' : '' }}">Payslip</a></li>
                             </ul>
-                        </li>
+                        </li>-->
                     </ul>
                 </li>
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">Reports</h6>
+                    <h6 class="submenu-hdr">Reportes</h6>
                     <ul>
-                        <li class="{{ Request::is('sales-report') ? 'active' : '' }}"><a
+                    <li class="{{ Request::is('productos_mas_vendidos') ? 'active' : '' }}"><a
+                    href="{{ url('productos_mas_vendidos') }}"><i data-feather="shopping-cart"></i><span>Productos Más Vendidos</span></a></li>
+
+                    <li class="{{ Request::is('producto_users_mas_puntos') ? 'active' : '' }}"><a
+                    href="{{ url('producto_users_mas_puntos') }}"><i data-feather="award"></i><span>Usuarios Con Más Puntos</span></a></li>
+
+                    <li class="{{ Request::is('reporte_diario_ventas') ? 'active' : '' }}"><a
+                    href="{{ url('reporte_diario_ventas') }}"><i data-feather="calendar"></i><span>Venta Del Día De Hoy</span></a></li>
+
+                    <li class="{{ Request::is('reporte_venta_fechas') ? 'active' : '' }}"><a
+                    href="{{ url('reporte_venta_fechas') }}"><i data-feather="bar-chart-2"></i><span>Reporte Ventas</span></a></li>
+
+
+
+                       <!-- <li class="{{ Request::is('sales-report') ? 'active' : '' }}"><a
                                 href="{{ url('sales-report') }}"><i data-feather="bar-chart-2"></i><span>Sales
                                     Report</span></a></li>
                         <li class="{{ Request::is('purchase-report') ? 'active' : '' }}"><a
@@ -288,23 +309,23 @@
                         <li class="{{ Request::is('profit-and-loss') ? 'active' : '' }}"><a
                                 href="{{ url('profit-and-loss') }}"><i data-feather="pie-chart"></i><span>Profit &
                                     Loss</span></a></li>
-                    </ul>
+                    </ul> 
                 </li>
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">User Management</h6>
+                    <h6 class="submenu-hdr">Manejo De Usuarios</h6>
                     <ul>
                         <li class="{{ Request::is('users') ? 'active' : '' }}"><a href="{{ url('users') }}"><i
-                                    data-feather="user-check"></i><span>Users</span></a>
+                                    data-feather="user-check"></i><span>Usuarios</span></a>
                         </li>
                         <li class="{{ Request::is('roles-permissions','permissions') ? 'active' : '' }}"><a
-                                href="{{ url('roles-permissions') }}"><i data-feather="shield"></i><span>Roles &
-                                    Permissions</span></a></li>
+                                href="{{ url('roles-permissions') }}"><i data-feather="shield"></i><span>Roles y
+                                    Permisos</span></a></li>
                         <li class="{{ Request::is('delete-account') ? 'active' : '' }}"><a
                                 href="{{ url('delete-account') }}"><i data-feather="lock"></i><span>Delete Account
-                                    Request</span></a></li>
+                                    Request</span></a></li> 
                     </ul>
-                </li>
-                <li class="submenu-open">
+                </li>-->
+                <!--<li class="submenu-open">
                     <h6 class="submenu-hdr">Pages</h6>
                     <ul>
                         <li class="{{ Request::is('profile') ? 'active' : '' }}"><a href="{{ url('profile') }}"><i
@@ -520,7 +541,7 @@
                             </ul>
                         </li>
                         <li class="{{ Request::is('signin') ? 'active' : '' }}">
-                            <a href="{{ url('signin') }}"><i data-feather="log-out"></i><span>Logout</span> </a>
+                            <a href="{{ route('logout') }}"><i data-feather="log-out"></i><span>Logout</span> </a>
                         </li>
                     </ul>
                 </li>
@@ -792,7 +813,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li>-->
             </ul>
         </div>
     </div>

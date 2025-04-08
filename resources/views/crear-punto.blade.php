@@ -34,6 +34,14 @@
                                                     <input type="number" name="Puntos_Obtenidos" placeholder="Ej. 150" class="form-control" required>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-4 col-sm-6 col-12">
+                                                    <div class="mb-3 add-product">
+                                                     <label class="form-label">Fecha de Expiración</label>
+                                                     <input type="date" name="Fecha_De_Caducidad" class="form-control" 
+                                                     min="{{ date('Y-m-d') }}" 
+                                                      placeholder="Seleccione fecha (opcional)">
+                                                    </div>
+                                            </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="input-blocks summer-description-box transfer mb-3">

@@ -1,13 +1,17 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\POSController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\puntoController;
+use App\Http\Controllers\PuntoController;
 use App\Http\Controllers\ProductoPuntosController;
 use App\Http\Controllers\PuntosUsersController;
-
+use App\Http\Controllers\EstadisticasController;
+use App\Http\Controllers\VentaController;
+use App\Http\Controllers\ReportesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +26,18 @@ use App\Http\Controllers\PuntosUsersController;
 
 Route::post('/register', [authController::class, 'register'])->name('register');
 Route::post('/login', [authController::class, 'login'])->name('login');
-Route::post('/logout', [authController::class, 'logout'])->name('logout');
+Route::get('/logout', [authController::class, 'logout'])->name('logout');
 Route::get('/signin', [authController::class, 'signin'])->name('signin');
 Route::get('/register', [authController::class, 'registerr'])->name('register');
 
+Route::get('/customers', [ClientesController::class, 'index'])->name('customers');
+Route::post('/agregarCliente', [ClientesController::class, 'agregarCliente'])->name('agregarCliente');
+Route::get('/pos', [POSController::class, 'index'])->name('pos');
+
+
+// Route::get('/pos', function () {
+    
+// })->name('pos');
 
 
 
@@ -42,21 +54,20 @@ Route::get('/register', [authController::class, 'registerr'])->name('register');
 
 
 
-
-Route::get('index', [CustomAuthController::class, 'dashboard']);
-Route::get('signin', [CustomAuthController::class, 'index'])->name('signin');
-Route::post('custom-login', [CustomAuthController::class, 'customSignin'])->name('signin.custom');
-Route::get('register', [CustomAuthController::class, 'registration'])->name('register');
-Route::post('custom-register', [CustomAuthController::class, 'customRegister'])->name('register.custom');
+// Route::get('index', [CustomAuthController::class, 'dashboard']);
+// Route::get('signin', [CustomAuthController::class, 'index'])->name('signin');
+// Route::post('custom-login', [CustomAuthController::class, 'customSignin'])->name('signin.custom');
+// Route::get('register', [CustomAuthController::class, 'registration'])->name('register');
+// Route::post('custom-register', [CustomAuthController::class, 'customRegister'])->name('register.custom');
 Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
-Route::get('/', function () {
-    return view('index');
-})->name('index')->middleware('auth');
+// Route::get('/', function () {
+//     return view('index');
+// })->name('index')->middleware('auth');
 
-Route::get('/index', function () {
-    return view('index');
-})->name('index');
+// Route::get('/index', function () {
+//     return view('index');
+// })->name('index');
 
 //Rutas producto
 Route::get('/product-list', [ProductController::class, 'producto'])->name('product-list');
@@ -67,6 +78,9 @@ Route::post('/add-product', [ProductController::class, 'guardarProducto'])->name
 Route::get('/edit-product/{Id_Producto}', [ProductController::class, 'editarProductoGet'])->name('edit-product');
 Route::post('/edit-product/{Id_Producto}', [ProductController::class, 'actualizarProducto'])->name('update-product');
 Route::get('/cambiar-estado/{Id_Producto}', [ProductController::class, 'cambiarEstado'])->name('cambiar-estado');
+Route::get('/productos-expirados', [ProductController::class, 'productosExpirados'])->name('productos-expirados');
+Route::get('/actualizar-expirados', [EstadisticasController::class, 'actualizarProductosExpirados']);
+
 
 //Rutas Puntos
 Route::get('/puntos', [PuntoController::class, 'puntos'])->name('puntos');
@@ -85,11 +99,41 @@ Route::post('/producto_puntos', [ProductoPuntosController::class, 'store'])->nam
 Route::get('/editar-producto_puntos/{id}', [ProductoPuntosController::class, 'editar'])->name('editar-producto_puntos');
 Route::put('/editar-producto_puntos/{id}', [ProductoPuntosController::class, 'update'])->name('editar-producto_puntos.update');
 Route::get('/cambiar-estado-producto-punto/{id}', [ProductoPuntosController::class, 'cambiarEstadoProductosPuntos'])->name('cambiar-estado-producto-punto');
+Route::get('/producto/{producto_id}/puntos', [ProductoPuntosController::class, 'obtenerPuntosPorProducto']);
 
 //Rutas para buscar la cantidad de puntos por numero de cedula de usuario
 Route::get('/puntos_users', [PuntosUsersController::class, 'puntosUsersList'])->name('puntos_users');
 Route::get('/puntos_totales_users', [PuntosUsersController::class, 'buscarPorCedula'])->name('puntos_users_buscar');
+Route::get('/lista-puntos-users', [PuntosUsersController::class, 'listarUsuariosConPuntos'])->name('lista.puntos.users');
+Route::get('/expirar-puntos-anual', [PuntosUsersController::class, 'expirarPuntosAnual'])->name('expirar.puntos.anual');
 
+
+//Estadisticas
+Route::get('/top-usuarios', [EstadisticasController::class, 'topUsuarios']);
+Route::get('/total-usuarios', [EstadisticasController::class, 'totalUsuarios']);
+Route::get('/productos-stock-bajo', [EstadisticasController::class, 'ProductosStockBajo']);
+Route::get('/index', [EstadisticasController::class, 'productosPorVencer']);
+Route::get('/', [EstadisticasController::class, 'productosPorVencer']);
+Route::get('/stockbajo', [EstadisticasController::class, 'productosStockBajo2']);
+Route::get('/productos_a_vencer', [EstadisticasController::class, 'productosPorVencer2']);
+Route::get('/total-productos-expirados', [EstadisticasController::class, 'totalProductosExpirados']);
+Route::get('/total-productos-stock-bajo', [EstadisticasController::class, 'totalProductosStockBajo']);
+Route::get('/total-productos-por-vencer', [EstadisticasController::class, 'totalProductosPorVencer']);
+
+//Ventas
+Route::post('/completar-venta', [VentaController::class, 'store']);
+Route::get('/cierrecaja', [VentaController::class, 'cierrecaja'])->name('cierrecaja');
+Route::post('/CerrarCaja', [VentaController::class, 'CerrarCaja'])->name('CerrarCaja');
+
+
+//Puntos ganados por usuario
+Route::post('/check-user', [ClientesController::class, 'checkUser']);
+
+//Reportes
+Route::get('/productos_mas_vendidos', [ReportesController::class, 'productosMasVendidos']);
+Route::get('/producto_users_mas_puntos', [ReportesController::class, 'puntosUsersList']);
+Route::get('/reporte_diario_ventas', [ReportesController::class, 'reporteDiarioVentas'])->name('reportes.ventas-diarias');
+Route::get('/reporte_venta_fechas', [ReportesController::class, 'reportePorFechas'])->name('reporte.ventas.fechas');
 
 Route::get('/expired-products', function () {
     return view('expired-products');
@@ -304,17 +348,13 @@ Route::get('/quotation-list', function () {
     return view('quotation-list');
 })->name('quotation-list');
 
-Route::get('/pos', function () {
-    return view('pos');
-})->name('pos');
+
 
 Route::get('/coupons', function () {
     return view('coupons');
 })->name('coupons');
 
-Route::get('/customers', function () {
-    return view('customers');
-})->name('customers');
+
 
 Route::get('/suppliers', function () {
     return view('suppliers');
