@@ -27,6 +27,6 @@ class ProductoPunto extends Model
 
     public function punto()
     {
-        return $this->belongsTo(Punto::class, 'Id_PuntosFK', 'Id_Puntos');
+        return $this->belongsTo(punto::class, 'Id_PuntosFK', 'Id_Puntos');
     }
 }
