@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductoPunto;
 use App\Models\punto;
-use App\Models\producto;
+use App\Models\Producto;
 
 class ProductoPuntosController extends Controller
 {
