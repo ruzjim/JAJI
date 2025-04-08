@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\PuntosUser;
-use Illuminate\Support\Facades\DB;
 use App\Models\Producto;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 
 class EstadisticasController extends Controller
 {
@@ -83,7 +82,7 @@ class EstadisticasController extends Controller
 
     public function productosPorVencer()
     {
-        dd('productosPorVencer');
+        // dd('productosPorVencer');
         try {
             $hoy = now()->format('Y-m-d');
             $semanaDespues = now()->addWeek()->format('Y-m-d');
