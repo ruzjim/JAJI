@@ -59,7 +59,7 @@ public function reporteDiarioVentas()
                         ->sum('Monto_Total');
 
     // Obtener productos vendidos hoy con cantidades
-    $productosVendidos = VentaProducto::with(['producto' => function($query) {
+    $productosVendidos = ventaProducto::with(['producto' => function($query) {
                             $query->select('Id_Producto', 'barcode', 'Nombre_Producto', 'Marca', 'Precio_Venta');
                         }])
                         ->whereHas('venta', function($query) use ($hoy, $manana) {
