@@ -19,6 +19,24 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.producto-agotado {
+    position: relative;
+    cursor: not-allowed;
+}
+
+.agotado-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 10;
+}
+
 .feather-activity:before {
 	content: "\e900";
 }

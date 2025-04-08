@@ -40,6 +40,24 @@
     "file": "icons/dropdown.svg",
     "src": "resources/img/icons/dropdown.svg"
   },
+  "resources/js/addproducts.js": {
+    "file": "js/addproducts.js",
+    "name": "addproducts",
+    "src": "resources/js/addproducts.js",
+    "isEntry": true
+  },
+  "resources/js/cierrecaja.js": {
+    "file": "js/cierrecaja.js",
+    "name": "cierrecaja",
+    "src": "resources/js/cierrecaja.js",
+    "isEntry": true
+  },
+  "resources/js/estadisticas.js": {
+    "file": "js/estadisticas.js",
+    "name": "estadisticas",
+    "src": "resources/js/estadisticas.js",
+    "isEntry": true
+  },
   "resources/js/productoPuntos.js": {
     "file": "js/productoPuntos.js",
     "name": "productoPuntos",
