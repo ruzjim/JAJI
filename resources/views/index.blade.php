@@ -1,8 +1,8 @@
 <?php $page = 'index'; ?>
 @extends('layout.mainlayout')
 @section('content')
-{{-- @vite(['resources/js/metricas.js']) --}}
-<script src="{{ asset('js/metricas.js') }}"></script>
+@vite(['resources/js/metricas.js'])
+{{-- <script src="{{ asset('js/metricas.js') }}"></script> --}}
 
 <div class="page-wrapper">
     <div class="content">
