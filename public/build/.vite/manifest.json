@@ -52,10 +52,10 @@
     "src": "resources/js/cierrecaja.js",
     "isEntry": true
   },
-  "resources/js/estadisticas.js": {
-    "file": "js/estadisticas.js",
-    "name": "estadisticas",
-    "src": "resources/js/estadisticas.js",
+  "resources/js/metricas.js": {
+    "file": "js/metricas.js",
+    "name": "metricas",
+    "src": "resources/js/metricas.js",
     "isEntry": true
   },
   "resources/js/productoPuntos.js": {
