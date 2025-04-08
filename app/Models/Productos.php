@@ -18,6 +18,7 @@ class Producto extends model
      * @var array<int, string>
      */
 
+     
     protected $table = 'producto';
     protected $primaryKey = 'Id_Producto';
     protected $fillable = [
