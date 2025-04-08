@@ -15,7 +15,7 @@ class POSController extends Controller
         $productos = DB::select('CALL GetProductsWithDiscount()');
 
         // Obtener imágenes de promociones desde storage
-        $archivos = File::files(storage_path('app/public/promociones'));
+        $archivos = File::files(public_path('promociones'));
         $promociones = collect($archivos)->map(function ($archivo) {
             return asset('promociones/' . basename($archivo));
         });
