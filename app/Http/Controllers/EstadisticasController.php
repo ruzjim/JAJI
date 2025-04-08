@@ -93,7 +93,7 @@ class EstadisticasController extends Controller
                 ->limit(5)
                 ->get(['Nombre_Producto', 'Marca', 'Fecha_De_Caducidad']);
                 
-                dd($productos);
+                // dd($productos);
                 return view('index')->with('productos', $productos);
         } catch (\Exception $e) {
             return response()->json([
