@@ -94,7 +94,7 @@ class EstadisticasController extends Controller
                 ->get(['Nombre_Producto', 'Marca', 'Fecha_De_Caducidad']);
                 
                 return view('index')->with('productos', $productos);
-            
+            dd($productos);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Error al obtener productos',
