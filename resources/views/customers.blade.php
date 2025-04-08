@@ -12,7 +12,7 @@
     display: none;
 }
 </style>
-    @vite(['resources/js/test.js'])
+    {{-- @vite(['resources/js/test.js']) --}}
     <div class="page-wrapper">
         <div class="content">
             @component('components.breadcrumb')
