@@ -138,6 +138,7 @@
                                 @foreach ($ventasSinCierre as $venta)
                                     <tr>
 
+                                        
                                         <td>{{ $venta->Id_Venta }}</td>
                                         <td>{{ $venta->Monto_Total }}</td>
                                         <td>{{ $venta->Metodo_Pago }}</td>
