@@ -53,9 +53,9 @@ Route::get('/pos', [POSController::class, 'index'])->name('pos');
 
 
 Route::get('/admin/promociones', function () {
-    $archivos = File::files(storage_path('app/public/promociones'));
+    $archivos = File::files(public_path('promociones'));
     $imagenesPromociones = collect($archivos)->map(function ($archivo) {
-        return asset('storage/promociones/' . basename($archivo));
+        return asset('promociones/' . basename($archivo));
     });
 
     return view('admin.promociones.index', compact('imagenesPromociones'));
