@@ -12,7 +12,8 @@ use App\Http\Controllers\PuntosUsersController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ReportesController;
-
+use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\NotificacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,6 +69,27 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 // Route::get('/index', function () {
 //     return view('index');
 // })->name('index');
+// CRUD Comentarios (HU12)
+
+Route::get('/comentarios', [ComentarioController::class, 'index'])->name('comentarios.index');
+Route::get('/comentarios/crear', [ComentarioController::class, 'create'])->name('comentarios.create');
+Route::post('/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');
+Route::get('/comentarios/{id}/editar', [ComentarioController::class, 'edit'])->name('comentarios.edit');
+Route::put('/comentarios/{id}', [ComentarioController::class, 'update'])->name('comentarios.update');
+Route::delete('/comentarios/{id}', [ComentarioController::class, 'destroy'])->name('comentarios.destroy');
+Route::get('/comentarios/cambiar-estado/{id}', [ComentarioController::class, 'cambiarEstado'])->name('comentarios.cambiarEstado');
+
+
+// CRUD Notificaciones (HU16)
+
+Route::get('/notificaciones', [NotificacionController::class, 'index'])->name('notificaciones.index');
+Route::get('/notificaciones/crear', [NotificacionController::class, 'create'])->name('notificaciones.create');
+Route::post('/notificaciones', [NotificacionController::class, 'store'])->name('notificaciones.store');
+Route::get('/notificaciones/{id}/editar', [NotificacionController::class, 'edit'])->name('notificaciones.edit');
+Route::put('/notificaciones/{id}', [NotificacionController::class, 'update'])->name('notificaciones.update');
+Route::delete('/notificaciones/{id}', [NotificacionController::class, 'destroy'])->name('notificaciones.destroy');
+Route::get('/notificaciones/cambiar-estado/{id}', [NotificacionController::class, 'cambiarEstado'])->name('notificaciones.cambiarEstado');
+
 
 //Rutas producto
 Route::get('/product-list', [ProductController::class, 'producto'])->name('product-list');
