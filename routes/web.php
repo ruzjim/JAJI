@@ -3,6 +3,9 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\POSController;
 use App\Http\Controllers\ProductController;
@@ -12,6 +15,9 @@ use App\Http\Controllers\PuntosUsersController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ReportesController;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\NotificacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,10 +54,53 @@ Route::get('/pos', [POSController::class, 'index'])->name('pos');
 
 
 
+Route::get('/admin/promociones', function () {
+    if (!file_exists(public_path('promociones'))) {
+        mkdir(public_path('promociones'), 0755, true);
+    }
+    $archivos = File::files(public_path('promociones'));
+    $imagenesPromociones = collect($archivos)->map(function ($archivo) {
+        return asset('promociones/' . basename($archivo));
+    });
+
+    return view('admin.promociones.index', compact('imagenesPromociones'));
+})->name('promociones.index');
+
+Route::post('/admin/promociones/subir', function (Request $request) {
+    $request->validate([
+        'imagen' => 'required|file|image|mimes:jpeg,jpg,png|max:2048',
+    ]);
+
+    if (!$request->hasFile('imagen')) {
+        return back()->with('error', 'No se recibió ningún archivo.');
+    }
+
+    $imagen = $request->file('imagen');
+
+    if (!$imagen->isValid()) {
+        return back()->with('error', 'El archivo no se subió correctamente.');
+    }
+
+    $nombreArchivo = uniqid('promo_') . '.' . $imagen->getClientOriginalExtension();
+
+    $imagen->move(public_path('promociones'), $nombreArchivo);
+
+    return redirect()->route('promociones.index')->with('success', 'Imagen subida correctamente.');
+})->name('promociones.subir');
 
 
 
+Route::post('/admin/promociones/borrar', function (Request $request) {
+    $ruta = $request->input('imagen');
 
+    if ($ruta) {
+        $nombre = basename($ruta);
+        Storage::delete('public/promociones/' . $nombre);
+        return redirect()->route('promociones.index')->with('success', 'Imagen eliminada correctamente.');
+    }
+
+    return redirect()->route('promociones.index')->with('error', 'No se pudo eliminar la imagen.');
+})->name('promociones.borrar');
 
 
 // Route::get('index', [CustomAuthController::class, 'dashboard']);
@@ -68,6 +117,27 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 // Route::get('/index', function () {
 //     return view('index');
 // })->name('index');
+// CRUD Comentarios (HU12)
+
+Route::get('/comentarios', [ComentarioController::class, 'index'])->name('comentarios.index');
+Route::get('/comentarios/crear', [ComentarioController::class, 'create'])->name('comentarios.create');
+Route::post('/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');
+Route::get('/comentarios/{id}/editar', [ComentarioController::class, 'edit'])->name('comentarios.edit');
+Route::put('/comentarios/{id}', [ComentarioController::class, 'update'])->name('comentarios.update');
+Route::delete('/comentarios/{id}', [ComentarioController::class, 'destroy'])->name('comentarios.destroy');
+Route::get('/comentarios/cambiar-estado/{id}', [ComentarioController::class, 'cambiarEstado'])->name('comentarios.cambiarEstado');
+
+
+// CRUD Notificaciones (HU16)
+
+Route::get('/notificaciones', [NotificacionController::class, 'index'])->name('notificaciones.index');
+Route::get('/notificaciones/crear', [NotificacionController::class, 'create'])->name('notificaciones.create');
+Route::post('/notificaciones', [NotificacionController::class, 'store'])->name('notificaciones.store');
+Route::get('/notificaciones/{id}/editar', [NotificacionController::class, 'edit'])->name('notificaciones.edit');
+Route::put('/notificaciones/{id}', [NotificacionController::class, 'update'])->name('notificaciones.update');
+Route::delete('/notificaciones/{id}', [NotificacionController::class, 'destroy'])->name('notificaciones.destroy');
+Route::get('/notificaciones/cambiar-estado/{id}', [NotificacionController::class, 'cambiarEstado'])->name('notificaciones.cambiarEstado');
+
 
 //Rutas producto
 Route::get('/product-list', [ProductController::class, 'producto'])->name('product-list');

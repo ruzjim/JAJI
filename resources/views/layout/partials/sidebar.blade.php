@@ -10,13 +10,6 @@
                             <a href="javascript:void(0);"
                                 class="{{ Request::is('index', '/', 'sales-dashboard') ? 'active subdrop' : '' }}"><i
                                     data-feather="grid"></i><span>Panel</span><span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="{{ url('index') }}"
-                                        class="{{ Request::is('index', '/') ? 'active' : '' }}">Panel De Estadisticas</a></li>
-                                <!--<li><a href="{{ url('sales-dashboard') }}"
-                                        class="{{ Request::is('sales-dashboard') ? 'active' : '' }}">Sales Dashboard</a>
-                                </li>-->
-                            </ul>
                         </li>
                         <li class="submenu d-none">
                             <a href="javascript:void(0);"
@@ -52,6 +45,21 @@
                         </li>
                     </ul>
                 </li>
+                <li class="submenu-open">
+                        <h6 class="submenu-hdr">Comunicación</h6>
+                        <ul>
+                            <li class="{{ Request::is('comentarios') ? 'active' : '' }}">
+                                <a href="{{ route('comentarios.index') }}">
+                                    <i class="fa-solid fa-comments"></i>&nbsp;&nbsp;<span>Comentarios</span>
+                                </a>
+                            </li>
+                            <li class="{{ Request::is('notificaciones') ? 'active' : '' }}">
+                                <a href="{{ route('notificaciones.index') }}">
+                                    <i class="fa-solid fa-bell"></i>&nbsp;&nbsp;<span>Notificaciones</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>                    
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Inventario</h6>
                     <ul>
