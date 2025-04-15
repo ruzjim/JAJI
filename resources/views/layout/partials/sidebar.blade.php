@@ -7,10 +7,14 @@
                     <h6 class="submenu-hdr">Menú Principal</h6>
                     <ul>
                         <li class="submenu">
-                            <a href="javascript:void(0);"
-                                class="{{ Request::is('index', '/', 'sales-dashboard') ? 'active subdrop' : '' }}"><i
-                                    data-feather="grid"></i><span>Panel</span><span class="menu-arrow"></span></a>
-                        </li>
+                                <a href="javascript:void(0);"
+                                    class="{{ Request::is('index', '/', 'sales-dashboard') ? 'active subdrop' : '' }}"><i
+                                        data-feather="grid"></i><span>Panel</span><span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{{ url('index') }}"
+                                            class="{{ Request::is('index', '/') ? 'active' : '' }}">Panel De Estadisticas</a></li>
+                                </ul>
+                            </li>
                         <li class="submenu d-none">
                             <a href="javascript:void(0);"
                                 class="{{ Request::is('chat', 'file-manager', 'file-archived','file-document','file-favourites','file-manager-seleted','file-recent','file-shared','notes', 'todo', 'email', 'calendar', 'call-history', 'audio-call', 'video-call','file-manager-deleted') ? 'active subdrop' : '' }} "><i
