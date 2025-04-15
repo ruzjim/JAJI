@@ -34,7 +34,7 @@ Route::post('/register', [authController::class, 'register'])->name('register');
 Route::post('/login', [authController::class, 'login'])->name('login');
 Route::get('/logout', [authController::class, 'logout'])->name('logout');
 Route::get('/signin', [authController::class, 'signin'])->name('signin');
-Route::get('/register', [authController::class, 'registerr'])->name('register');
+// Route::get('/register', [authController::class, 'registerr'])->name('register');
 
 Route::get('/customers', [ClientesController::class, 'index'])->middleware('auth')->name('customers');
 Route::post('/agregarCliente', [ClientesController::class, 'agregarCliente'])->name('agregarCliente');

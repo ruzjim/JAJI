@@ -58,9 +58,9 @@
                             <div class="form-login">
                                 <button class="btn btn-login" type="submit">Iniciar</button>
                             </div>
-                            <div class="signinform">
+                            {{-- <div class="signinform">
                                 <h4>¿Eres nuevo?<a href="{{ url('register') }}" class="hover-a"> Crea una cuenta</a></h4>
-                            </div>
+                            </div> --}}
                             {{-- <div class="form-setlogin or-text">
                                         <h4>O</h4>
                                     </div>
