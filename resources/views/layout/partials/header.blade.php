@@ -261,13 +261,13 @@
          /Notifications -->
 
         <li class="nav-item nav-item-box">
-            <a href="{{ url('general-settings') }}"><i data-feather="settings"></i></a>
+            
         </li>
         <li class="nav-item dropdown has-arrow main-drop">
             <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-info">
                     <span class="user-letter">
-                        <img src="{{ URL::asset('/build/img/profiles/avatar-01.webp') }}" alt=""
+                        <img src="{{ Auth::user()->profile_photo_path }}" alt=""
                             class="img-fluid">
                     </span>
                     <span class="user-detail">
@@ -275,6 +275,7 @@
                         <span class="user-role">Super Admin</span>
                     </span>
                 </span>
+                {{-- @dump(Auth::user()) --}}
             </a>
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
