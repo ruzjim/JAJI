@@ -1,4 +1,4 @@
-<div class="customizer-links" id="setdata">
+{{-- <div class="customizer-links" id="setdata">
     <ul class="sticky-sidebar">
         <li class="sidebar-icons">
             <a href="#" class="navigation-add" data-bs-toggle="tooltip" data-bs-placement="left"
@@ -7,4 +7,4 @@
             </a>
         </li>
     </ul>
-</div>
+</div> --}}
