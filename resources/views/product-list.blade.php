@@ -54,9 +54,7 @@
                                         <td>{{ $producto->updated_at ? \Carbon\Carbon::parse($producto->updated_at)->format('d/m/Y H:i') : 'N/A' }}</td>
                                         <td class="action-table-data text-center">
                                             <div class="edit-delete-action d-flex justify-content-center gap-2">
-                                                <a class="me-2 edit-icon  p-2" href="{{ url('product-details') }}">
-                                                    <i data-feather="eye" class="feather-eye"></i>
-                                                </a>
+                                               
                                                 <a class="me-2 p-2" href="{{ route('edit-product', $producto->Id_Producto) }}">
                                                     <i data-feather="edit" class="feather-edit"></i>
                                                 </a>

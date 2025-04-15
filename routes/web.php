@@ -36,9 +36,9 @@ Route::get('/logout', [authController::class, 'logout'])->name('logout');
 Route::get('/signin', [authController::class, 'signin'])->name('signin');
 Route::get('/register', [authController::class, 'registerr'])->name('register');
 
-Route::get('/customers', [ClientesController::class, 'index'])->name('customers');
+Route::get('/customers', [ClientesController::class, 'index'])->middleware('auth')->name('customers');
 Route::post('/agregarCliente', [ClientesController::class, 'agregarCliente'])->name('agregarCliente');
-Route::get('/pos', [POSController::class, 'index'])->name('pos');
+Route::get('/pos', [POSController::class, 'index'])->middleware('auth')->name('pos');
 
 
 // Route::get('/pos', function () {
@@ -64,7 +64,7 @@ Route::get('/admin/promociones', function () {
     });
 
     return view('admin.promociones.index', compact('imagenesPromociones'));
-})->name('promociones.index');
+})->middleware('auth')->name('promociones.index');
 
 Route::post('/admin/promociones/subir', function (Request $request) {
     $request->validate([
@@ -120,9 +120,9 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 // CRUD Comentarios (HU12)
 
 Route::get('/comentarios', [ComentarioController::class, 'index'])->name('comentarios.index');
-Route::get('/comentarios/crear', [ComentarioController::class, 'create'])->name('comentarios.create');
+Route::get('/comentarios/crear', [ComentarioController::class, 'create'])->middleware('auth')->name('comentarios.create');
 Route::post('/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');
-Route::get('/comentarios/{id}/editar', [ComentarioController::class, 'edit'])->name('comentarios.edit');
+Route::get('/comentarios/{id}/editar', [ComentarioController::class, 'edit'])->middleware('auth')->name('comentarios.edit');
 Route::put('/comentarios/{id}', [ComentarioController::class, 'update'])->name('comentarios.update');
 Route::delete('/comentarios/{id}', [ComentarioController::class, 'destroy'])->name('comentarios.destroy');
 Route::get('/comentarios/cambiar-estado/{id}', [ComentarioController::class, 'cambiarEstado'])->name('comentarios.cambiarEstado');
@@ -130,80 +130,80 @@ Route::get('/comentarios/cambiar-estado/{id}', [ComentarioController::class, 'ca
 
 // CRUD Notificaciones (HU16)
 
-Route::get('/notificaciones', [NotificacionController::class, 'index'])->name('notificaciones.index');
-Route::get('/notificaciones/crear', [NotificacionController::class, 'create'])->name('notificaciones.create');
-Route::post('/notificaciones', [NotificacionController::class, 'store'])->name('notificaciones.store');
-Route::get('/notificaciones/{id}/editar', [NotificacionController::class, 'edit'])->name('notificaciones.edit');
-Route::put('/notificaciones/{id}', [NotificacionController::class, 'update'])->name('notificaciones.update');
-Route::delete('/notificaciones/{id}', [NotificacionController::class, 'destroy'])->name('notificaciones.destroy');
-Route::get('/notificaciones/cambiar-estado/{id}', [NotificacionController::class, 'cambiarEstado'])->name('notificaciones.cambiarEstado');
+Route::get('/notificaciones', [NotificacionController::class, 'index'])->middleware('auth')->name('notificaciones.index');
+Route::get('/notificaciones/crear', [NotificacionController::class, 'create'])->middleware('auth')->name('notificaciones.create');
+Route::post('/notificaciones', [NotificacionController::class, 'store'])->middleware('auth')->name('notificaciones.store');
+Route::get('/notificaciones/{id}/editar', [NotificacionController::class, 'edit'])->middleware('auth')->name('notificaciones.edit');
+Route::put('/notificaciones/{id}', [NotificacionController::class, 'update'])->middleware('auth')->name('notificaciones.update');
+Route::delete('/notificaciones/{id}', [NotificacionController::class, 'destroy'])->middleware('auth')->name('notificaciones.destroy');
+Route::get('/notificaciones/cambiar-estado/{id}', [NotificacionController::class, 'cambiarEstado'])->middleware('auth')->name('notificaciones.cambiarEstado');
 
 
 //Rutas producto
-Route::get('/product-list', [ProductController::class, 'producto'])->name('product-list');
+Route::get('/product-list', [ProductController::class, 'producto'])->middleware('auth')->name('product-list');
 Route::get('/add-product', function () {
     return view('add-product');
-})->name('add-product');
-Route::post('/add-product', [ProductController::class, 'guardarProducto'])->name('guardar-producto');
-Route::get('/edit-product/{Id_Producto}', [ProductController::class, 'editarProductoGet'])->name('edit-product');
-Route::post('/edit-product/{Id_Producto}', [ProductController::class, 'actualizarProducto'])->name('update-product');
-Route::get('/cambiar-estado/{Id_Producto}', [ProductController::class, 'cambiarEstado'])->name('cambiar-estado');
-Route::get('/productos-expirados', [ProductController::class, 'productosExpirados'])->name('productos-expirados');
-Route::get('/actualizar-expirados', [EstadisticasController::class, 'actualizarProductosExpirados']);
+})->middleware('auth')->name('add-product');
+Route::post('/add-product', [ProductController::class, 'guardarProducto'])->middleware('auth')->name('guardar-producto');
+Route::get('/edit-product/{Id_Producto}', [ProductController::class, 'editarProductoGet'])->middleware('auth')->name('edit-product');
+Route::post('/edit-product/{Id_Producto}', [ProductController::class, 'actualizarProducto'])->middleware('auth')->name('update-product');
+Route::get('/cambiar-estado/{Id_Producto}', [ProductController::class, 'cambiarEstado'])->middleware('auth')->name('cambiar-estado');
+Route::get('/productos-expirados', [ProductController::class, 'productosExpirados'])->middleware('auth')->name('productos-expirados');
+Route::get('/actualizar-expirados', [EstadisticasController::class, 'actualizarProductosExpirados'])->middleware('auth');
 
 
 //Rutas Puntos
-Route::get('/puntos', [PuntoController::class, 'puntos'])->name('puntos');
-Route::get('/edit-punto/{Id_Puntos}', [PuntoController::class, 'editarPuntoGet'])->name('editar-punto');
-Route::put('/edit-punto/{Id_Puntos}', [PuntoController::class, 'actualizarPunto'])->name('update-punto');
+Route::get('/puntos', [PuntoController::class, 'puntos'])->middleware('auth')->name('puntos');
+Route::get('/edit-punto/{Id_Puntos}', [PuntoController::class, 'editarPuntoGet'])->middleware('auth')->name('editar-punto');
+Route::put('/edit-punto/{Id_Puntos}', [PuntoController::class, 'actualizarPunto'])->middleware('auth')->name('update-punto');
 Route::get('/crear-punto', function () {
     return view('crear-punto');
-})->name('crear-punto');
-Route::post('/crear-punto', [PuntoController::class, 'guardarPunto'])->name('guardar-punto');
-Route::get('/cambiar-estado-punto/{Id_Puntos}', [PuntoController::class, 'cambiarEstadoPuntos'])->name('cambiar-estado-punto');
+})->middleware('auth')->name('crear-punto');
+Route::post('/crear-punto', [PuntoController::class, 'guardarPunto'])->middleware('auth')->name('guardar-punto');
+Route::get('/cambiar-estado-punto/{Id_Puntos}', [PuntoController::class, 'cambiarEstadoPuntos'])->middleware('auth')->name('cambiar-estado-punto');
 
 //Rutas Producto Puntos
-Route::get('/producto_puntos', [ProductoPuntosController::class, 'producto_puntosList'])->name('producto_puntos');
-Route::get('/crear-producto_puntos', [ProductoPuntosController::class, 'crearproductopunto'])->name('crear-producto_puntos');
-Route::post('/producto_puntos', [ProductoPuntosController::class, 'store'])->name('producto_puntos.store');
-Route::get('/editar-producto_puntos/{id}', [ProductoPuntosController::class, 'editar'])->name('editar-producto_puntos');
-Route::put('/editar-producto_puntos/{id}', [ProductoPuntosController::class, 'update'])->name('editar-producto_puntos.update');
-Route::get('/cambiar-estado-producto-punto/{id}', [ProductoPuntosController::class, 'cambiarEstadoProductosPuntos'])->name('cambiar-estado-producto-punto');
-Route::get('/producto/{producto_id}/puntos', [ProductoPuntosController::class, 'obtenerPuntosPorProducto']);
+Route::get('/producto_puntos', [ProductoPuntosController::class, 'producto_puntosList'])->middleware('auth')->name('producto_puntos');
+Route::get('/crear-producto_puntos', [ProductoPuntosController::class, 'crearproductopunto'])->middleware('auth')->name('crear-producto_puntos');
+Route::post('/producto_puntos', [ProductoPuntosController::class, 'store'])->middleware('auth')->name('producto_puntos.store');
+Route::get('/editar-producto_puntos/{id}', [ProductoPuntosController::class, 'editar'])->middleware('auth')->name('editar-producto_puntos');
+Route::put('/editar-producto_puntos/{id}', [ProductoPuntosController::class, 'update'])->middleware('auth')->name('editar-producto_puntos.update');
+Route::get('/cambiar-estado-producto-punto/{id}', [ProductoPuntosController::class, 'cambiarEstadoProductosPuntos'])->middleware('auth')->name('cambiar-estado-producto-punto');
+Route::get('/producto/{producto_id}/puntos', [ProductoPuntosController::class, 'obtenerPuntosPorProducto'])->middleware('auth');
 
 //Rutas para buscar la cantidad de puntos por numero de cedula de usuario
-Route::get('/puntos_users', [PuntosUsersController::class, 'puntosUsersList'])->name('puntos_users');
-Route::get('/puntos_totales_users', [PuntosUsersController::class, 'buscarPorCedula'])->name('puntos_users_buscar');
-Route::get('/lista-puntos-users', [PuntosUsersController::class, 'listarUsuariosConPuntos'])->name('lista.puntos.users');
-Route::get('/expirar-puntos-anual', [PuntosUsersController::class, 'expirarPuntosAnual'])->name('expirar.puntos.anual');
+Route::get('/puntos_users', [PuntosUsersController::class, 'puntosUsersList'])->middleware('auth')->name('puntos_users');
+Route::get('/puntos_totales_users', [PuntosUsersController::class, 'buscarPorCedula'])->middleware('auth')->name('puntos_users_buscar');
+Route::get('/lista-puntos-users', [PuntosUsersController::class, 'listarUsuariosConPuntos'])->middleware('auth')->name('lista.puntos.users');
+Route::get('/expirar-puntos-anual', [PuntosUsersController::class, 'expirarPuntosAnual'])->middleware('auth')->name('expirar.puntos.anual');
 
 
 //Estadisticas
-Route::get('/top-usuarios', [EstadisticasController::class, 'topUsuarios']);
-Route::get('/total-usuarios', [EstadisticasController::class, 'totalUsuarios']);
-Route::get('/productos-stock-bajo', [EstadisticasController::class, 'ProductosStockBajo']);
-Route::get('/index', [EstadisticasController::class, 'productosPorVencer']);
-Route::get('/', [EstadisticasController::class, 'productosPorVencer']);
-Route::get('/stockbajo', [EstadisticasController::class, 'productosStockBajo2']);
-Route::get('/productos_a_vencer', [EstadisticasController::class, 'productosPorVencer2']);
-Route::get('/total-productos-expirados', [EstadisticasController::class, 'totalProductosExpirados']);
-Route::get('/total-productos-stock-bajo', [EstadisticasController::class, 'totalProductosStockBajo']);
-Route::get('/total-productos-por-vencer', [EstadisticasController::class, 'totalProductosPorVencer']);
+Route::get('/top-usuarios', [EstadisticasController::class, 'topUsuarios'])->middleware('auth');
+Route::get('/total-usuarios', [EstadisticasController::class, 'totalUsuarios'])->middleware('auth');
+Route::get('/productos-stock-bajo', [EstadisticasController::class, 'ProductosStockBajo'])->middleware('auth');
+Route::get('/index', [EstadisticasController::class, 'productosPorVencer'])->middleware('auth');
+Route::get('/', [EstadisticasController::class, 'productosPorVencer'])->middleware('auth');
+Route::get('/stockbajo', [EstadisticasController::class, 'productosStockBajo2'])->middleware('auth');
+Route::get('/productos_a_vencer', [EstadisticasController::class, 'productosPorVencer2'])->middleware('auth');
+Route::get('/total-productos-expirados', [EstadisticasController::class, 'totalProductosExpirados'])->middleware('auth');
+Route::get('/total-productos-stock-bajo', [EstadisticasController::class, 'totalProductosStockBajo'])->middleware('auth');
+Route::get('/total-productos-por-vencer', [EstadisticasController::class, 'totalProductosPorVencer'])->middleware('auth');
 
 //Ventas
-Route::post('/completar-venta', [VentaController::class, 'store']);
-Route::get('/cierrecaja', [VentaController::class, 'cierrecaja'])->name('cierrecaja');
-Route::post('/CerrarCaja', [VentaController::class, 'CerrarCaja'])->name('CerrarCaja');
+Route::post('/completar-venta', [VentaController::class, 'store'])->middleware('auth');
+Route::get('/cierrecaja', [VentaController::class, 'cierrecaja'])->name('cierrecaja')->middleware('auth');
+Route::post('/CerrarCaja', [VentaController::class, 'CerrarCaja'])->name('CerrarCaja')->middleware('auth');
 
 
 //Puntos ganados por usuario
-Route::post('/check-user', [ClientesController::class, 'checkUser']);
+Route::post('/check-user', [ClientesController::class, 'checkUser'])->middleware('auth');
 
 //Reportes
-Route::get('/productos_mas_vendidos', [ReportesController::class, 'productosMasVendidos']);
-Route::get('/producto_users_mas_puntos', [ReportesController::class, 'puntosUsersList']);
-Route::get('/reporte_diario_ventas', [ReportesController::class, 'reporteDiarioVentas'])->name('reportes.ventas-diarias');
-Route::get('/reporte_venta_fechas', [ReportesController::class, 'reportePorFechas'])->name('reporte.ventas.fechas');
+Route::get('/productos_mas_vendidos', [ReportesController::class, 'productosMasVendidos'])->middleware('auth');
+Route::get('/producto_users_mas_puntos', [ReportesController::class, 'puntosUsersList'])->middleware('auth');
+Route::get('/reporte_diario_ventas', [ReportesController::class, 'reporteDiarioVentas'])->middleware('auth')->name('reportes.ventas-diarias');
+Route::get('/reporte_venta_fechas', [ReportesController::class, 'reportePorFechas'])->middleware('auth')->name('reporte.ventas.fechas');
 
 Route::get('/expired-products', function () {
     return view('expired-products');
