@@ -13,7 +13,7 @@
     <title>JaJi del valle</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('/build/img/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('/build/icons/favicon.ico')}}">
 
     @include('layout.partials.head')
 </head>
