@@ -22,7 +22,7 @@
                                 <label class="form-label">Correo electrónico</label>
                                 <div class="form-addons">
                                     {{-- <input type="text" name="email" class="form-control"  value="{{ old('email') }}" required> --}}
-                                    <input type="text" name="email" class="form-control"  value="a@a.com" required>
+                                    <input type="text" name="email" class="form-control" required>
                                     @if ($errors->has('email'))
                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
@@ -33,7 +33,7 @@
                                 <label>Contraseña</label>
                                 <div class="pass-group">
                                     {{-- <input type="password" name="password" class="pass-input" required> --}}
-                                    <input type="password" name="password" class="pass-input" value="123456" required>
+                                    <input type="password" name="password" class="pass-input" required>
                                     <span class="fas toggle-password fa-eye-slash"></span>
                                     @if ($errors->has('password'))
                                         <span class="text-danger">{{ $errors->first('password') }}</span>
