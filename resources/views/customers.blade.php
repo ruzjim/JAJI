@@ -61,6 +61,7 @@
                             <thead>
                                 <tr>
                                     <th>Cliente</th>
+                                    <th>Tipo</th>
                                     <th>Cédula</th>
                                     <th>Telefono</th>
                                     <th>Email</th>
@@ -80,6 +81,7 @@
                                                 <a href="javascript:void(0);">{{ $customer->name }}</a>
                                             </div>
                                         </td>
+                                        <td>{{ $customer->role_id == 1 ? 'Usuario' : 'Cliente' }}</td>
                                         <td>{{ $customer->cedula }}</td>
                                         <td>{{ $customer->telefono }}</td> 
                                         <td> {{ $customer->email }}</td>

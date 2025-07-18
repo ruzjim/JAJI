@@ -11,8 +11,8 @@ class ClientesController extends Controller
 {
     public function index()
     {
-        $customers = User::select('name', 'cedula', 'telefono', 'email', 'profile_photo_path')
-            ->where('role_id', 2)
+        $customers = User::select('name', 'cedula', 'telefono', 'email', 'profile_photo_path', 'role_id')
+            // ->where('role_id', 2)
             ->orderBy('name', 'asc')
             ->get();
         return view('customers', compact('customers'));
